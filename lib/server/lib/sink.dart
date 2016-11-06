@@ -22,23 +22,24 @@ class AdminSink extends aque.RequestSink {
 
   @override
   void setupRouter(aque.Router router) {
-    aque.Router authRouter = new aque.Router()
-      ..route("/login")
+    router
+      ..basePath = "/api"
+    // routes for AUTHENTICATION
+      ..route("/auth/login")
           .pipe(new aque.Authorizer(authenticationServer, strategy: aque.AuthStrategy.client))
-          .generate(() => new LoginController())
-      ..route("/logout").pipe(new aque.Authorizer(authenticationServer)).generate(() => new LogoutController());
-    aque.Router tagMasterRouter = new aque.Router();
-    aque.Router accountManagerRouter = new aque.Router();
+          .generate(() => new aque.AuthController(authenticationServer))
+      ..route("/auth/logout").pipe(new aque.Authorizer(authenticationServer)).generate(() => new LogoutController())
+      ..route("/auth/register").pipe(new aque.Authorizer(authenticationServer)).generate(() => new RegisterController())
+      ..route("/identify").pipe(new aque.Authorizer(authenticationServer)).generate(() => new IdentityController());
+    // routes for ACCOUNT MANAGER
 
-    router.route("/api").pipe(new aque.Router()
-      ..route("/auth").pipe(authRouter)
-      ..route("/tag_master").pipe(tagMasterRouter)
-      ..route("/account").pipe(accountManagerRouter));
+    // routes for TAG MASTER 2
+
   }
 
   aque.ManagedContext contextWithConnectionInfo(aque.DatabaseConnectionConfiguration database) {
     var connectionInfo = configuration.database;
-    var dataModel = new aque.ManagedDataModel.fromPackageContainingType(this.runtimeType);
+    var dataModel = new aque.ManagedDataModel.fromPackageContainingType(User);
     var psc = new aque.PostgreSQLPersistentStore.fromConnectionInfo(connectionInfo.username, connectionInfo.password,
         connectionInfo.host, connectionInfo.port, connectionInfo.databaseName);
 

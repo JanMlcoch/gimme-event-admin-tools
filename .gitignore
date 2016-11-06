@@ -21,3 +21,9 @@ doc/api/
 *.iml
 *.ipr
 *.iws
+
+# NGINX
+nginx/logs
+
+# AQUEDUCT
+.aqueductsignal

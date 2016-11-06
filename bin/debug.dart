@@ -8,10 +8,10 @@ import 'package:admin_tools/server/lib/library.dart';
 Future main() async {
   try {
     var configFileName = "config.yaml";
-    var logPath = "api.log";
+    RequestController.includeErrorDetailsInServerErrorResponses = true;
 
     var config = new AdminConfiguration(configFileName);
-    var logger = new LoggingServer([new RotatingLoggingBackend(logPath)]);
+    var logger = new LoggingServer([new ConsoleBackend()]);
     await logger.start();
 
     var app = new Application<AdminSink>();
@@ -21,7 +21,7 @@ Future main() async {
       AdminSink.ConfigurationKey : config
     };
 
-    await app.start(numberOfInstances: 3);
+    await app.start(runOnMainIsolate:true);
 
     var signalPath = new File(".aqueductsignal");
     await signalPath.writeAsString("ok");

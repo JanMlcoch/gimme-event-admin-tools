@@ -1,5 +1,5 @@
-username: aqueduct_admin
-password: aqueduct
-host: localhost
+username: admin_tools
+password: uHFWd35Nyj0fBamrtEo1
+host: akcnik.vserver.cz
 port: 5432
-databaseName: aqueduct
+databaseName: admin_tools

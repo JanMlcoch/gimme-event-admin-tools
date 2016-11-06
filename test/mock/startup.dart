@@ -1,8 +1,8 @@
 import 'package:aqueduct/aqueduct.dart' as aque;
 import 'package:scribe/scribe.dart';
 import 'dart:async';
-import '../../server/lib/library.dart';
-import '../../server/model/library.dart' show ClientRecord;
+import 'package:admin_tools/server/lib/library.dart';
+import 'package:admin_tools/admin_tools.dart' show ClientRecord;
 
 class TestApplication {
   TestApplication() {

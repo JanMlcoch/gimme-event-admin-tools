@@ -3,7 +3,7 @@
 
 import 'package:angular2/platform/browser.dart';
 
-import 'package:admin_tools/account_manager/angular_components/app_component.dart';
+import './angular_components/app_component.dart';
 
 void main() {
   bootstrap(AppComponent);

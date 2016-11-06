@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:args/args.dart';
 import 'package:aqueduct/aqueduct.dart' as aque;
-import '../server/lib/library.dart';
+import 'package:admin_tools/server/lib/library.dart';
 
 Future main(List<String> args) async {
   var argParser = new ArgParser()

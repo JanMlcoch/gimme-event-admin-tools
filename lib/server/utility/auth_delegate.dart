@@ -44,8 +44,8 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 
   Future<User> authenticatableForUsername(aque.AuthServer server, String username) async {
     var userQ = new aque.Query<User>()
-      ..matchOn.email = username
-      ..resultProperties = ["email", "hashedPassword", "salt", "id"];
+      ..matchOn.username = username
+      ..resultProperties = ["username","email", "hashedPassword", "salt", "id"];
 
     return await userQ.fetchOne();
   }
@@ -53,7 +53,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
   Future<User> authenticatableForID(aque.AuthServer server, dynamic id) async {
     var userQ = new aque.Query<User>()
       ..matchOn.id = id
-      ..resultProperties = ["email", "hashedPassword", "salt", "id"];
+      ..resultProperties = ["username","email", "hashedPassword", "salt", "id"];
 
     return await userQ.fetchOne();
   }
