@@ -1,0 +1,7 @@
+port: 8000
+database:
+ username: aqueduct_admin
+ password: aqueduct
+ host: localhost
+ port: 5432
+ databaseName: aqueduct_test
