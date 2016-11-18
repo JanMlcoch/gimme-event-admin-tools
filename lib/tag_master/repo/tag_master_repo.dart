@@ -1,4 +1,4 @@
-part of tagMaster2;
+part of tagMaster2.repo;
 
 ///Class which instance represent complete output from tagMaster
 class TagMasterRepository {
