@@ -6,7 +6,7 @@ class TagMasterRepository {
   List<Relation> relations;
 
   Map<String, List<Map<String, dynamic>>> toMap() {
-    Map<String, dynamic> map = {};
+    Map<String, List<Map<String, dynamic>>> map = {};
 
     map["relations"] = [];
     for (Relation relation in relations) {
@@ -21,12 +21,12 @@ class TagMasterRepository {
     return map;
   }
 
-  void fromMap(Map<String, dynamic> map) {
-    for (Map relationMap in map["relations"]) {
+  void fromMap(Map<String, List<Map<String, dynamic>>> map) {
+    for (Map<String, dynamic> relationMap in map["relations"]) {
       if(relations == null)relations = [];
       relations.add(new Relation()..fromMap(relationMap));
     }
-    for (Map tagMap in map["tags"]) {
+    for (Map<String, dynamic> tagMap in map["tags"]) {
       if(tags == null)tags = [];
       tags.add(new Tag()..fromMap(tagMap));
     }

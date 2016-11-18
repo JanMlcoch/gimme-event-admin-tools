@@ -9,3 +9,5 @@ part "record.dart";
 part "action_record.dart";
 part 'version.dart';
 part 'repo/repository_validator.dart';
+
+typedef bool RelationTest(Relation r);

@@ -102,7 +102,7 @@ abstract class RepositoryValidator {
     return true;
   }
 
-  static Function _getSynonimityTest(int tagId) {
+  static RelationTest _getSynonymityTest(int tagId) {
     bool testFunction(Relation relation) {
       if (relation.type != RelationSubstance.SYNONYM) return false;
       if (relation.originTagIds.length != 1) return false;
@@ -114,7 +114,7 @@ abstract class RepositoryValidator {
     return testFunction;
   }
 
-  static Function _getComposityTest(int tagId) {
+  static RelationTest _getComposityTest(int tagId) {
     bool testFunction(Relation relation) {
       if (relation.type != RelationSubstance.COMPOSITE) return false;
       //todo: is this condition necessary?
@@ -151,7 +151,7 @@ abstract class RepositoryValidator {
 
     bool customTest(Tag tag) {
       List<Relation> relevantRelations = repo.getRelationsRelevantFor(tag);
-      relevantRelations.removeWhere(_getSynonimityTest(tag.tagId));
+      relevantRelations.removeWhere(_getSynonymityTest(tag.tagId));
       return relevantRelations.isEmpty;
     }
 
@@ -165,7 +165,7 @@ abstract class RepositoryValidator {
 
     bool compositeTest(Tag tag) {
       List<Relation> relevantRelations = repo.getRelationsRelevantFor(tag);
-      relevantRelations.removeWhere(_getSynonimityTest(tag.tagId));
+      relevantRelations.removeWhere(_getSynonymityTest(tag.tagId));
       if (relevantRelations.length == 0) return false;
       relevantRelations.removeWhere((Relation relation) {
         return relation.type == RelationSubstance.COMPOSITE && relation.originTagIds == [tag.tagId];
@@ -183,7 +183,7 @@ abstract class RepositoryValidator {
 
     bool specificTest(Tag tag) {
       List<Relation> relevantRelations = repo.getRelationsRelevantFor(tag);
-      relevantRelations.removeWhere(_getSynonimityTest(tag.tagId));
+      relevantRelations.removeWhere(_getSynonymityTest(tag.tagId));
       relevantRelations.removeWhere(_getComposityTest(tag.tagId));
       if (relevantRelations.length == 0) return false;
       relevantRelations.removeWhere((Relation relation) {
@@ -202,7 +202,7 @@ abstract class RepositoryValidator {
 
     bool coreTest(Tag tag) {
       List<Relation> relevantRelations = repo.getRelationsRelevantFor(tag);
-      relevantRelations.removeWhere(_getSynonimityTest(tag.tagId));
+      relevantRelations.removeWhere(_getSynonymityTest(tag.tagId));
       relevantRelations.removeWhere(_getComposityTest(tag.tagId));
       if (relevantRelations.length == 0) return false;
       if (relevantRelations
