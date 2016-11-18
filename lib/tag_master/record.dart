@@ -1,7 +1,7 @@
 part of tagMaster2;
 
 ///instance of [Record] represents atomic difference between [TagMasterRepository]s.
-class Record {
+class Record{
   int userId;
   Tag tag;
   Relation relation;
@@ -12,19 +12,17 @@ class Record {
   ///Creates instance of [Record] representing relation operation
   Record.recordRelation(this.userId, this.relation);
 
-  void fromMap(Map<String, dynamic> map) {
-    userId = map["userId"];
-    var tagMap = map["tag"];
-    if (tagMap is Map<String, dynamic>) {
-      tag = new Tag()..fromMap(tagMap);
-    }
-    var relationMap = map["relation"];
-    if (relationMap is Map<String, dynamic>) {
-      relation = new Relation()..fromMap(relationMap);
-    }
+  Record.fromMapConstructor(Map<String, dynamic> map){
+    this.fromMap(map);
   }
 
-  Map<String, dynamic> toMap() {
+  void fromMap(Map<String, dynamic> map){
+    userId = map["userId"];
+    if(map["tag"] is Map<String, dynamic>)tag = new Tag()..fromMap((map["tag"] as Map<String, dynamic>));
+    if(map["relation"] is Map<String, dynamic>)relation = new Relation()..fromMap((map["relation"] as Map<String, dynamic>));
+  }
+
+  Map<String, dynamic> toMap(){
     Map<String, dynamic> map = {};
 
     map["userId"] = userId;
@@ -34,11 +32,12 @@ class Record {
     return map;
   }
 
-  bool isInConflictWith(Record record) {
-    if ((tag == null) == (record.relation == null)) return false;
-    if (tag == null) {
+  bool isInConflictWith(Record record){
+    if((tag == null) == (record.relation == null))return false;
+    if(tag == null){
       return relation.hasEquivalentTags(record.relation);
-    } else {
+    }
+    else{
       return tag.tagId == record.tag.tagId;
     }
   }

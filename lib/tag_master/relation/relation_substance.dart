@@ -7,7 +7,7 @@ class RelationSubstance {
 
   RelationSubstance._();
 
-  factory RelationSubstance.createFromMap(Map<String, String> map) {
+  factory RelationSubstance.createFromMap(Map<String, dynamic> map) {
     switch (map["type"]) {
       case SYNONYM:
         return new SynonymRelation()..fromMap(map);
@@ -30,13 +30,13 @@ class RelationSubstance {
     return "general relation";
   }
 
-  void fromMap(Map<String, String> map) {}
+  void fromMap(Map<String, dynamic> map) {}
 
   Map<String, dynamic> toMap() {
     return {"type": getType()};
   }
 
-  bool validateLocally() {
+  bool validateLocally(){
     throw new Exception("tried validation of instance that should have NEVER EVER been created.");
   }
 }

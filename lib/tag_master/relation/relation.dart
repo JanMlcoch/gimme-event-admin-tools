@@ -30,14 +30,10 @@ class Relation {
   }
 
   void fromMap(Map<String, dynamic> map) {
-    var originTagList = map["originTagIds"];
-    if (originTagList is List<int>) {
-      originTagIds = originTagList;
-    }
+    if (map["originTagIds"] is List<int>) originTagIds = (map["originTagIds"] as List<int>);
     destinationTagId = map["destinationTagId"];
-    var substanceMap = map["relation"];
-    if (substanceMap is Map<String, String>) {
-      substance = new RelationSubstance.createFromMap(substanceMap);
+    if (map["relation"] is Map<String, dynamic>) {
+      substance = new RelationSubstance.createFromMap((map["relation"] as Map<String, dynamic>));
     }
   }
 

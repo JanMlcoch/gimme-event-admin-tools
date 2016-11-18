@@ -2,6 +2,14 @@ part of tagMaster2;
 
 ///Class representing tags
 class Tag {
+  ///sometimes "comparable" might be used instead
+  static const int TYPE_SYNONYM = 1;
+  static const int TYPE_CUSTOM = 2;
+  static const int TYPE_COMPOSITE = 3;
+  ///sometimes "concrete" might be used instead
+  static const int TYPE_SPECIFIC = 4;
+  static const int TYPE_CORE = 5;
+
   String tagName;
   int tagId;
   int tagType;
@@ -35,7 +43,7 @@ class Tag {
     if(!([1,2,3,4,5].contains(tagType)))return false;
     if(!(lang is String))return false;
     if(authorId == null)return false;
-    if(authorId < 0)return false;
+    if(authorId < -1)return false;
 
     return true;
   }

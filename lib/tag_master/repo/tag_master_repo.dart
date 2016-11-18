@@ -6,7 +6,7 @@ class TagMasterRepository {
   List<Relation> relations;
 
   Map<String, List<Map<String, dynamic>>> toMap() {
-    Map<String, List<Map<String, dynamic>>> map = {};
+    Map<String, dynamic> map = {};
 
     map["relations"] = [];
     for (Relation relation in relations) {
@@ -21,42 +21,43 @@ class TagMasterRepository {
     return map;
   }
 
-  void fromMap(Map<String, List<Map<String,dynamic>>> map) {
-    for (Map<String,dynamic> relationMap in map["relations"]) {
+  void fromMap(Map<String, dynamic> map) {
+    for (Map relationMap in map["relations"]) {
+      if(relations == null)relations = [];
       relations.add(new Relation()..fromMap(relationMap));
     }
-    for (Map<String,dynamic> tagMap in map["tags"]) {
+    for (Map tagMap in map["tags"]) {
+      if(tags == null)tags = [];
       tags.add(new Tag()..fromMap(tagMap));
     }
   }
 
   ///Validates this instance
   bool validate() {
-    if (!validateAtomsLocally()) return false;
-    return validateGlobally();
+    return RepositoryValidator.validate(this);
   }
 
   ///This method returns true or false depending on whether the atomic
   /// [Relation]s and [Tag]s in [relations] and [tags] are valid as standalones.
   bool validateAtomsLocally() {
-    for (Tag tag in tags) {
-      if (!tag.validateLocally()) {
-        print("Loacl validation of tag with id ${tag.tagId} failed");
-        return false;
-      }
-    }
-    for (Relation relation in relations) {
-      if (!relation.validateLocally()) {
-        print(
-            "Local validation of relation leading from ${relation.originTagIds} to ${relation.destinationTagId} failed");
-      }
-    }
-    return true;
+    return RepositoryValidator.validateAtomsLocally(this);
   }
 
   ///validates global relationships between [Relation]s and [Tag]s in [relations] and [tags].
   bool validateGlobally() {
-    //todo: implement
-    return false;
+    return RepositoryValidator.validateGlobally(this);
+  }
+
+  Tag getTagById(int tagId) {
+    return tags.firstWhere((t) => t.tagId == tagId);
+  }
+
+  List<Relation> getRelationsRelevantFor(Tag tag) {
+    List<Relation> relevantRelations = [];
+    for (Relation relation in relations) {
+      if (relation.destinationTagId == tag.tagId || relation.originTagIds.contains(tag.tagId))
+        relevantRelations.add(relation);
+    }
+    return relevantRelations;
   }
 }
