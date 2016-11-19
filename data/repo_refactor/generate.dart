@@ -2,12 +2,12 @@ library generate;
 
 import 'dart:io';
 import 'dart:convert';
-import '../lib/tag_master/library.dart';
+import '../../lib/tag_master/repo/library.dart';
 
 void main() {
   String oldString = "";
 
-  File oldRepo = new File("repo_refactor/original_repo");
+  File oldRepo = new File("data/repo_refactor/original_repo");
   oldString = oldRepo.readAsStringSync();
 
   oldString = oldString.replaceAll(";", ",");
@@ -19,9 +19,9 @@ void main() {
     lines2.add(line.replaceFirst(",", ":["));
   }
   oldString = lines2.reduce((a, b) => "$a$b");
-  String oldStringDart = "Map<String,dynamic> original = {$oldString};";
+  String oldStringDart = "Map original = {$oldString};";
 
-  File old = new File("repo_refactor/original.dart");
+  File old = new File("data/repo_refactor/original.dart");
   old.createSync();
   old.writeAsStringSync(oldStringDart);
 
@@ -34,7 +34,7 @@ void main() {
 
   Map<String, dynamic> preJson = {"tags": [], "relations": []};
 
-  Map<String, dynamic> originalMap = JSON.decode(oldString);
+  Map<String, dynamic> originalMap = (JSON.decode(oldString) as Map<String, dynamic>);
 
   originalMap.forEach((String key, List<dynamic> values) {
     preJson["tags"].add({"tagId": int.parse(key), "tagName": values[0], "tagType": values[1], "lang": "cz", "authorId": -1});
@@ -50,22 +50,22 @@ void main() {
 
   json = JSON.encode(preJson);
 
-  String postJson = "Map<String,dynamic> newRepo = $json ;";
+  String postJson = "Map newRepo = $json ;";
 
-  File file = new File("repo_refactor/new.dart");
+  File file = new File("data/repo_refactor/new.dart");
   file.createSync();
   file.writeAsStringSync(postJson);
 
-  File newRepo = new File("repo_refactor/new_repo");
+  File newRepo = new File("data/repo_refactor/new_repo");
   newRepo.createSync();
   newRepo.writeAsStringSync(json);
 
-  TagMasterRepository repo = new TagMasterRepository()..fromMap(preJson);
+  TagMasterRepository repo = new TagMasterRepository()..fromMap(preJson as Map<String, List<Map<String, dynamic>>>);
   Map mapie = repo.toMap();
   String deserializedJson = JSON.encode(mapie);
   deserializedJson = "Map a =$deserializedJson;";
 
-  File filex = new File("repo_refactor/new_deserialized.dart");
+  File filex = new File("data/repo_refactor/new_deserialized.dart");
   filex.createSync();
   filex.writeAsStringSync(deserializedJson);
 
