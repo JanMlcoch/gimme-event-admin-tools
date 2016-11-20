@@ -6,6 +6,20 @@ class Relation {
   RelationSubstance substance;
   String get type => substance.getType();
 
+  Relation();
+
+  Relation.synonym(this.originTagIds, this.destinationTagId){
+    this.substance = new SynonymRelation();
+  }
+
+  Relation.composite(this.originTagIds, this.destinationTagId, double strength){
+    this.substance = new CompositeRelation.withStrength(strength);
+  }
+
+  Relation.imprint(this.originTagIds, this.destinationTagId, ImprintPoint imprintPoint){
+    this.substance = new ImprintRelation.withImprintPoint(imprintPoint);
+  }
+
   bool hasEquivalentTags(Relation relation) {
     if (destinationTagId == relation.destinationTagId && originTagIds.length == relation.originTagIds.length) {
       bool areEquivalent = true;

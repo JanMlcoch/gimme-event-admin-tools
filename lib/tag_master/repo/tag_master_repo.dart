@@ -5,6 +5,10 @@ class TagMasterRepository {
   List<Tag> tags;
   List<Relation> relations;
 
+  TagMasterRepository();
+
+  TagMasterRepository.withData(this.tags, this.relations);
+
   Map<String, List<Map<String, dynamic>>> toMap() {
     Map<String, List<Map<String, dynamic>>> map = {};
 
@@ -33,8 +37,8 @@ class TagMasterRepository {
   }
 
   ///Validates this instance
-  bool validate() {
-    return RepositoryValidator.validate(this);
+  bool validate({List<TagMasterRepositoryRule> rules: null}) {
+    return RepositoryValidator.validate(this, rules: rules);
   }
 
   ///This method returns true or false depending on whether the atomic

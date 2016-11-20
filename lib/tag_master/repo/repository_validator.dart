@@ -28,15 +28,16 @@ abstract class RepositoryValidator {
   /// [Relation]s and [Tag]s in [relations] and [tags] are valid as standalones.
   static bool validateAtomsLocally(TagMasterRepository repo) {
     for (Tag tag in repo.tags) {
-      if (!tag.validateLocally()) {
-        print("Local validation of tag with id ${tag.tagId} failed");
+      if (tag?.validateLocally() != true) {
+        print("Local validation of tag with id ${tag?.tagId} failed");
         return false;
       }
     }
     for (Relation relation in repo.relations) {
-      if (!relation.validateLocally()) {
+      if (relation?.validateLocally() != true) {
         print(
-            "Local validation of relation leading from ${relation.originTagIds} to ${relation.destinationTagId} failed");
+            "Local validation of relation leading from ${relation?.originTagIds} to ${relation?.destinationTagId} failed");
+        return false;
       }
     }
     return true;

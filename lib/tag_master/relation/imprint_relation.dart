@@ -2,6 +2,7 @@ part of tagMaster2.relation;
 
 class ImprintRelation extends RelationSubstance {
   ImprintRelation() : super._();
+  ImprintRelation.withImprintPoint(this.imprintPoint) : super._();
   ImprintPoint imprintPoint;
 
   @override

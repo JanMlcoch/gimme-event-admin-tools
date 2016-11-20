@@ -2,6 +2,7 @@ part of tagMaster2.relation;
 
 class CompositeRelation extends RelationSubstance {
   CompositeRelation() : super._();
+  CompositeRelation.withStrength(this.strength) : super._();
   double strength;
 
   @override

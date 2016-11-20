@@ -16,6 +16,33 @@ class Tag {
   String lang;
   int authorId;
 
+  Tag();
+
+  Tag.synonym(this.tagId, this.tagName, this.authorId, {String lang: "cs"}){
+    this.lang = lang;
+    this.tagType = TYPE_SYNONYM;
+  }
+
+  Tag.custom(this.tagId, this.tagName, this.authorId, {String lang: "cs"}){
+    this.lang = lang;
+    this.tagType = TYPE_CUSTOM;
+  }
+
+  Tag.composite(this.tagId, this.tagName, this.authorId, {String lang: "cs"}){
+    this.lang = lang;
+    this.tagType = TYPE_COMPOSITE;
+  }
+
+  Tag.specific(this.tagId, this.tagName, this.authorId, {String lang: "cs"}){
+    this.lang = lang;
+    this.tagType = TYPE_SPECIFIC;
+  }
+
+  Tag.core(this.tagId, this.tagName, this.authorId, {String lang: "cs"}){
+    this.lang = lang;
+    this.tagType = TYPE_CORE;
+  }
+
   void fromMap(Map<String, dynamic> map) {
     tagName = map["tagName"];
     tagId = map["tagId"];
