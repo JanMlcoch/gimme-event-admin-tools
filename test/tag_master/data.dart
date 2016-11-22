@@ -12,14 +12,26 @@ TagMasterRepository repoWithOnlyNullRelationsOnlyNullTag = new TagMasterReposito
 TagMasterRepository repoWithOnlyNullRelationsOnlyNullTags =
     new TagMasterRepository.withData([null, null], [null, null]);
 
+TagMasterRepository repoOnlyEmptyTag = new TagMasterRepository.withData([new Tag()],[]);
+TagMasterRepository repoOnlyTagNullId = new TagMasterRepository.withData([new Tag.custom(null, "tag", 0)],[]);
+TagMasterRepository repoOnlyTagNullName = new TagMasterRepository.withData([new Tag.custom(0, null, 0)],[]);
+TagMasterRepository repoOnlyTagNullAuthor = new TagMasterRepository.withData([new Tag.custom(0, "tag", null)],[]);
+TagMasterRepository repoOnlyTagNullLang = new TagMasterRepository.withData([new Tag.custom(0, "tag", 0, lang: null)],[]);
+TagMasterRepository repoOnlyEmptyRelation = new TagMasterRepository.withData([],[new Relation()]);
+TagMasterRepository repoOnlyRelationNullOriginTags = new TagMasterRepository.withData([],[new Relation.composite(null,0,0.5)]);
+TagMasterRepository repoOnlyRelationOriginTagsWithOnlyNull = new TagMasterRepository.withData([],[new Relation.composite([null],0,0.5)]);
+TagMasterRepository repoOnlyRelationOriginTagsWithNotOnlyNull = new TagMasterRepository.withData([],[new Relation.composite([null,0],0,0.5)]);
+TagMasterRepository repoOnlyRelationPointingNull = new TagMasterRepository.withData([],[new Relation.composite([0],null,0.5)]);
+TagMasterRepository repoOnlyCompositeRelationWithNullStrength = new TagMasterRepository.withData([],[new Relation.composite([0],0,null)]);
+TagMasterRepository repoOnlyImprintRelationWithNullPoint = new TagMasterRepository.withData([],[new Relation.imprint([0],0,null)]);
+
 TagMasterRepository repoOnlySynonymTag = new TagMasterRepository.withData([new Tag.synonym(0, "customTag", 0)], []);
 TagMasterRepository repoOnlyCustomTag = new TagMasterRepository.withData([new Tag.custom(0, "customTag", 0)], []);
 TagMasterRepository repoOnlyCompositeTag = new TagMasterRepository.withData([new Tag.composite(0, "customTag", 0)], []);
 TagMasterRepository repoOnlySpecificTag = new TagMasterRepository.withData([new Tag.specific(0, "customTag", 0)], []);
 TagMasterRepository repoOnlyCoreTag = new TagMasterRepository.withData([new Tag.core(0, "customTag", 0)], []);
 
-TagMasterRepository validRepoWithAdditionalNullTag =
-    new TagMasterRepository.withData([new Tag.custom(0, "customTag", 0), null], []);
+TagMasterRepository validRepoWithAdditionalNullTag = new TagMasterRepository.withData([new Tag.custom(0, "customTag", 0), null], []);
 
 TagMasterRepository validRepoWithAdditionalNullRelation = new TagMasterRepository.withData([
   new Tag.custom(0, "customTag", 0),
@@ -93,6 +105,14 @@ TagMasterRepository repoSynonymsPointingSameTag = new TagMasterRepository.withDa
   new Relation.synonym([0], 2),
   new Relation.synonym([1], 2),
 ]);
+
+TagMasterRepository synonymPointingNonexistentTag = new TagMasterRepository.withData([new Tag.synonym(0,"synonym",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository nonexistentSynonymPointing = new TagMasterRepository.withData([new Tag.core(1,"core",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository customPointingAsSynonym = new TagMasterRepository.withData([new Tag.custom(0,"imposter",0),new Tag.core(1,"core",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository compositePointingAsSynonym = new TagMasterRepository.withData([new Tag.composite(0,"imposter",0),new Tag.core(1,"core",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository specificPointingAsSynonym = new TagMasterRepository.withData([new Tag.specific(0,"imposter",0),new Tag.core(1,"core",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository corePointingAsSynonym = new TagMasterRepository.withData([new Tag.core(0,"imposter",0),new Tag.core(1,"core",0)],[new Relation.synonym([0],1)]);
+TagMasterRepository twoSynonymsPointingAsSynonym = new TagMasterRepository.withData([new Tag.synonym(0,"synonym0",0),new Tag.synonym(1,"synonym1",0),new Tag.core(2,"core",0)],[new Relation.synonym([0,1],2)]);
 
 TagMasterRepository repoOnlyCustomTags =
     new TagMasterRepository.withData([new Tag.custom(0, "custom0", 0), new Tag.custom(1, "custom1", 0)], []);

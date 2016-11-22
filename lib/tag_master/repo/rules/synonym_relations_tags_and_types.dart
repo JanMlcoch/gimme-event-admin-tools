@@ -12,8 +12,8 @@ class SynonymRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepository
 
     bool synonymRelationTest(Relation relation) {
       if (relation.originTagIds.length != 1) return false;
-      if (repo.getTagById(relation.originTagIds[0]).tagType != Tag.TYPE_SYNONYM) return false;
-      if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_SYNONYM) return false;
+      if (repo.getTagById(relation.originTagIds[0])?.tagType != Tag.TYPE_SYNONYM) return false;
+      if (repo.getTagById(relation.destinationTagId)?.tagType == Tag.TYPE_SYNONYM) return false;
       return true;
     }
 

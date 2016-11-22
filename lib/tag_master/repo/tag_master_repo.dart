@@ -53,7 +53,7 @@ class TagMasterRepository {
   }
 
   Tag getTagById(int tagId) {
-    return tags.firstWhere((t) => t.tagId == tagId);
+    return tags.firstWhere((t) => t.tagId == tagId, orElse: ()=>null);
   }
 
   List<Relation> getRelationsRelevantFor(Tag tag) {

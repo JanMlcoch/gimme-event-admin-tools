@@ -8,15 +8,15 @@ class Relation {
 
   Relation();
 
-  Relation.synonym(this.originTagIds, this.destinationTagId){
+  Relation.synonym(this.originTagIds, this.destinationTagId) {
     this.substance = new SynonymRelation();
   }
 
-  Relation.composite(this.originTagIds, this.destinationTagId, double strength){
+  Relation.composite(this.originTagIds, this.destinationTagId, double strength) {
     this.substance = new CompositeRelation.withStrength(strength);
   }
 
-  Relation.imprint(this.originTagIds, this.destinationTagId, ImprintPoint imprintPoint){
+  Relation.imprint(this.originTagIds, this.destinationTagId, ImprintPoint imprintPoint) {
     this.substance = new ImprintRelation.withImprintPoint(imprintPoint);
   }
 
@@ -53,6 +53,7 @@ class Relation {
 
   bool validateLocally() {
     if (!(originTagIds is List<int>)) return false;
+    if (originTagIds.contains(null)) return false;
     if (!(destinationTagId is int)) return false;
     if (type == RelationSubstance.SYNONYM && originTagIds.length > 1) return false;
 

@@ -9,8 +9,9 @@ import '../../lib/tag_master/sidos_entities/library.dart';
 
 
 part 'data.dart';
-part 'repo_validation_base.dart';
-part 'repo_validation_synonyms.dart';
+part 'repo_validation_local_validation.dart';
+part 'repo_validation_synonym_relations_tags_types.dart';
+part 'repo_validation_synonyms_have_relations.dart';
 part 'repo_validation_customs.dart';
 part 'repo_validation_unique_tag_ids.dart';
 part 'repo_validation_unique_tag_names.dart';
@@ -28,13 +29,16 @@ Future main() async {
   });
   group("TagMaster Repository tests", () {
     group("TagMaster Repository validation tests", () {
-      group("TagMaster Repository validation basic tests", () {
-        tagMasterRepoBasicValidationTests();
+      group("TagMaster Repository local validation tests", () {
+        tagMasterRepoLocalValidationTests();
       });
-      group("TagMaster Repository validation synonyms test", () {
-        tagMasterRepoSynonymValidationTests();
+      group("Synonym Relations have appropriate tags and tag types tests", () {
+        synonymRelationsHaveAppropriateTagsAndTagTypesTests();
       });
-      group("TagMaster Repository validation customs test", () {
+      group("Synonyms have Appropriate relations tests", () {
+        synonymsHaveRelationsTests();
+      });
+      group("TagMaster Repository validation customs tests", () {
         tagMasterRepoCustomValidationTests();
       });
       group("Unique tag ids tests",(){
