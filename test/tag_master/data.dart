@@ -21,6 +21,14 @@ TagMasterRepository repoOnlyCoreTag = new TagMasterRepository.withData([new Tag.
 TagMasterRepository validRepoWithAdditionalNullTag =
     new TagMasterRepository.withData([new Tag.custom(0, "customTag", 0), null], []);
 
+TagMasterRepository validRepoWithAdditionalNullRelation = new TagMasterRepository.withData([
+  new Tag.custom(0, "customTag", 0),
+  new Tag.synonym(1, "synonym", 0)
+], [
+  new Relation.synonym([1], 0),
+  null
+]);
+
 TagMasterRepository repoSynonymPointingItself = new TagMasterRepository.withData([
   new Tag.synonym(0, "synonym", 0),
 ], [
