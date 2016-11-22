@@ -84,3 +84,139 @@ TagMasterRepository repoSynonymPointingWithImprintRelation = new TagMasterReposi
 ], [
   new Relation.imprint([0], 1, new ImprintPoint()),
 ]);
+
+TagMasterRepository repoSynonymsPointingSameTag = new TagMasterRepository.withData([
+  new Tag.synonym(0, "synonym", 0),
+  new Tag.synonym(1, "synonym2", 0),
+  new Tag.custom(2, "custom", 0),
+], [
+  new Relation.synonym([0], 2),
+  new Relation.synonym([1], 2),
+]);
+
+TagMasterRepository repoOnlyCustomTags =
+    new TagMasterRepository.withData([new Tag.custom(0, "custom0", 0), new Tag.custom(1, "custom1", 0)], []);
+
+TagMasterRepository repoCustomsWithRelation = new TagMasterRepository.withData([
+  new Tag.custom(0, "custom0", 0),
+  new Tag.custom(1, "custom1", 0)
+], [
+  new Relation.synonym([0], 1)
+]);
+
+TagMasterRepository repoWithTwoSameTags =
+    new TagMasterRepository.withData([new Tag.custom(0, "custom0", 0), new Tag.custom(0, "custom0", 0)], []);
+
+TagMasterRepository repoWithTwoSameAndOneDifferentTags = new TagMasterRepository.withData(
+    [new Tag.custom(0, "custom0", 0), new Tag.custom(0, "custom0", 0), new Tag.custom(1, "custom1", 0)], []);
+
+TagMasterRepository onlyDuplicitSelfPointingBinaryRelation = new TagMasterRepository.withData([], [
+  new Relation.composite([0], 0, 0.2),
+  new Relation.composite([0], 0, 0.2),
+]);
+
+TagMasterRepository onlyDuplicitBinaryRelation = new TagMasterRepository.withData([], [
+  new Relation.composite([0], 1, 0.2),
+  new Relation.composite([0], 1, 0.2),
+]);
+
+TagMasterRepository onlyDuplicitTernaryRelation = new TagMasterRepository.withData([], [
+  new Relation.composite([0,1], 1, 0.2),
+  new Relation.composite([0,1], 1, 0.2),
+]);
+
+
+TagMasterRepository onlyDuplicitTernaryRelationWithDifferentStrength = new TagMasterRepository.withData([], [
+  new Relation.composite([0,1], 1, 0.2),
+  new Relation.composite([0,1], 1, 0.2),
+]);
+
+///___________________________
+///
+TagMasterRepository repoWithCompositeTagPointingSpecific = new TagMasterRepository.withData([
+  new Tag.composite(0, "composite", 0),
+  new Tag.specific(1, "specific", 0)
+], [
+  new Relation.composite([0], 1, 1.0)
+]);
+
+TagMasterRepository repoWithTwoCompositeTagsPointingSpecificSeparately = new TagMasterRepository.withData([
+  new Tag.composite(0, "composite", 0),
+  new Tag.composite(2, "composite2", 0),
+  new Tag.specific(1, "specific", 0)
+], [
+  new Relation.composite([0], 1, 1.0),
+  new Relation.composite([2], 1, 1.0)
+]);
+
+TagMasterRepository repoWithTwoCompositeTagsPointingSpecificTogether = new TagMasterRepository.withData([
+  new Tag.composite(0, "composite", 0),
+  new Tag.composite(2, "composite2", 0),
+  new Tag.specific(1, "specific", 0)
+], [
+  new Relation.composite([0, 2], 1, 1.0)
+]);
+
+TagMasterRepository repoWithTwoCompositeTagsPointingSpecificTogetherAndSeparately = new TagMasterRepository.withData([
+  new Tag.composite(0, "composite", 0),
+  new Tag.composite(2, "composite2", 0),
+  new Tag.specific(1, "specific", 0)
+], [
+  new Relation.composite([0, 2], 1, 1.0),
+  new Relation.composite([0], 1, 1.0),
+  new Relation.composite([2], 1, 1.0),
+]);
+
+//_______________________________________
+
+TagMasterRepository coreTagsPointingEachOther = new TagMasterRepository.withData([
+  new Tag.core(0, "0", 0),
+  new Tag.core(1, "1", 0)
+], [
+  new Relation.imprint([0], 1, new ImprintPoint()),
+  new Relation.imprint([1], 0, new ImprintPoint()),
+]);
+
+TagMasterRepository coreTagsPointingSameTag = new TagMasterRepository.withData([
+  new Tag.core(0, "0", 0),
+  new Tag.core(1, "1", 0)
+], [
+  new Relation.imprint([0], 1, new ImprintPoint()),
+  new Relation.imprint([1], 1, new ImprintPoint()),
+]);
+
+TagMasterRepository coreTagPointingTwoTags = new TagMasterRepository.withData([
+  new Tag.core(0, "0", 0),
+  new Tag.core(1, "1", 0)
+], [
+  new Relation.imprint([0], 1, new ImprintPoint()),
+  new Relation.imprint([1], 1, new ImprintPoint()),
+]);
+
+TagMasterRepository complete3coreHyperGraph = new TagMasterRepository.withData([
+  new Tag.core(0, "0", 0),
+  new Tag.core(1, "1", 0),
+  new Tag.core(2, "2", 0),
+], [
+  new Relation.imprint([0], 0, new ImprintPoint()),
+  new Relation.imprint([0], 1, new ImprintPoint()),
+  new Relation.imprint([0], 2, new ImprintPoint()),
+  new Relation.imprint([1], 0, new ImprintPoint()),
+  new Relation.imprint([1], 1, new ImprintPoint()),
+  new Relation.imprint([1], 2, new ImprintPoint()),
+  new Relation.imprint([2], 0, new ImprintPoint()),
+  new Relation.imprint([2], 1, new ImprintPoint()),
+  new Relation.imprint([2], 2, new ImprintPoint()),
+  new Relation.imprint([0, 1], 0, new ImprintPoint()),
+  new Relation.imprint([0, 1], 1, new ImprintPoint()),
+  new Relation.imprint([0, 1], 2, new ImprintPoint()),
+  new Relation.imprint([0, 2], 0, new ImprintPoint()),
+  new Relation.imprint([0, 2], 1, new ImprintPoint()),
+  new Relation.imprint([0, 2], 2, new ImprintPoint()),
+  new Relation.imprint([1, 2], 0, new ImprintPoint()),
+  new Relation.imprint([1, 2], 1, new ImprintPoint()),
+  new Relation.imprint([1, 2], 2, new ImprintPoint()),
+  new Relation.imprint([0, 1, 2], 0, new ImprintPoint()),
+  new Relation.imprint([0, 1, 2], 1, new ImprintPoint()),
+  new Relation.imprint([0, 1, 2], 2, new ImprintPoint()),
+]);

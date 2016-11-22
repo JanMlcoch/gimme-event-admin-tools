@@ -174,4 +174,9 @@ void tagMasterRepoSynonymValidationTests() {
         .validate(rules: [new TagMasterRepositoryRule.synonymsHaveAppropriateRelation()]);
     expect(isValid, equals(false));
   });
+
+  test("Test of synonym pointing same tag validity", () {
+    bool isValid = repoSynonymsPointingSameTag.validate();
+    expect(isValid, equals(true));
+  });
 }
