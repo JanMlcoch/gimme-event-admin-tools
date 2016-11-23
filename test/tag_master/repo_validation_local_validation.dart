@@ -142,5 +142,18 @@ void tagMasterRepoLocalValidationTests() {
     expect(isValid, equals(false));
   });
 
+  test("Test of synonym relation with empty originTags local validity", () {
+    bool isValid = emptyOriginTagsSynonym.validateAtomsLocally();
+    expect(isValid, equals(false));
+  });
 
+  test("Test of composite relation with empty originTags local validity", () {
+    bool isValid = emptyOriginTagsComposite.validateAtomsLocally();
+    expect(isValid, equals(false));
+  });
+
+  test("Test of imprint relation with empty originTags local validity", () {
+    bool isValid = emptyOriginTagsImprint.validateAtomsLocally();
+    expect(isValid, equals(false));
+  });
 }

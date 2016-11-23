@@ -31,6 +31,12 @@ TagMasterRepository repoOnlyCompositeTag = new TagMasterRepository.withData([new
 TagMasterRepository repoOnlySpecificTag = new TagMasterRepository.withData([new Tag.specific(0, "customTag", 0)], []);
 TagMasterRepository repoOnlyCoreTag = new TagMasterRepository.withData([new Tag.core(0, "customTag", 0)], []);
 
+TagMasterRepository emptyOriginTagsSynonym = new TagMasterRepository.withData([],[new Relation.synonym([],1)]);
+TagMasterRepository emptyOriginTagsComposite = new TagMasterRepository.withData([],[new Relation.composite([],1,0.5)]);
+TagMasterRepository emptyOriginTagsImprint = new TagMasterRepository.withData([],[new Relation.imprint([],1, new ImprintPoint())]);
+
+TagMasterRepository ternaryRelationWithOneMissingOriginTag = new TagMasterRepository.withData([new Tag.core(0,"0",0)],[new Relation.imprint([0,1],0,new ImprintPoint())]);
+
 TagMasterRepository validRepoWithAdditionalNullTag = new TagMasterRepository.withData([new Tag.custom(0, "customTag", 0), null], []);
 
 TagMasterRepository validRepoWithAdditionalNullRelation = new TagMasterRepository.withData([

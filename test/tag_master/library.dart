@@ -16,6 +16,7 @@ part 'repo_validation_customs.dart';
 part 'repo_validation_unique_tag_ids.dart';
 part 'repo_validation_unique_tag_names.dart';
 part 'repo_validation_unique_relations.dart';
+part 'repo_validation_relation_tags_exists.dart';
 
 Future main() async {
   Timer timeout;
@@ -50,6 +51,15 @@ Future main() async {
       group("Unique relation tests",(){
         uniqueRelationsTests();
       });
+      group("Relation tags exists tests",(){
+        relationTagsExistsTests();
+      });
+      //todo: custom having relations - in default redundant
+      //todo: composite having relations
+      //todo: specific having relations
+      //todo: core having relations
+      //todo: composite relations tags&types
+      //todo: imprint relations tags&types
     });
   });
 }
