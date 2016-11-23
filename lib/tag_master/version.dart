@@ -8,6 +8,11 @@ class Version {
   TagMasterRepository initialState;
   TagMasterRepository currentState;
 
+  void applyActionRecord(ActionRecord record){
+    //todo: checking versionIds and shit
+    currentState = record.applyOn(currentState);
+  }
+
   void fromMap(Map<String, dynamic> map) {
     id = map["id"];
     insertionTime = new DateTime.fromMillisecondsSinceEpoch(map["insertionTime"]);

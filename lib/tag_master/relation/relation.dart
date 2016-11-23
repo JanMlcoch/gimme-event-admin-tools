@@ -55,6 +55,7 @@ class Relation {
     if (!(originTagIds is List<int>)) return false;
     if (originTagIds.contains(null)) return false;
     if (!(destinationTagId is int)) return false;
+    if (originTagIds?.isEmpty != false) return false;
     if (type == RelationSubstance.SYNONYM && originTagIds.length > 1) return false;
 
     return substance.validateLocally();
