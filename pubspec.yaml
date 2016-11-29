@@ -8,6 +8,7 @@ dependencies:
   scribe: any
   aqueduct: "^1.0.0"
   googleapis_auth: any
+  angular2_components: ^0.1.0
 dev_dependencies:
   test: any
   browser: ^0.10.0

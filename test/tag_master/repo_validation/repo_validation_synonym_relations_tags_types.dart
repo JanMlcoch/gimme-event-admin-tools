@@ -51,13 +51,11 @@ void synonymRelationsHaveAppropriateTagsAndTagTypesTests() {
 
 
   test("Test of synonym pointing nonexistent tag synonym having relation validity stability", () {
-    bool isValid =
     synonymPointingNonexistentTag.validate(rules: [new TagMasterRepositoryRule.synonymRelationsHaveAppropriateTagsAndTagTypes()]);
     expect(true, equals(true));
   });
 
   test("Test of nonexistent synonym pointing tag synonym having relation validity stability", () {
-    bool isValid =
     nonexistentSynonymPointing.validate(rules: [new TagMasterRepositoryRule.synonymRelationsHaveAppropriateTagsAndTagTypes()]);
     expect(true, equals(true));
   });
