@@ -2,8 +2,8 @@ part of tagMaster2.repo;
 
 ///Class which instance represent complete output from tagMaster
 class TagMasterRepository {
-  List<Tag> tags;
-  List<Relation> relations;
+  List<Tag> tags = [];
+  List<Relation> relations = [];
 
   TagMasterRepository();
 

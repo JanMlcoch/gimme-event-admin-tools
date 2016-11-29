@@ -6,17 +6,19 @@ import '../../lib/tag_master/repo/library.dart';
 import '../../lib/tag_master/relation/library.dart';
 import '../../lib/tag_master/tag.dart';
 import '../../lib/tag_master/sidos_entities/library.dart';
+import '../../lib/tag_master/library.dart';
 
 
-part 'data.dart';
-part 'repo_validation_local_validation.dart';
-part 'repo_validation_synonym_relations_tags_types.dart';
-part 'repo_validation_synonyms_have_relations.dart';
-part 'repo_validation_customs.dart';
-part 'repo_validation_unique_tag_ids.dart';
-part 'repo_validation_unique_tag_names.dart';
-part 'repo_validation_unique_relations.dart';
-part 'repo_validation_relation_tags_exists.dart';
+part 'repo_record_application.dart';
+part 'repo_validation/data.dart';
+part 'repo_validation/repo_validation_local_validation.dart';
+part 'repo_validation/repo_validation_synonym_relations_tags_types.dart';
+part 'repo_validation/repo_validation_synonyms_have_relations.dart';
+part 'repo_validation/repo_validation_customs.dart';
+part 'repo_validation/repo_validation_unique_tag_ids.dart';
+part 'repo_validation/repo_validation_unique_tag_names.dart';
+part 'repo_validation/repo_validation_unique_relations.dart';
+part 'repo_validation/repo_validation_relation_tags_exists.dart';
 
 Future main() async {
   Timer timeout;
@@ -29,6 +31,9 @@ Future main() async {
     timeout.cancel();
   });
   group("TagMaster Repository tests", () {
+    group("TagMaster Repository Record Application tests",(){
+      actionRecordApplicationTests();
+    });
     group("TagMaster Repository validation tests", () {
       group("TagMaster Repository local validation tests", () {
         tagMasterRepoLocalValidationTests();

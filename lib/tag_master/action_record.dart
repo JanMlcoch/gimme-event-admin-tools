@@ -14,6 +14,21 @@ class ActionRecord {
   Record record;
   String type;
 
+  ActionRecord.addTag(this.id, this.versionId, this.userId, Tag tag){
+    type = TYPE_ADD_TAG;
+    record = new Record.recordTag(userId, tag);
+  }
+
+  ActionRecord.removeTag(this.id, this.versionId, this.userId, Tag tag){
+    type = TYPE_REMOVE_TAG;
+    record = new Record.recordTag(userId, tag);
+  }
+
+  ActionRecord.changeTag(this.id, this.versionId, this.userId, Tag tag){
+    type = TYPE_CHANGE_TAG;
+    record = new Record.recordTag(userId, tag);
+  }
+
   //todo: should this change argument or return copy?
   TagMasterRepository applyOn(TagMasterRepository repo) {
     TagMasterRepository repoCopy = new TagMasterRepository()..fromMap(repo.toMap());
