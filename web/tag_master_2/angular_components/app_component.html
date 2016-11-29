@@ -1,7 +1,5 @@
 <h1>My First Angular 2 App</h1>
-<button (click)="setPath(path1)">Path 1</button>
-<button (click)="setPath(path2)">Path 2</button>
-<button (click)="setPath(path3)">Path 3</button>
-<div *ngIf="path == path1">Hello1</div>
-<div *ngIf="path == path2">Hello2</div>
-<div *ngIf="path == path3">Hello3</div>
+<button [routerLink]="['Path1']">Path 1</button>
+<button [routerLink]="['Path2']">Path 2</button>
+<button [routerLink]="['Path3']">Path 3</button>
+<router-outlet></router-outlet>
