@@ -4,22 +4,35 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
+import 'get_repo_service.dart';
+import '../tag_master/library.dart';
+import 'dart:async';
 
 @Component(
     selector: 'my-app',
     styleUrls: const ['app_component.css'],
     templateUrl: 'app_component.html',
     directives: const [materialDirectives, ROUTER_DIRECTIVES],
-    providers: const [materialProviders, ROUTER_PROVIDERS])
+    providers: const [materialProviders, GetRepoService, ROUTER_PROVIDERS])
 @RouteConfig(const [
-  const Route(path: '/path1', name: 'Path1', component: Component1),
+  const Route(path: '/view_tags', name: 'ViewTags', component: ViewTagsComponent),
   const Route(path: '/path2', name: 'Path2', component: Component2),
   const Route(path: '/path3', name: 'Path3', component: Component3),
 ])
 class AppComponent {}
 
-@Component(selector: "component1", template: 'Hello1')
-class Component1 {}
+@Component(selector: "view-tags", templateUrl: 'view_tags.html')
+class ViewTagsComponent implements OnInit{
+  final GetRepoService _repoService;
+  ViewTagsComponent(this._repoService);
+
+  @Input()
+  TagMasterRepository repo;
+
+  Future<Null> ngOnInit() async {
+    repo = await _repoService.getRepo();
+  }
+}
 
 @Component(selector: "component2", template: 'Hello2')
 class Component2 {}

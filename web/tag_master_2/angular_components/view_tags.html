@@ -1,0 +1,21 @@
+<div *ngIf="repo?.tags != null">
+    <table>
+        <tr>
+            <th>Tag Id</th>
+            <th>Tag Name</th>
+            <th>Tag Type</th>
+        </tr>
+        <tr *ngFor="let tag of repo.tags">
+            <td>
+                {{tag.tagId}}
+            </td>
+            <td>
+                {{tag.tagName}}
+            </td>
+            <td>
+                {{tag.tagType}}
+            </td>
+        </tr>
+    </table>
+    <!--{{repo?.toMap()["tags"].toString()}}-->
+</div>
