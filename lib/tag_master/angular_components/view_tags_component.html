@@ -4,6 +4,7 @@
             <th>Tag Id</th>
             <th>Tag Name</th>
             <th>Tag Type</th>
+            <th>Edit/Detail</th>
         </tr>
         <tr *ngFor="let tag of repo.tags">
             <td>
@@ -14,6 +15,9 @@
             </td>
             <td>
                 {{tag.tagType}}
+            </td>
+            <td>
+                <material-button [routerLink]="['EditTag', {id: tag.tagId}]" raised>View Tags</material-button>
             </td>
         </tr>
     </table>

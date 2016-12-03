@@ -66,5 +66,7 @@ Future main() async {
       //todo: composite relations tags&types
       //todo: imprint relations tags&types
     });
+    //todo: getTagById test
+    //todo: getRelationsRelevant FOr ID test
   });
 }
