@@ -2,14 +2,9 @@ import 'package:angular2/core.dart';
 
 import 'dart:async';
 
-import '../tag_master/library.dart';
-import '../data/repo_refactor/new_deserialized.dart';
+import 'package:admin_tools/tag_master/library.dart';
+import 'package:admin_tools/tag_master/repo_refactor/new_deserialized.dart';
 
-//class TagMasterRepository{
-//  void fromMap(Map<String, List<Map<String, dynamic>>> b){}
-//}
-//
-//Map a = {};
 
 @Injectable()
 class GetRepoService {
