@@ -7,17 +7,18 @@ import 'package:angular2_components/angular2_components.dart';
 import 'get_repo_service.dart';
 import 'view_tags_component.dart';
 import 'edit_tag_component.dart';
+import 'create_tag_component.dart';
 
 @Component(
     selector: 'my-app',
     styleUrls: const ['app_component.css'],
     templateUrl: 'app_component.html',
-    directives: const [materialDirectives, ROUTER_DIRECTIVES],
+    directives: const [materialDirectives, ROUTER_DIRECTIVES, ViewTagsComponent],
     providers: const [materialProviders, GetRepoService, ROUTER_PROVIDERS])
 @RouteConfig(const [
   const Route(path: '/view_tags', name: 'ViewTags', component: ViewTagsComponent),
   const Route(path: '/edit_tag/:id', name: 'EditTag', component: EditTagComponent),
-  const Route(path: '/path2', name: 'Path2', component: Component2),
+  const Route(path: '/create_tag', name: 'CreateTag', component: CreateTagComponent),
   const Route(path: '/path3', name: 'Path3', component: Component3),
 ])
 class AppComponent {}

@@ -1,7 +1,15 @@
 <h1>My First Angular 2 App</h1>
 <material-button [routerLink]="['ViewTags']" raised>View Tags</material-button>
-<material-button [routerLink]="['Path2']" raised>Path 2</material-button>
+<material-button [routerLink]="['CreateTag']" raised>Create Tag</material-button>
 <material-button [routerLink]="['Path3']" raised>Path 3</material-button>
 
-
-<router-outlet></router-outlet>
+<table>
+    <tr>
+        <td valign="top">
+            <view-tags></view-tags>
+        </td>
+        <td valign="top">
+            <router-outlet></router-outlet>
+        </td>
+    </tr>
+</table>

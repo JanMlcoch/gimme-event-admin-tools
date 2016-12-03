@@ -1,24 +1,24 @@
-<div *ngIf="subRepo?.tags?.first != null">
+<div>
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.tagName}}" /></td>
+            <td><input type="text" value="New Tag" /></td>
         </tr>
         <tr>
             <td>Id:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.tagId}}" disabled/></td>
+            <td><input type="text" value="{{subRepo?.getLowestUnusedTagId()}}" disabled/></td>
         </tr>
         <tr>
             <td>Lang:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.lang}}" /></td>
+            <td><input type="text" value="cs" /></td>
         </tr>
         <tr>
             <td>Author(id):</td>
-            <td><input type="text" value="TODO ({{subRepo.tags?.first?.authorId}})" disabled/></td>
+            <td><input type="text" value="TODO)" disabled/></td>
         </tr>
         <tr>
             <td>Type:</td>
-            <td><input type="text" value="TODO slovni - {{subRepo.tags?.first?.tagType}}" disabled/></td>
+            <td><input type="text" value="4" disabled/></td>
         </tr>
     </table>
     Relations from

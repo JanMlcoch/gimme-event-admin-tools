@@ -17,7 +17,7 @@
                 {{tag.tagType}}
             </td>
             <td>
-                <material-button [routerLink]="['EditTag', {id: tag.tagId}]" raised>View Tags</material-button>
+                <material-button [routerLink]="['EditTag', {id: tag.tagId.toString()}]" raised>View Tag</material-button>
             </td>
         </tr>
     </table>

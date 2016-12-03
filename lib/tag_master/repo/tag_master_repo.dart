@@ -27,11 +27,11 @@ class TagMasterRepository {
 
   void fromMap(Map<String, List<Map<String, dynamic>>> map) {
     for (Map<String, dynamic> relationMap in map["relations"]) {
-      if(relations == null)relations = [];
+      if (relations == null) relations = [];
       relations.add(new Relation()..fromMap(relationMap));
     }
     for (Map<String, dynamic> tagMap in map["tags"]) {
-      if(tags == null)tags = [];
+      if (tags == null) tags = [];
       tags.add(new Tag()..fromMap(tagMap));
     }
   }
@@ -52,10 +52,12 @@ class TagMasterRepository {
     return RepositoryValidator.validateGlobally(this);
   }
 
+  ///Returns [Tag] by [Tag.id]
   Tag getTagById(int tagId) {
-    return tags.firstWhere((t) => t.tagId == tagId, orElse: ()=>null);
+    return tags.firstWhere((t) => t.tagId == tagId, orElse: () => null);
   }
 
+  ///Returns [List] of all [Relation]s that originates or destinates at [Tag] [tag]
   List<Relation> getRelationsRelevantFor(Tag tag) {
     List<Relation> relevantRelations = [];
     for (Relation relation in relations) {
@@ -63,5 +65,24 @@ class TagMasterRepository {
         relevantRelations.add(relation);
     }
     return relevantRelations;
+  }
+
+  int getLowestUnusedTagId() {
+    int currentMax = -1;
+    List<int> freeIdsLowerThanCurrentMax = [];
+    for (Tag tag in tags) {
+      int id = tag.tagId;
+      while(id > currentMax){
+        currentMax++;
+        freeIdsLowerThanCurrentMax.add(currentMax);
+      }
+      freeIdsLowerThanCurrentMax.remove(id);
+    }
+    if(freeIdsLowerThanCurrentMax.isEmpty){
+      return currentMax+1;
+    }
+    else{
+      return freeIdsLowerThanCurrentMax.reduce((a,b)=>min(a,b));
+    }
   }
 }

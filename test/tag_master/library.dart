@@ -8,8 +8,8 @@ import '../../lib/tag_master/tag.dart';
 import '../../lib/tag_master/sidos_entities/library.dart';
 import '../../lib/tag_master/library.dart';
 
-
 part 'repo_record_application.dart';
+part 'repo_lowest_free_id.dart';
 part 'repo_validation/data.dart';
 part 'repo_validation/repo_validation_local_validation.dart';
 part 'repo_validation/repo_validation_synonym_relations_tags_types.dart';
@@ -31,8 +31,11 @@ Future main() async {
     timeout.cancel();
   });
   group("TagMaster Repository tests", () {
-    group("TagMaster Repository Record Application tests",(){
+    group("TagMaster Repository Record Application tests", () {
       actionRecordApplicationTests();
+    });
+    group("Tag Master getLowestUnusedId test", () {
+      tagMasterRepoLowestUnusedIdTests();
     });
     group("TagMaster Repository validation tests", () {
       group("TagMaster Repository local validation tests", () {
@@ -47,16 +50,16 @@ Future main() async {
       group("TagMaster Repository validation customs tests", () {
         tagMasterRepoCustomValidationTests();
       });
-      group("Unique tag ids tests",(){
+      group("Unique tag ids tests", () {
         uniqueTagIdsTests();
       });
-      group("Unique tag names tests",(){
+      group("Unique tag names tests", () {
         uniqueTagNamesTests();
       });
-      group("Unique relation tests",(){
+      group("Unique relation tests", () {
         uniqueRelationsTests();
       });
-      group("Relation tags exists tests",(){
+      group("Relation tags exists tests", () {
         relationTagsExistsTests();
       });
       //todo: custom having relations - in default redundant
