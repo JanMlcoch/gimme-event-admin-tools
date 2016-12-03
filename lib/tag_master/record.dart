@@ -2,30 +2,65 @@ part of tagMaster2;
 
 ///instance of [Record] represents atomic difference between [TagMasterRepository]s.
 class Record{
-  int userId;
   Tag tag;
   Relation relation;
+  bool isRemoval = false;
 
   ///Creates instance of [Record] representing tag operation
-  Record.recordTag(this.userId, this.tag);
+  Record.recordTag(this.tag);
 
   ///Creates instance of [Record] representing relation operation
-  Record.recordRelation(this.userId, this.relation);
+  Record.recordRelation(this.relation);
 
-  Record.fromMapConstructor(Map<String, dynamic> map){
+  Record.fromMapConstructor(Map<String, Map<String,dynamic>> map){
     this.fromMap(map);
   }
 
-  void fromMap(Map<String, dynamic> map){
-    userId = map["userId"];
-    if(map["tag"] is Map<String, dynamic>)tag = new Tag()..fromMap((map["tag"] as Map<String, dynamic>));
-    if(map["relation"] is Map<String, dynamic>)relation = new Relation()..fromMap((map["relation"] as Map<String, dynamic>));
+  static List<Record> diff(TagMasterRepository originalRepo, TagMasterRepository finalRepo){
+    List<Record> records = [];
+    for(Tag originTag in originalRepo.tags){
+      Tag finalTag = finalRepo.getTagById(originTag.tagId);
+      if(finalTag == null){
+        records.add(new Record.recordTag(originTag)..isRemoval = true);
+        continue;
+      }
+      if(finalTag.toMap().toString() != originTag.toMap().toString()){
+        records.add(new Record.recordTag(finalTag));
+      }
+    }
+    for(Tag finalTag in finalRepo.tags){
+      if(originalRepo.getTagById(finalTag.tagId)==null){
+        records.add(new Record.recordTag(finalTag));
+      }
+    }
+    for(Relation originRelation in originalRepo.relations){
+      List<Relation> finalRelations = finalRepo.relations.where((Relation r){r.hasEquivalentTags(originRelation);});
+      if(finalRelations.isEmpty){
+        records.add(new Record.recordRelation(originRelation)..isRemoval=true);
+        continue;
+      }
+      if(finalRelations.first.substance.toMap().toString() != originRelation.substance.toMap().toString()){
+        records.add(new Record.recordRelation(finalRelations.first));
+      }
+    }
+    for(Relation finalRelation in finalRepo.relations){
+      List<Relation> originRelations = finalRepo.relations.where((Relation r){r.hasEquivalentTags(finalRelation);});
+      if(originRelations.isEmpty){
+        records.add(new Record.recordRelation(finalRelation));
+        continue;
+      }
+    }
+    return records;
+  }
+
+  void fromMap(Map<String, Map<String, dynamic>> map){
+    tag = new Tag()..fromMap(map["tag"]);
+    relation = new Relation()..fromMap(map["relation"]);
   }
 
   Map<String, dynamic> toMap(){
     Map<String, dynamic> map = {};
 
-    map["userId"] = userId;
     map["tag"] = tag.toMap();
     map["relation"] = relation.toMap();
 

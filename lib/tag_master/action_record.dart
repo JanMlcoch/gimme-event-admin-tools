@@ -4,6 +4,7 @@ class ActionRecord {
   static const String TYPE_BINARY_RELATION = "t1";
   static const String TYPE_TERNARY_RELATION = "t2";
   static const String TYPE_QUATERNARY_RELATION = "t3";
+  static const String TYPE_REMOVE_RELATION = "t-";
   static const String TYPE_ADD_TAG = "addTag";
   static const String TYPE_REMOVE_TAG = "removeTag";
   static const String TYPE_CHANGE_TAG = "changeTag";
@@ -16,17 +17,18 @@ class ActionRecord {
 
   ActionRecord.addTag(this.id, this.versionId, this.userId, Tag tag){
     type = TYPE_ADD_TAG;
-    record = new Record.recordTag(userId, tag);
+    record = new Record.recordTag(tag);
   }
 
   ActionRecord.removeTag(this.id, this.versionId, this.userId, Tag tag){
     type = TYPE_REMOVE_TAG;
-    record = new Record.recordTag(userId, tag);
+    record = new Record.recordTag(tag);
+    record.isRemoval = true;
   }
 
   ActionRecord.changeTag(this.id, this.versionId, this.userId, Tag tag){
     type = TYPE_CHANGE_TAG;
-    record = new Record.recordTag(userId, tag);
+    record = new Record.recordTag(tag);
   }
 
   //todo: should this change argument or return copy?
@@ -57,7 +59,8 @@ class ActionRecord {
     versionId = map["versionId"];
     userId = map["userId"];
     if (map["record"] is Map<String, dynamic>) {
-      record = new Record.fromMapConstructor((map["record"]) as Map<String, dynamic>);
+      //todo: on is not
+      if((map["record"]) is Map<String, dynamic>)record = new Record.fromMapConstructor((map["record"]) as Map<String, Map<String,dynamic>>);
     } else {
       print("JSON object for creation of record had wrong format");
     }

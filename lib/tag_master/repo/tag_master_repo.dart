@@ -52,7 +52,7 @@ class TagMasterRepository {
     return RepositoryValidator.validateGlobally(this);
   }
 
-  ///Returns [Tag] by [Tag.id]
+  ///Returns [Tag] by [Tag.id]. If no tag has desired id, returns null.
   Tag getTagById(int tagId) {
     return tags.firstWhere((t) => t.tagId == tagId, orElse: () => null);
   }

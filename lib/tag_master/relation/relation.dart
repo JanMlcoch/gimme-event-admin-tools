@@ -20,6 +20,11 @@ class Relation {
     this.substance = new ImprintRelation.withImprintPoint(imprintPoint);
   }
 
+  //todo: revise
+  Relation.imprintDefault(this.originTagIds, this.destinationTagId) {
+    this.substance = new ImprintRelation.withImprintPoint(new ImprintPoint());
+  }
+
   bool hasEquivalentTags(Relation relation) {
     if (destinationTagId == relation.destinationTagId && originTagIds.length == relation.originTagIds.length) {
       bool areEquivalent = true;

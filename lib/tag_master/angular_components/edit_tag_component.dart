@@ -25,12 +25,37 @@ class EditTagComponent implements OnInit {
   List<Relation> get relationsTo =>
       subRepo.relations.where((Relation relation) => relation.destinationTagId == subRepo?.tags?.first?.tagId).toList();
 
+  void addRelationFrom() {
+    int tagId = subRepo.tags.single.tagId;
+    int type = subRepo.tags.single.tagType;
+    Relation relation;
+    if (type == Tag.TYPE_SYNONYM) {
+      //todo: more robust
+      relation = new Relation.synonym([tagId], -1);
+    }
+    if (type == Tag.TYPE_COMPOSITE) {
+      //todo: more robust
+      relation = new Relation.composite([tagId], -1, 0.5);
+    }
+    if (type == Tag.TYPE_SPECIFIC || type == Tag.TYPE_CORE) {
+      //todo: more robust
+      relation = new Relation.imprintDefault([tagId], -1);
+    }
+    subRepo.relations.add(relation);
+  }
+
+  void removeRelation(Relation relation) {
+    subRepo.relations.remove(relation);
+    //todo: global/toCommit removal
+  }
+
   Future<Null> ngOnInit() async {
     String _tagIdString = _routeParams.get('id');
     _tagIdString = _tagIdString != null ? _tagIdString : "";
     int _tagId = int.parse(_tagIdString, onError: (_) {
       throw new Exception("Parsing of tagId from routing parameters failed");
     });
+//    subRepo = await _repoService.getRepo();
     subRepo = await _repoService.getSubRepoOfTagId(_tagId);
   }
 }

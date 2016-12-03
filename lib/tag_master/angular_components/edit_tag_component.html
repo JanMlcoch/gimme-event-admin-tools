@@ -2,23 +2,24 @@
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.tagName}}" /></td>
+            <td><material-input [(ngModel)]="subRepo.tags.first.tagName"></material-input></td>
         </tr>
         <tr>
             <td>Id:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.tagId}}" disabled/></td>
+            <!--materialize-->
+            <td>{{subRepo.tags.first.tagId}}</td>
         </tr>
         <tr>
             <td>Lang:</td>
-            <td><input type="text" value="{{subRepo.tags?.first?.lang}}" /></td>
+            <td><material-input type="text" [(ngModel)]="subRepo.tags.first.lang"></material-input></td>
         </tr>
         <tr>
             <td>Author(id):</td>
-            <td><input type="text" value="TODO ({{subRepo.tags?.first?.authorId}})" disabled/></td>
+            <td>TODO ({{subRepo.tags?.first?.authorId}})</td>
         </tr>
         <tr>
             <td>Type:</td>
-            <td><input type="text" value="TODO slovni - {{subRepo.tags?.first?.tagType}}" disabled/></td>
+            <td>TODO slovni - {{subRepo.tags?.first?.tagType}} <material-button raised disabled>Change</material-button></td>
         </tr>
     </table>
     Relations from
@@ -45,10 +46,11 @@
                 {{relation.type}}
             </td>
             <td>
-                TODO
+                <material-button raised (click)="removeRelation(relation)">-</material-button>
             </td>
         </tr>
     </table>
+    <material-button (click)="addRelationFrom()" raised label="addRelationFrom" disabled="{{subRepo.tags?.first?.tagType<3}}">+</material-button>
 
     Relations to
     <table>
