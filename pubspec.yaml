@@ -8,7 +8,8 @@ dependencies:
   scribe: any
   aqueduct: "^1.0.0"
   googleapis_auth: any
-  angular2_components: ^0.1.0
+  angular2_components:
+    git: https://github.com/dart-lang/angular2_components
 dev_dependencies:
   test: any
   browser: ^0.10.0
