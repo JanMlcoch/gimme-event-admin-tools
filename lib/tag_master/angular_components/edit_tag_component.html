@@ -37,6 +37,7 @@
                 <span *ngFor="let tagId of relation.originTagIds">
                     <!--<a [routerLink]="['EditTag', {id: tagId}]">{{tagId}}</a>-->
                     <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId).tagName}}</a>
+                    <glyph icon="edit_mode" size="medium" raised></glyph>
                     <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
                 ]

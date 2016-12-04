@@ -1,4 +1,4 @@
-part of tagMaster2;
+part of tagMaster2.version;
 
 class ActionRecord {
   static const String TYPE_BINARY_RELATION = "t1";

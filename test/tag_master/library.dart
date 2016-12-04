@@ -31,6 +31,19 @@ Future main() async {
 // if the test already ended, cancel the timeout
     timeout.cancel();
   });
+  group("Smart select tests",(){
+    group("Smart select sorter tests",(){
+      //todo: startsWith tests
+      //todo: substring tests
+      //todo: startsWithAbbrev tests
+      //todo: abbrev tests
+      //todo: typeDesiredTests
+      //todo: desiredCountTests
+      //todo: synonym remaping tests
+    });
+    //todo: index tests
+    //todo: index generator tests
+  });
   group("TagMaster Repository tests", () {
     group("TagMaster Repository Record Application tests", () {
       group("Action record application tests", () {

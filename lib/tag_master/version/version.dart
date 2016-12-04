@@ -1,4 +1,4 @@
-part of tagMaster2;
+part of tagMaster2.version;
 
 class Version {
   int id;

@@ -1,4 +1,4 @@
-part of tagMaster2;
+part of tagMaster2.version;
 
 ///instance of [Record] represents atomic difference between [TagMasterRepository]s.
 class Record{
