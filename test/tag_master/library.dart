@@ -9,6 +9,7 @@ import '../../lib/tag_master/sidos_entities/library.dart';
 import '../../lib/tag_master/library.dart';
 
 part 'repo_record_application.dart';
+part 'repo_diff.dart';
 part 'repo_lowest_free_id.dart';
 part 'repo_validation/data.dart';
 part 'repo_validation/repo_validation_local_validation.dart';
@@ -32,7 +33,12 @@ Future main() async {
   });
   group("TagMaster Repository tests", () {
     group("TagMaster Repository Record Application tests", () {
-      actionRecordApplicationTests();
+      group("Action record application tests", () {
+        actionRecordApplicationTests();
+      });
+      group("Tag Master diff tests", () {
+        repoDiffTests();
+      });
     });
     group("Tag Master getLowestUnusedId test", () {
       tagMasterRepoLowestUnusedIdTests();
