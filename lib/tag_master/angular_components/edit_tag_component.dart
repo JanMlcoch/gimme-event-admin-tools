@@ -17,6 +17,7 @@ class EditTagComponent implements OnInit {
 
   @Input()
   TagMasterRepository subRepo;
+  TagMasterRepository repo;
 
   List<Relation> get relationsFrom => subRepo.relations
       .where((Relation relation) => relation.originTagIds.single == subRepo?.tags?.first?.tagId)
@@ -25,6 +26,7 @@ class EditTagComponent implements OnInit {
   List<Relation> get relationsTo =>
       subRepo.relations.where((Relation relation) => relation.destinationTagId == subRepo?.tags?.first?.tagId).toList();
 
+  //todo: discuss defaults
   void addRelationFrom() {
     int tagId = subRepo.tags.single.tagId;
     int type = subRepo.tags.single.tagType;
@@ -42,10 +44,12 @@ class EditTagComponent implements OnInit {
       relation = new Relation.imprintDefault([tagId], -1);
     }
     subRepo.relations.add(relation);
+    repo.relations.add(relation);
   }
 
   void removeRelation(Relation relation) {
     subRepo.relations.remove(relation);
+    repo.relations.remove(relation);
     //todo: global/toCommit removal
   }
 
@@ -57,5 +61,6 @@ class EditTagComponent implements OnInit {
     });
 //    subRepo = await _repoService.getRepo();
     subRepo = await _repoService.getSubRepoOfTagId(_tagId);
+    repo = await _repoService.getRepo();
   }
 }

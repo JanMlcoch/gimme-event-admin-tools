@@ -22,10 +22,11 @@
             <td>TODO slovni - {{subRepo.tags?.first?.tagType}} <material-button raised disabled>Change</material-button></td>
         </tr>
     </table>
-    Relations from
+    <h2>Relations from</h2>
     <table>
         <tr>
             <th>originTagIds</th>
+            <th></th>
             <th>destinationTagId</th>
             <th>Type</th>
             <th>values?</th>
@@ -34,28 +35,34 @@
             <td>
                 [
                 <span *ngFor="let tagId of relation.originTagIds">
-                    <a [routerLink]="['EditTag', {id: tagId}]" style="width: 10px;">{{tagId}}</a>
-                    <span *ngIf="!relationsFrom.last.hasEquivalentTags(relation)">,</span>
+                    <!--<a [routerLink]="['EditTag', {id: tagId}]">{{tagId}}</a>-->
+                    <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId).tagName}}</a>
+                    <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
                 ]
             </td>
             <td>
-                <a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>
+                -->
+            </td>
+            <td>
+                <!--<a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>-->
+                <a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{repo.getTagById(relation.destinationTagId)?.tagName}}</a>
             </td>
             <td>
                 {{relation.type}}
             </td>
             <td>
-                <material-button raised (click)="removeRelation(relation)">-</material-button>
+                <material-button raised (trigger)="removeRelation(relation)">-</material-button>
             </td>
         </tr>
     </table>
-    <material-button (click)="addRelationFrom()" raised label="addRelationFrom" disabled="{{subRepo.tags?.first?.tagType<3}}">+</material-button>
+    <material-button (trigger)="addRelationFrom()" raised label="addRelationFrom" disabled="{{subRepo.tags?.first?.tagType<3}}">+</material-button>
 
-    Relations to
+    <h2>Relations to</h2>
     <table>
         <tr>
             <th>originTagIds</th>
+            <th></th>
             <th>destinationTagId</th>
             <th>Type</th>
             <th>values?</th>
@@ -64,20 +71,27 @@
             <td>
                 [
                 <span *ngFor="let tagId of relation.originTagIds">
-                    <a [routerLink]="['EditTag', {id: tagId}]" style="width: 10px;">{{tagId}}</a>
-                    <span *ngIf="!relationsTo.last.hasEquivalentTags(relation)">,</span>
+                    <!--<a [routerLink]="['EditTag', {id: tagId}]">{{tagId}}</a>-->
+                    <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId).tagName}}</a>
+                    <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
                 ]
             </td>
             <td>
-                <a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>
+                -->
+            </td>
+            <td>
+                <!--<a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>-->
+                <a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{repo.getTagById(relation.destinationTagId)?.tagName}}</a>
             </td>
             <td>
                 {{relation.type}}
             </td>
             <td>
-                TODO
+                <material-button raised (trigger)="removeRelation(relation)">-</material-button>
             </td>
         </tr>
     </table>
+    <material-button (trigger)="addRelationTo()" raised label="addRelationFrom" disabled>+</material-button>
+    <!--<material-button (trigger)="addRelationTo()" raised label="addRelationFrom" disabled="{{subRepo.tags?.first?.tagType<3}}">+</material-button>-->
 </div>
