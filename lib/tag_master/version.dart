@@ -10,7 +10,7 @@ class Version {
 
   void applyActionRecord(ActionRecord record){
     //todo: checking versionIds and shit
-    currentState = record.applyOn(currentState);
+    currentState = record.appliedOn(currentState);
   }
 
   void fromMap(Map<String, dynamic> map) {
