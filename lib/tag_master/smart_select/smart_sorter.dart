@@ -49,7 +49,7 @@ abstract class SmartSorter {
     List<Tag> tagsAbbreviationStartsWith = getStartsWithAbbrevTags(repo,inputString);;
     List<Tag> tagsAbbreviation = getAbbrevTags(repo,inputString);;
 
-    TagCompare tagTypeCompare = (a, b) => a.tagType.compareTo(b.tagType);
+    TagCompare tagTypeCompare = (a, b) => -a.tagType.compareTo(b.tagType);
 
     tagsStartsWith.sort(tagTypeCompare);
     tagsSubstring.sort(tagTypeCompare);
@@ -113,4 +113,6 @@ abstract class SmartSorter {
   static List<Tag> getAbbrevTags(TagMasterRepository repo, String string){
     return [];
   }
+
+  //todo: method for boldification
 }

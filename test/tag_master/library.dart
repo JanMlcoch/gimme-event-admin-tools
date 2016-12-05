@@ -25,7 +25,9 @@ part 'smart_select/starts_with.dart';
 part 'smart_select/substring.dart';
 part 'smart_select/desired_count.dart';
 part 'smart_select/allowed_types.dart';
-//part 'smart_select/synonym_remap.dart';
+part 'smart_select/synonym_remap.dart';
+part 'smart_select/unicity.dart';
+part 'smart_select/order.dart';
 
 Future main() async {
   Timer timeout;
@@ -37,66 +39,37 @@ Future main() async {
 // if the test already ended, cancel the timeout
     timeout.cancel();
   });
-  group("Smart select tests",(){
-    group("Smart select sorter tests",(){
-      group("SMart select startsWithfiltering tests", (){
-        sSStartsWithTests();
-      });
-      group("Smart select substring filter tests", (){
-        sSSubstringTests();
-      });
+  group("Smart select tests", () {
+    group("Smart select sorter tests", () {
+      group("SMart select startsWithfiltering tests", sSStartsWithTests);
+      group("Smart select substring filter tests", sSSubstringTests);
       //todo: startsWithAbbrev tests
       //todo: abbrev tests
-      group("Allowed types tests", (){
-        sSAllowedTypeTests();
-      });
-      group("Handling size of output filter tests", (){
-        desiredCountTest();
-      });
-      //todo: synonym remaping tests
-      //todo> correct order tests
-      //todo> unicity tests
+      group("Allowed types tests", sSAllowedTypeTests);
+      group("Handling size of output filter tests", desiredCountTest);
+      group("Synonym remaping test", sSReMapSynonymsTests);
+      group("Order tests", sSOrderTests);
+      group("Tests of unicity of 'getTags()'", sSUnicityTests);
     });
     //todo: index tests
     //todo: index generator tests
   });
   group("TagMaster Repository tests", () {
     group("TagMaster Repository Record Application tests", () {
-      group("Action record application tests", () {
-        actionRecordApplicationTests();
-      });
-      group("Tag Master diff tests", () {
-        repoDiffTests();
-      });
+      group("Action record application tests", actionRecordApplicationTests);
+      group("Tag Master diff tests", repoDiffTests);
     });
-    group("Tag Master getLowestUnusedId test", () {
-      tagMasterRepoLowestUnusedIdTests();
-    });
+    group("Tag Master getLowestUnusedId test", tagMasterRepoLowestUnusedIdTests);
     group("TagMaster Repository validation tests", () {
-      group("TagMaster Repository local validation tests", () {
-        tagMasterRepoLocalValidationTests();
-      });
-      group("Synonym Relations have appropriate tags and tag types tests", () {
-        synonymRelationsHaveAppropriateTagsAndTagTypesTests();
-      });
-      group("Synonyms have Appropriate relations tests", () {
-        synonymsHaveRelationsTests();
-      });
-      group("TagMaster Repository validation customs tests", () {
-        tagMasterRepoCustomValidationTests();
-      });
-      group("Unique tag ids tests", () {
-        uniqueTagIdsTests();
-      });
-      group("Unique tag names tests", () {
-        uniqueTagNamesTests();
-      });
-      group("Unique relation tests", () {
-        uniqueRelationsTests();
-      });
-      group("Relation tags exists tests", () {
-        relationTagsExistsTests();
-      });
+      group("TagMaster Repository local validation tests", tagMasterRepoLocalValidationTests);
+      group("Synonym Relations have appropriate tags and tag types tests",
+          synonymRelationsHaveAppropriateTagsAndTagTypesTests);
+      group("Synonyms have Appropriate relations tests", synonymsHaveRelationsTests);
+      group("TagMaster Repository validation customs tests", tagMasterRepoCustomValidationTests);
+      group("Unique tag ids tests", uniqueTagIdsTests);
+      group("Unique tag names tests", uniqueTagNamesTests);
+      group("Unique relation tests", uniqueRelationsTests);
+      group("Relation tags exists tests", relationTagsExistsTests);
       //todo: custom having relations - in default redundant
       //todo: composite having relations
       //todo: specific having relations
