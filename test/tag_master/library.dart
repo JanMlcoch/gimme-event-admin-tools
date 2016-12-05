@@ -7,6 +7,7 @@ import '../../lib/tag_master/relation/library.dart';
 import '../../lib/tag_master/tag.dart';
 import '../../lib/tag_master/sidos_entities/library.dart';
 import '../../lib/tag_master/library.dart';
+import '../../lib/tag_master/smart_select/library.dart';
 
 part 'repo_record_application.dart';
 part 'repo_diff.dart';
@@ -20,6 +21,7 @@ part 'repo_validation/repo_validation_unique_tag_ids.dart';
 part 'repo_validation/repo_validation_unique_tag_names.dart';
 part 'repo_validation/repo_validation_unique_relations.dart';
 part 'repo_validation/repo_validation_relation_tags_exists.dart';
+part 'smart_select/starts_with.dart';
 
 Future main() async {
   Timer timeout;
@@ -33,13 +35,16 @@ Future main() async {
   });
   group("Smart select tests",(){
     group("Smart select sorter tests",(){
-      //todo: startsWith tests
+      group("SMart select startsWithfiltering tests", (){
+        sSStartsWithTests();
+      });
       //todo: substring tests
       //todo: startsWithAbbrev tests
       //todo: abbrev tests
       //todo: typeDesiredTests
       //todo: desiredCountTests
       //todo: synonym remaping tests
+      //todo: without remap complete
     });
     //todo: index tests
     //todo: index generator tests
