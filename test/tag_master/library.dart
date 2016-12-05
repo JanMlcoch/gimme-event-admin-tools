@@ -22,6 +22,7 @@ part 'repo_validation/repo_validation_unique_tag_names.dart';
 part 'repo_validation/repo_validation_unique_relations.dart';
 part 'repo_validation/repo_validation_relation_tags_exists.dart';
 part 'smart_select/starts_with.dart';
+part 'smart_select/substring.dart';
 
 Future main() async {
   Timer timeout;
@@ -38,7 +39,9 @@ Future main() async {
       group("SMart select startsWithfiltering tests", (){
         sSStartsWithTests();
       });
-      //todo: substring tests
+      group("Smart select substring filter tests", (){
+        sSSubstringTests();
+      });
       //todo: startsWithAbbrev tests
       //todo: abbrev tests
       //todo: typeDesiredTests
