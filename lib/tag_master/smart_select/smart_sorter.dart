@@ -66,6 +66,8 @@ abstract class SmartSorter {
             tag = new LabeledTag.fromTag(
                 "${tag.tagName} -->", repo.getTagById(repo.getRelationsRelevantFor(tag).first.destinationTagId));
           }
+          if(!(tag is LabeledTag))tag = new LabeledTag.fromTag("",tag);
+          //todo: find out why strong mode havent shouted if tag in next row wasnt sure to be LabeledTag
           if (sorted.where((tag2) => tag2.tagId == tag.tagId).isEmpty) sorted.add(tag);
         }
         return i + 1;

@@ -1,0 +1,10 @@
+<material-input [(ngModel)]="string" (focus)="shouldRenderOptions = true" (blur)="shouldRenderOptions = false"></material-input>
+The value is {{string}}
+<div *ngIf="shouldRenderOptions">
+    <div *ngFor="let option of options">
+        <material-button raised (trigger)="chooseOption(option.tagId)">
+            {{option.tagName}}
+            <span *ngIf="option.label!=''">({{option.label}})</span>
+        </material-button>
+    </div>
+</div>

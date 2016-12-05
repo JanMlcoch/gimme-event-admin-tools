@@ -36,9 +36,9 @@ void sSUnicityTests() {
   Relation syn2Specific = new Relation.synonym([6], 3);
   Relation syn2Core = new Relation.synonym([7], 4);
 
-  String getLabel(Tag tag) {
-    return "${tag.tagName} -->";
-  }
+//  String getLabel(Tag tag) {
+//    return "${tag.tagName} -->";
+//  }
 
   List<Tag> allNonsynTags = [custom, composite, specific, core];
   List<Tag> allTags = [

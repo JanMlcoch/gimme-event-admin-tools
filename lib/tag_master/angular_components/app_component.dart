@@ -8,6 +8,7 @@ import 'get_repo_service.dart';
 import 'view_tags_component.dart';
 import 'edit_tag_component.dart';
 import 'create_tag_component.dart';
+import 'ss_component.dart';
 
 @Component(
     selector: 'my-app',
@@ -19,7 +20,7 @@ import 'create_tag_component.dart';
   const Route(path: '/view_tags', name: 'ViewTags', component: ViewTagsComponent),
   const Route(path: '/edit_tag/:id', name: 'EditTag', component: EditTagComponent),
   const Route(path: '/create_tag', name: 'CreateTag', component: CreateTagComponent),
-  const Route(path: '/path3', name: 'Path3', component: Component3),
+  const Route(path: '/smart_select_test', name: 'Path3', component: SmartSelectComponent),
 ])
 class AppComponent {}
 
