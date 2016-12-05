@@ -22,10 +22,10 @@ void sSSubstringTests() {
   Tag namelessTag = new Tag.composite(0, "", 0);
   Tag aTag = new Tag.composite(1, "a", 0);
   Tag bTag = new Tag.composite(2, "b", 0);
-  Tag abTag = new Tag.composite(0, "ab", 0);
-  Tag abcTag = new Tag.composite(0, "abc", 0);
-  Tag cdTag = new Tag.composite(0, "cd", 0);
-  Tag babTag = new Tag.composite(0, "bab", 0);
+  Tag abTag = new Tag.composite(3, "ab", 0);
+  Tag abcTag = new Tag.composite(4, "abc", 0);
+  Tag cdTag = new Tag.composite(5, "cd", 0);
+  Tag babTag = new Tag.composite(6, "bab", 0);
 
   test("Empty repo substring result tests", getSubstringTest([],"",[]));
   test("Empty string substring result tests", getSubstringTest([namelessTag,abTag,aTag,bTag],"",[namelessTag,abTag,aTag,bTag]));

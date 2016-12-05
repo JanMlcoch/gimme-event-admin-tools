@@ -23,6 +23,9 @@ part 'repo_validation/repo_validation_unique_relations.dart';
 part 'repo_validation/repo_validation_relation_tags_exists.dart';
 part 'smart_select/starts_with.dart';
 part 'smart_select/substring.dart';
+part 'smart_select/desired_count.dart';
+part 'smart_select/allowed_types.dart';
+//part 'smart_select/synonym_remap.dart';
 
 Future main() async {
   Timer timeout;
@@ -44,10 +47,15 @@ Future main() async {
       });
       //todo: startsWithAbbrev tests
       //todo: abbrev tests
-      //todo: typeDesiredTests
-      //todo: desiredCountTests
+      group("Allowed types tests", (){
+        sSAllowedTypeTests();
+      });
+      group("Handling size of output filter tests", (){
+        desiredCountTest();
+      });
       //todo: synonym remaping tests
-      //todo: without remap complete
+      //todo> correct order tests
+      //todo> unicity tests
     });
     //todo: index tests
     //todo: index generator tests
