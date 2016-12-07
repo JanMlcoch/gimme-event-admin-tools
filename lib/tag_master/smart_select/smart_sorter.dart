@@ -93,7 +93,7 @@ abstract class SmartSorter {
   static List<Tag> getStartsWithTags(TagMasterRepository repo, String string){
     List<Tag> toReturn = [];
     for(Tag tag in repo.tags){
-      if(tag.tagName.startsWith(string))toReturn.add(tag);
+      if(tag.tagName.toLowerCase().startsWith(string.toLowerCase()))toReturn.add(tag);
     }
     return toReturn;
   }
@@ -101,7 +101,7 @@ abstract class SmartSorter {
   static List<Tag> getSubstringTags(TagMasterRepository repo, String string){
     List<Tag> toReturn = [];
     for(Tag tag in repo.tags){
-      if(tag.tagName.contains(string))toReturn.add(tag);
+      if(tag.tagName.toLowerCase().contains(string.toLowerCase()))toReturn.add(tag);
     }
     return toReturn;
   }

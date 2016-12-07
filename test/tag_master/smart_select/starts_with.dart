@@ -25,6 +25,7 @@ void sSStartsWithTests() {
   Tag abTag = new Tag.composite(3, "ab", 0);
   Tag abcTag = new Tag.composite(4, "abc", 0);
   Tag cdTag = new Tag.composite(5, "cd", 0);
+  Tag aBTag = new Tag.composite(6, "aB", 0);
 
   test("Empty repo startsWIth result tests", getStartsWithTest([],"",[]));
   test("Empty string startsWIth result tests", getStartsWithTest([namelessTag,abTag,aTag,bTag],"",[namelessTag,abTag,aTag,bTag]));
@@ -43,6 +44,8 @@ void sSStartsWithTests() {
   test("string containes bit doesnt start with name startsWIth result test", getStartsWithTest([cdTag],"acd",[]));
   test("string starts with but is not name startsWIth result test", getStartsWithTest([abTag],"abc",[]));
   test("string & name starts with same characters startsWIth result test", getStartsWithTest([abcTag],"abd",[]));
+
+  test("case insensitivity startsWIth result test", getStartsWithTest([aBTag],"ab",[aBTag]));
 
   test("misch mash startsWIth result test", getStartsWithTest([namelessTag,abTag,aTag,abcTag,bTag,cdTag],"ab",[abTag,abcTag]));
 }

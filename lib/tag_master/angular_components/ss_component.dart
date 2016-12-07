@@ -14,12 +14,7 @@ class SmartSelectComponent implements OnInit {
   final GetRepoService _repoService;
   SmartSelectComponent(this._repoService);
 
-  String _string = "";
-  String get string => _string;
-  set string(String value){
-    _string = value;
-    updateOptions();
-  }
+  String string = "";
 
   @Input()
   TagMasterRepository repo;
@@ -33,9 +28,14 @@ class SmartSelectComponent implements OnInit {
     options = SmartSorter.getTags(string,repo);
   }
 
+  void delayedBlur(){
+    Timer timer = new Timer(new Duration(milliseconds: 500),(){shouldRenderOptions = false;});
+  }
+
   void chooseOption(int tagId){
     shouldRenderOptions = false;
     string = repo.getTagById(tagId).tagName;
+//    string = "aaa";
     chosenTagId = tagId;
   }
 

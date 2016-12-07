@@ -26,6 +26,7 @@ void sSSubstringTests() {
   Tag abcTag = new Tag.composite(4, "abc", 0);
   Tag cdTag = new Tag.composite(5, "cd", 0);
   Tag babTag = new Tag.composite(6, "bab", 0);
+  Tag aBTag = new Tag.composite(7, "aB", 0);
 
   test("Empty repo substring result tests", getSubstringTest([],"",[]));
   test("Empty string substring result tests", getSubstringTest([namelessTag,abTag,aTag,bTag],"",[namelessTag,abTag,aTag,bTag]));
@@ -44,6 +45,8 @@ void sSSubstringTests() {
   test("string containes bit doesnt start with name substring result test", getSubstringTest([cdTag],"acd",[]));
   test("string starts with but is not name substring result test", getSubstringTest([abTag],"abc",[]));
   test("string & name starts with same characters substring result test", getSubstringTest([abcTag],"abd",[]));
+
+  test("case insensitivity substring result test", getSubstringTest([aBTag],"b",[aBTag]));
 
   test("misch mash substring result test", getSubstringTest([namelessTag,abTag,aTag,abcTag,bTag,cdTag,babTag],"ab",[abTag,abcTag,babTag]));
 }

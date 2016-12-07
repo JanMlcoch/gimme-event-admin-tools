@@ -1,4 +1,4 @@
-<material-input [(ngModel)]="string" (focus)="shouldRenderOptions = true" (blur)="shouldRenderOptions = false"></material-input>
+<material-input [(ngModel)]="string" (input)="updateOptions()" (focus)="shouldRenderOptions = true" (blur)="delayedBlur()"></material-input>
 The value is {{string}}
 <div *ngIf="shouldRenderOptions">
     <div *ngFor="let option of options">
