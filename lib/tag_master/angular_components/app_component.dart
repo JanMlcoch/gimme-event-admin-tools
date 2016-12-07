@@ -9,18 +9,20 @@ import 'view_tags_component.dart';
 import 'edit_tag_component.dart';
 import 'create_tag_component.dart';
 import 'ss_component.dart';
+import 'quick_add_tag_component.dart';
 
 @Component(
     selector: 'my-app',
     styleUrls: const ['app_component.css'],
     templateUrl: 'app_component.html',
-    directives: const [materialDirectives, ROUTER_DIRECTIVES, ViewTagsComponent],
+    directives: const [materialDirectives, ROUTER_DIRECTIVES, ViewTagsComponent, QuickAddTagComponent],
     providers: const [materialProviders, GetRepoService, ROUTER_PROVIDERS])
 @RouteConfig(const [
   const Route(path: '/view_tags', name: 'ViewTags', component: ViewTagsComponent),
   const Route(path: '/edit_tag/:id', name: 'EditTag', component: EditTagComponent),
   const Route(path: '/create_tag', name: 'CreateTag', component: CreateTagComponent),
   const Route(path: '/smart_select_test', name: 'Path3', component: SmartSelectComponent),
+  const Route(path: '/qat_test', name: 'Path4', component: QuickAddTagComponent),
 ])
 class AppComponent {}
 

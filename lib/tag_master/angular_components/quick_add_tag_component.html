@@ -1,0 +1,3 @@
+<material-input raised [(ngModel)]="string" (input)="validate()"></material-input>
+<material-button *ngIf="!isValid" raised disabled>Submit</material-button>
+<material-button *ngIf="isValid" raised (trigger)="submit()">Submit</material-button>

@@ -85,4 +85,8 @@ class TagMasterRepository {
       return freeIdsLowerThanCurrentMax.reduce((a,b)=>min(a,b));
     }
   }
+
+  TagMasterRepository copy(){
+    return new TagMasterRepository()..fromMap(toMap());
+  }
 }

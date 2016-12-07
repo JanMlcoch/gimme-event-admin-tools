@@ -9,7 +9,7 @@ import 'package:admin_tools/tag_master/smart_select/library.dart';
     selector: "smart-select",
     templateUrl: 'smart-select.html',
     directives: const [materialDirectives],
-    providers: const [materialProviders/*, GetRepoService*//*, ROUTER_PROVIDERS*/])
+    providers: const [materialProviders /*, GetRepoService*/ /*, ROUTER_PROVIDERS*/])
 class SmartSelectComponent implements OnInit {
   final GetRepoService _repoService;
   SmartSelectComponent(this._repoService);
@@ -23,16 +23,18 @@ class SmartSelectComponent implements OnInit {
   List<LabeledTag> options = [];
   int chosenTagId;
 
-  void updateOptions(){
+  void updateOptions() {
     //todo:upgrade
-    options = SmartSorter.getTags(string,repo);
+    options = SmartSorter.getTags(string, repo);
   }
 
-  void delayedBlur(){
-    Timer timer = new Timer(new Duration(milliseconds: 500),(){shouldRenderOptions = false;});
+  void delayedBlur() {
+    Timer timer = new Timer(new Duration(milliseconds: 500), () {
+      shouldRenderOptions = false;
+    });
   }
 
-  void chooseOption(int tagId){
+  void chooseOption(int tagId) {
     shouldRenderOptions = false;
     string = repo.getTagById(tagId).tagName;
 //    string = "aaa";

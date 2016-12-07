@@ -8,8 +8,8 @@ class UniqueTagNames extends TagMasterRepositoryRule{
   static bool _areTagNamesUnique(TagMasterRepository repo) {
     List<String> tagNames = [];
     for (Tag tag in repo.tags) {
-      if (tagNames.contains(tag.tagName)) return false;
-      tagNames.add(tag.tagName);
+      if (tagNames.contains(tag.tagName.toLowerCase())) return false;
+      tagNames.add(tag.tagName.toLowerCase());//todo: test case insesitivity
     }
     return true;
   }
