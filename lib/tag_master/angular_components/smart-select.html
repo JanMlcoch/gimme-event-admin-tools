@@ -1,5 +1,5 @@
 <material-input [(ngModel)]="string" (input)="updateOptions()" (focus)="shouldRenderOptions = true" (blur)="delayedBlur()"></material-input>
-The value is {{string}}
+<!--The value is {{string}}-->
 <div *ngIf="shouldRenderOptions">
     <div *ngFor="let option of options">
         <material-button raised (trigger)="chooseOption(option.tagId)">

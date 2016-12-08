@@ -17,7 +17,7 @@ class GetRepoService {
   Future<Null> getTagMasterRepoFromRemote()async{
     Map<String, List<Map<String, dynamic>>> repoMap = {"tags":[],"relations":[]};
     if(a is Map<String, List<Map<String, dynamic>>>){
-//      repoMap = a as Map<String, List<Map<String, dynamic>>>;
+      repoMap = a as Map<String, List<Map<String, dynamic>>>;
     }
     else{
       throw new Exception("Repo has bad format");

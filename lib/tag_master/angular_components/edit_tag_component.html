@@ -36,7 +36,16 @@
                 [
                 <span *ngFor="let tagId of relation.originTagIds">
                     <!--<a [routerLink]="['EditTag', {id: tagId}]">{{tagId}}</a>-->
-                    <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId).tagName}}</a>
+                    <smart-select
+                            *ngIf="relationToEdit == relation"
+                            [string]="repo.getTagById(tagId)?.tagName"
+                            [chosenTagId]="tagId"
+                            (onTagChosen)="repo.getTagById(tagId).tagId = $event"
+                            disabled
+                    ></smart-select>
+                    <a *ngIf="relationToEdit != relation"  [routerLink]="['EditTag', {id: tagId}]">
+                        {{repo.getTagById(tagId).tagName}}
+                    </a>
                     <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
                 ]
@@ -46,13 +55,23 @@
             </td>
             <td>
                 <!--<a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>-->
-                <a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{repo.getTagById(relation.destinationTagId)?.tagName}}</a>
+                <smart-select
+                        *ngIf="relationToEdit == relation"
+                        [string]="repo.getTagById(relation.destinationTagId)?.tagName"
+                        [chosenTagId]="relation.destinationTagId"
+                        (onTagChosen)="relation.destinationTagId = $event"
+                ></smart-select>
+                <a *ngIf="relationToEdit != relation" [routerLink]="['EditTag', {id: relation.destinationTagId}]">
+                    {{repo.getTagById(relation.destinationTagId)?.tagName}}
+                </a>
             </td>
             <td>
                 {{relation.type}}
             </td>
             <td>
-                <material-button raised (trigger)="removeRelation(relation)" disabled>
+                <material-button raised (trigger)="editRelation(relation)">
+                    <!--todo:detect internet connectivity-->
+                    <!--[]-->
                     <glyph icon="edit_mode" size="medium"></glyph>
                 </material-button>
                 <material-button raised (trigger)="removeRelation(relation)">-</material-button>
@@ -91,7 +110,7 @@
                 {{relation.type}}
             </td>
             <td>
-                <material-button raised (trigger)="removeRelation(relation)">-</material-button>
+                <!--<material-button raised (trigger)="removeRelation(relation)">-</material-button>-->
             </td>
         </tr>
     </table>
