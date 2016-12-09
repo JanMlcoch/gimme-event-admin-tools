@@ -1,4 +1,5 @@
 <div *ngIf="subRepo?.tags?.first != null">
+    <material-button raised (trigger)="deleteTag()">Delete this tag</material-button>
     <table>
         <tr>
             <td>Name:</td>

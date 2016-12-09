@@ -4,6 +4,10 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
+import 'package:admin_tools/tag_master/repo/library.dart';
+
+import 'dart:async';
+
 import 'get_repo_service.dart';
 import 'view_tags_component.dart';
 import 'edit_tag_component.dart';
@@ -24,10 +28,26 @@ import 'quick_add_tag_component.dart';
   const Route(path: '/smart_select_test', name: 'Path3', component: SmartSelectComponent),
   const Route(path: '/qat_test', name: 'Path4', component: QuickAddTagComponent),
 ])
-class AppComponent {}
+class AppComponent {
 
-@Component(selector: "component2", template: 'Hello2')
-class Component2 {}
+  final GetRepoService _repoService;
+  AppComponent(this._repoService);
 
-@Component(selector: "component3", template: 'Hello3')
-class Component3 {}
+  @Input()
+  TagMasterRepository repo;
+
+  void emptyRepo(){
+    if(repo==null)return;
+    repo.tags = [];
+    repo.relations = [];
+  }
+
+  void revert(){
+    repo = _repoService.revertChanges();
+  }
+
+
+  Future<Null> ngOnInit() async {
+    repo = await _repoService.getRepo();
+  }
+}

@@ -33,6 +33,16 @@ class GetRepoService {
     return _workingRepo;
   }
 
+  TagMasterRepository revertChanges(){
+    _workingRepo = _originRepo.copy();
+    return _workingRepo;
+  }
+
+  void saveChanges(){
+    //todo: kominukace se serverem
+    _originRepo = _workingRepo.copy();
+  }
+
   Future<TagMasterRepository> getSubRepoOfTagId(int tagId) async{
     TagMasterRepository repo = await getRepo();
     Tag tag = repo.getTagById(tagId);

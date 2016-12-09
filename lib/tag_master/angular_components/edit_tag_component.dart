@@ -29,6 +29,14 @@ class EditTagComponent implements OnInit {
 
   Relation relationToEdit;
 
+  void deleteTag(){
+    //todo: kecy o nebezpečnosti
+    //todo: check influence on validity
+    repo.tags.remove(subRepo.tags.first);
+    for(Relation relation in  subRepo.relations){
+      repo.relations.remove(relation);
+    }
+  }
   //todo: discuss defaults
   void addRelationFrom() {
     int tagId = subRepo.tags.single.tagId;

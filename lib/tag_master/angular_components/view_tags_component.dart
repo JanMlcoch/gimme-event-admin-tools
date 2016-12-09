@@ -17,6 +17,19 @@ class ViewTagsComponent implements OnInit {
   @Input()
   TagMasterRepository repo;
 
+  void emptyRepo(){
+    repo.tags = [];
+    repo.relations = [];
+  }
+
+  void revert(){
+    repo = _repoService.revertChanges();
+  }
+
+  void save(){
+    _repoService.saveChanges();
+  }
+
   Future<Null> ngOnInit() async {
     repo = await _repoService.getRepo();
   }
