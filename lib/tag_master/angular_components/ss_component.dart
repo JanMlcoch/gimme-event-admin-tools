@@ -19,6 +19,15 @@ class SmartSelectComponent implements OnInit {
   final onTagChosen = new EventEmitter<int>();
 
   @Input()
+  List<int> allowedTypes = [1,2,3,4,5];
+
+  @Input()
+  List<int> excludedTagIds = [];
+
+  @Input()
+  bool shouldRemapSynonyms = true;
+
+  @Input()
   String string = "";
 
   @Input()
@@ -32,7 +41,8 @@ class SmartSelectComponent implements OnInit {
 
   void updateOptions() {
     //todo:upgrade
-    options = SmartSorter.getTags(string, repo);
+    //todo: add excluded tagIds
+    options = SmartSorter.getTags(string, repo, shouldReMapSynonyms: shouldRemapSynonyms);
   }
 
   void delayedBlur() {

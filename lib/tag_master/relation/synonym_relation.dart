@@ -16,4 +16,9 @@ class SynonymRelation extends RelationSubstance {
   bool validateLocally(){
     return true;
   }
+
+  @override
+  double getRepresentativeStrength(){
+    return 1.0;
+  }
 }

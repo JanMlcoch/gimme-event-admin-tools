@@ -7,7 +7,8 @@ abstract class SmartSorter {
       bool shouldReMapSynonyms: true,
       bool giveMaximalAmount: false,
       int numberOfTagsDesired: 5,
-      int indexNumberOfMatchedCharacters: 0}) {
+      int indexNumberOfMatchedCharacters: 0,
+      List<int> excludeTagIds: const[]}) {
     if (index != null) {
       String matchingString = inputString.substring(indexNumberOfMatchedCharacters);
       if (matchingString == "") {
@@ -61,7 +62,7 @@ abstract class SmartSorter {
       //todo: implement
     } else {
       int procedure(List<LabeledTag> sorted, Tag tag, int i) {
-        if (allowedTypes.contains(tag.tagType)) {
+        if (allowedTypes.contains(tag.tagType) && !excludeTagIds.contains(tag.tagId)) {
           if (shouldReMapSynonyms && tag.tagType == Tag.TYPE_SYNONYM) {
             tag = new LabeledTag.fromTag(
                 "${tag.tagName} -->", repo.getTagById(repo.getRelationsRelevantFor(tag).first.destinationTagId));

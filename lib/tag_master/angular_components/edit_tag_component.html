@@ -19,7 +19,13 @@
         </tr>
         <tr>
             <td>Type:</td>
-            <td>TODO slovni - {{subRepo.tags?.first?.tagType}} <material-button raised disabled>Change</material-button></td>
+            <td>TODO slovni - {{subRepo.tags?.first?.tagType}}
+                <material-button raised disabled>Change to Synonym</material-button>
+                <material-button raised disabled>Change to Custom</material-button>
+                <material-button raised disabled>Change to Composite</material-button>
+                <material-button raised disabled>Change to Specific</material-button>
+                <material-button raised disabled>Change to Core</material-button>
+            </td>
         </tr>
     </table>
     <h2>Relations from</h2>
@@ -29,6 +35,7 @@
             <th></th>
             <th>destinationTagId</th>
             <th>Type</th>
+            <th>values?</th>
             <th>values?</th>
         </tr>
         <tr *ngFor="let relation of relationsFrom">
@@ -55,6 +62,9 @@
             </td>
             <td>
                 <!--<a [routerLink]="['EditTag', {id: relation.destinationTagId}]">{{relation.destinationTagId}}</a>-->
+                <!--<div *ngIf="relationToEdit == relation">-->
+                    <!--<div *ngIf=""></div>-->
+                <!--</div>-->
                 <smart-select
                         *ngIf="relationToEdit == relation"
                         [string]="repo.getTagById(relation.destinationTagId)?.tagName"
@@ -69,12 +79,15 @@
                 {{relation.type}}
             </td>
             <td>
+                {{relation.getRepresentativeStrength()}}
+            </td>
+            <td>
                 <material-button raised (trigger)="editRelation(relation)">
                     <!--todo:detect internet connectivity-->
                     <!--[]-->
                     <glyph icon="edit_mode" size="medium"></glyph>
                 </material-button>
-                <material-button raised (trigger)="removeRelation(relation)">-</material-button>
+                <material-button raised (trigger)="removeRelation(relation)" disabled="{{subRepo.tags?.first?.tagType == 1}}">-</material-button>
             </td>
         </tr>
     </table>
@@ -110,6 +123,7 @@
                 {{relation.type}}
             </td>
             <td>
+                {{relation.getRepresentativeStrength()}}
                 <!--<material-button raised (trigger)="removeRelation(relation)">-</material-button>-->
             </td>
         </tr>

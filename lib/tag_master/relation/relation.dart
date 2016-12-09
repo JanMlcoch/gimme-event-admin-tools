@@ -40,6 +40,10 @@ class Relation {
     return false;
   }
 
+  double getRepresentativeStrength(){
+    return substance?.getRepresentativeStrength();
+  }
+
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {};
     map["originTagIds"] = originTagIds.toList();

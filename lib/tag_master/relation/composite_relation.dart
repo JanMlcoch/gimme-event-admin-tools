@@ -21,4 +21,9 @@ class CompositeRelation extends RelationSubstance {
   bool validateLocally(){
     return strength is double;
   }
+
+  @override
+  double getRepresentativeStrength(){
+    return strength;
+  }
 }

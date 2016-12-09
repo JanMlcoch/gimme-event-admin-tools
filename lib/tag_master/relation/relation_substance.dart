@@ -39,4 +39,8 @@ class RelationSubstance {
   bool validateLocally(){
     throw new Exception("tried validation of instance that should have NEVER EVER been created.");
   }
+
+  double getRepresentativeStrength(){
+    return null;
+  }
 }

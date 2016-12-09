@@ -22,4 +22,9 @@ class ImprintRelation extends RelationSubstance {
     //todo: implement upon higher version of SIDOS, when validation of SidosEntities will be implemented
     return imprintPoint is ImprintPoint;
   }
+
+  @override
+  double getRepresentativeStrength(){
+    return imprintPoint.value*imprintPoint.probability;
+  }
 }

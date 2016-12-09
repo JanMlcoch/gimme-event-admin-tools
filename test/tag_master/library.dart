@@ -50,6 +50,7 @@ Future main() async {
       group("Synonym remaping test", sSReMapSynonymsTests);
       group("Order tests", sSOrderTests);
       group("Tests of unicity of 'getTags()'", sSUnicityTests);
+      //todo: excludeIds tests
     });
     //todo: index tests
     //todo: index generator tests
