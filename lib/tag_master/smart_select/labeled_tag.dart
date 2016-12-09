@@ -4,7 +4,7 @@ class LabeledTag extends Tag{
   String label;
 
   LabeledTag.fromTag(String label,Tag tag):super(){
-    fromMap(tag.toMap());
+    if(tag != null)fromMap(tag.toMap());
     this.label = label;
   }
 }

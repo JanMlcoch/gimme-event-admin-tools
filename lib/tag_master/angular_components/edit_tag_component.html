@@ -48,6 +48,7 @@
                             *ngIf="relationToEdit == relation"
                             [string]="repo.getTagById(tagId)?.tagName"
                             [chosenTagId]="tagId"
+                            [allowedTypes]="[4,5]"
                             (onTagChosen)="replaceOriginTagId(relation,tagId,$event)"
                             disabled
                     ></smart-select>
@@ -72,6 +73,7 @@
                         *ngIf="relationToEdit == relation"
                         [string]="repo.getTagById(relation.destinationTagId)?.tagName"
                         [chosenTagId]="relation.destinationTagId"
+                        [allowedTypes]="getValidTargetTypes(subRepo.tags.first?.tagType)"
                         (onTagChosen)="relation.destinationTagId = $event"
                 ></smart-select>
                 <a *ngIf="relationToEdit != relation" [routerLink]="['EditTag', {id: relation.destinationTagId}]">

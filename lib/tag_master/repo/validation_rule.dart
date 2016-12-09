@@ -10,6 +10,8 @@ class TagMasterRepositoryRule {
   factory TagMasterRepositoryRule.uniqueTagNames() => new UniqueTagNames();
   ///tests whether there are or are not two [Relation]s with the same origin and destination tags
   factory TagMasterRepositoryRule.uniqueRelation() => new UniqueRelations();
+  ///Checks whether all higher order [Relation]s have nonrepeating originTagIds.
+  factory TagMasterRepositoryRule.originTagIdsAreSetish() => new MultiRelationsHaveNonrepeatingOrigins();
   factory TagMasterRepositoryRule.relationTagsExists() => new RelationTagsExists();
   ///finds out whether or not do synonym tags have appropriate relations regarding to the definitions of their types.
   factory TagMasterRepositoryRule.synonymsHaveAppropriateRelation() => new SynonymsHaveAppropriateRelations();

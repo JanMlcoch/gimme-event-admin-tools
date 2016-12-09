@@ -77,6 +77,7 @@ Future main() async {
       //todo: core having relations
       //todo: composite relations tags&types
       //todo: imprint relations tags&types
+      //todo: setish originTagIds
     });
     //todo: getTagById test
     //todo: getRelationsRelevant FOr ID test

@@ -7,6 +7,7 @@ abstract class RepositoryValidator {
     new TagMasterRepositoryRule.uniqueTagIds(),
     new TagMasterRepositoryRule.uniqueTagNames(),
     new TagMasterRepositoryRule.uniqueRelation(),
+    new TagMasterRepositoryRule.originTagIdsAreSetish(),
     new TagMasterRepositoryRule.relationTagsExists(),
     new TagMasterRepositoryRule.synonymsHaveAppropriateRelation(),
     new TagMasterRepositoryRule.customTagsHaveAppropriateRelation(),

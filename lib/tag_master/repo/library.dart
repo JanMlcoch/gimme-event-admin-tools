@@ -11,6 +11,7 @@ part "validation_rule.dart";
 part "rules/unique_tag_ids.dart";
 part "rules/unique_tag_names.dart";
 part "rules/unique_relations.dart";
+part "rules/multirelations_have_nonrepeating_origins.dart";
 part "rules/relation_tags_exists.dart";
 part "rules/synonyms_have_appropriate_relations.dart";
 part "rules/custom_tags_have_appropriate_relations.dart";

@@ -144,6 +144,15 @@ class EditTagComponent implements OnInit {
     subRepo = await _repoService.getSubRepoOfTagId(tagId);
   }
 
+  List<int> getValidTargetTypes(int originType) {
+    if (originType == Tag.TYPE_SYNONYM) return [2, 3, 4, 5];
+    if (originType == Tag.TYPE_CUSTOM) return [];
+    if (originType == Tag.TYPE_COMPOSITE) return [4, 5];
+    if (originType == Tag.TYPE_SPECIFIC) return [5];
+    if (originType == Tag.TYPE_CORE) return [5];
+    return null;
+  }
+
   bool addRelationEnabled() {
     if (tag.tagType == Tag.TYPE_CUSTOM) return false;
     if (tag.tagType == Tag.TYPE_SYNONYM && repo.getRelationsRelevantFor(tag).isNotEmpty) return false;
@@ -159,7 +168,7 @@ class EditTagComponent implements OnInit {
     }
   }
 
-  void replaceOriginTagId(Relation relation, int oldId, int newId){
+  void replaceOriginTagId(Relation relation, int oldId, int newId) {
     relation.originTagIds.remove(oldId);
     relation.originTagIds.add(newId);
   }
@@ -185,11 +194,11 @@ class EditTagComponent implements OnInit {
     repo.relations.add(relation);
   }
 
-  void addOriginTagId(Relation relation){
+  void addOriginTagId(Relation relation) {
     relation.originTagIds.add(-1);
   }
 
-  void removeOriginTagId(Relation relation){
+  void removeOriginTagId(Relation relation) {
     relation.originTagIds.removeLast();
   }
 
