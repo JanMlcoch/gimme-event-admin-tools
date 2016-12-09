@@ -17,7 +17,7 @@ class CompositeTagsHaveAppropriateRelations extends TagMasterRepositoryRule{
       relevantRelations.removeWhere((Relation relation) {
         return relation.type == RelationSubstance.COMPOSITE && relation.originTagIds == [tag.tagId];
       });
-      return relevantRelations.isEmpty;
+      return relevantRelations.isNotEmpty;
     }
 
     composite.removeWhere(compositeTest);

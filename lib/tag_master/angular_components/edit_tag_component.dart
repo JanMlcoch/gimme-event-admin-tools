@@ -15,39 +15,149 @@ class EditTagComponent implements OnInit {
   final GetRepoService _repoService;
   final RouteParams _routeParams;
   EditTagComponent(this._repoService, this._routeParams);
+  int get tagId => subRepo.tags.first.tagId;
+  Tag get tag => subRepo.tags.first;
 
   @Input()
   TagMasterRepository subRepo;
   TagMasterRepository repo;
 
-  List<Relation> get relationsFrom => subRepo.relations
-      .where((Relation relation) => relation.originTagIds.single == subRepo?.tags?.first?.tagId)
-      .toList();
+  List<Relation> get relationsFrom =>
+      subRepo.relations.where((Relation relation) => relation.originTagIds.single == tagId).toList();
 
   List<Relation> get relationsTo =>
-      subRepo.relations.where((Relation relation) => relation.destinationTagId == subRepo?.tags?.first?.tagId).toList();
+      subRepo.relations.where((Relation relation) => relation.destinationTagId == tagId).toList();
 
   Relation relationToEdit;
 
-  Future<Null> changeToCustom()async{
+  Future<Null> changeToCustom() async {
     //todo: kecy o nebezpečnosti
     //todo: check influence on validity
-    List<Relation> relations = repo.getRelationsRelevantFor(subRepo.tags.first);
-    for(Relation relation in relations){
+    List<Relation> relations = repo.getRelationsRelevantFor(tag);
+    for (Relation relation in relations) {
       repo.relations.remove(relation);
     }
     subRepo.tags.first.tagType = Tag.TYPE_CUSTOM;
-    subRepo = await _repoService.getSubRepoOfTagId(subRepo.tags.first.tagId);
+    subRepo = await _repoService.getSubRepoOfTagId(tagId);
   }
 
-  void deleteTag(){
+  Future<Null> changeToSynonym() async {
+    //todo: kecy o nebezpečnosti
+    //todo: check influence on validity
+    List<Relation> relations = repo.getRelationsRelevantFor(tag);
+    for (Relation relation in relations) {
+      //todo: keep representative relation?
+      repo.relations.remove(relation);
+//      if(relation.destinationTagId==tagId)repo.relations.remove(relation);
+//      if(relation.originTagIds.length!=1)repo.relations.remove(relation);
+    }
+    subRepo.tags.first.tagType = Tag.TYPE_SYNONYM;
+    subRepo = await _repoService.getSubRepoOfTagId(tagId);
+  }
+
+//todo: tests of change functions
+  Future<Null> changeToComposite() async {
+    List<Relation> relationsToAdd = [];
+
+    for (Relation relation in relationsFrom) {
+      if (repo.getTagById(relation.destinationTagId).tagType > 3) {
+        relationsToAdd.add(new Relation.composite(
+            relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
+      }
+    }
+
+    for (Relation relation in relationsTo) {
+      if (relation.type == RelationSubstance.SYNONYM) relationsToAdd.add(relation);
+    }
+
+    for (Relation relation in repo.getRelationsRelevantFor(tag)) {
+      repo.relations.remove(relation);
+    }
+    for (Relation relation in relationsToAdd) {
+      repo.relations.add(relation);
+    }
+
+    subRepo.tags.first.tagType = Tag.TYPE_COMPOSITE;
+    subRepo = await _repoService.getSubRepoOfTagId(tagId);
+  }
+
+  Future<Null> changeToSpecific() async {
+    List<Relation> relationsToAdd = [];
+
+    for (Relation relation in relationsFrom) {
+      if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+        if (tag.tagType == Tag.TYPE_CORE) {
+          relationsToAdd.add(relation);
+        } else {
+          if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+            relationsToAdd.add(new Relation.imprintFromValue(
+                relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
+          }
+        }
+      }
+    }
+    for (Relation relation in relationsTo) {
+      if (relation.type == RelationSubstance.SYNONYM || relation.type == RelationSubstance.COMPOSITE) {
+        relationsToAdd.add(relation);
+      }
+    }
+
+    for (Relation relation in repo.getRelationsRelevantFor(tag)) {
+      repo.relations.remove(relation);
+    }
+    for (Relation relation in relationsToAdd) {
+      repo.relations.add(relation);
+    }
+
+    subRepo.tags.first.tagType = Tag.TYPE_SPECIFIC;
+    subRepo = await _repoService.getSubRepoOfTagId(tagId);
+  }
+
+  Future<Null> changeToCore() async {
+    List<Relation> relationsToAdd = [];
+
+    for (Relation relation in relationsFrom) {
+      if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+        if (tag.tagType == Tag.TYPE_SPECIFIC) {
+          relationsToAdd.add(relation);
+        } else {
+          if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+            relationsToAdd.add(new Relation.imprintFromValue(
+                relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
+          }
+        }
+      }
+    }
+    for (Relation relation in relationsTo) {
+      relationsToAdd.add(relation);
+    }
+
+    for (Relation relation in repo.getRelationsRelevantFor(tag)) {
+      repo.relations.remove(relation);
+    }
+    for (Relation relation in relationsToAdd) {
+      repo.relations.add(relation);
+    }
+
+    subRepo.tags.first.tagType = Tag.TYPE_CORE;
+    subRepo = await _repoService.getSubRepoOfTagId(tagId);
+  }
+
+  bool addRelationEnabled() {
+    if (tag.tagType == Tag.TYPE_CUSTOM) return false;
+    if (tag.tagType == Tag.TYPE_SYNONYM && repo.getRelationsRelevantFor(tag).isNotEmpty) return false;
+    return true;
+  }
+
+  void deleteTag() {
     //todo: kecy o nebezpečnosti
     //todo: check influence on validity
     repo.tags.remove(subRepo.tags.first);
-    for(Relation relation in  subRepo.relations){
+    for (Relation relation in subRepo.relations) {
       repo.relations.remove(relation);
     }
   }
+
   //todo: discuss defaults
   void addRelationFrom() {
     int tagId = subRepo.tags.single.tagId;
@@ -75,7 +185,7 @@ class EditTagComponent implements OnInit {
     //todo: global/toCommit removal
   }
 
-  void editRelation(Relation relation){
+  void editRelation(Relation relation) {
     relationToEdit = relation;
   }
 

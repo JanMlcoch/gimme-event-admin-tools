@@ -14,7 +14,8 @@ class CompositeRelationsHaveAppropriateTagsAndTagTypes extends TagMasterReposito
       //todo: again, is this necessary?
       if (relation.originTagIds.length != 1) return false;
       if (repo.getTagById(relation.originTagIds[0]).tagType != Tag.TYPE_COMPOSITE) return false;
-      int destinationType = repo.getTagById(relation.destinationTagId).tagType;
+      int destinationType = repo.getTagById(relation.destinationTagId)?.tagType;
+      if(destinationType==null)return false;
       if (destinationType != Tag.TYPE_SPECIFIC && destinationType != Tag.TYPE_CORE) return false;
       return true;
     }

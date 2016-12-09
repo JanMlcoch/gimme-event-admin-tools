@@ -20,6 +20,11 @@ class Relation {
     this.substance = new ImprintRelation.withImprintPoint(imprintPoint);
   }
 
+
+  Relation.imprintFromValue(this.originTagIds, this.destinationTagId, double value) {
+    this.substance = new ImprintRelation.withImprintPoint(new ImprintPoint.withData(value, 1.0, 0.1, 0.1));
+  }
+
   //todo: revise
   Relation.imprintDefault(this.originTagIds, this.destinationTagId) {
     this.substance = new ImprintRelation.withImprintPoint(new ImprintPoint());

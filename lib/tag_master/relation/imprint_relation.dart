@@ -25,6 +25,8 @@ class ImprintRelation extends RelationSubstance {
 
   @override
   double getRepresentativeStrength(){
-    return imprintPoint.value*imprintPoint.probability;
+    double val = imprintPoint?.value == null ? 0.0 : imprintPoint.value;
+    double prob = imprintPoint?.probability == null ? 0.0 : imprintPoint.probability;
+    return val*prob;
   }
 }

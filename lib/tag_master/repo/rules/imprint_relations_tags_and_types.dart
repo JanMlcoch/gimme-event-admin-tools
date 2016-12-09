@@ -15,7 +15,8 @@ class ImprintRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepository
         int tagType = repo.getTagById(tagId).tagType;
         if (tagType != Tag.TYPE_SPECIFIC && tagType != Tag.TYPE_CORE) return false;
       }
-      int destinationType = repo.getTagById(relation.destinationTagId).tagType;
+      int destinationType = repo.getTagById(relation.destinationTagId)?.tagType;
+      if(destinationType == null)return false;
       if (destinationType != Tag.TYPE_CORE) return false;
       return true;
     }
