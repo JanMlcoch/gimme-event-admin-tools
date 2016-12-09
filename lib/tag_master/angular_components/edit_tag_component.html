@@ -22,7 +22,7 @@
             <td>Type:</td>
             <td>TODO slovni - {{subRepo.tags?.first?.tagType}}
                 <material-button raised disabled>Change to Synonym</material-button>
-                <material-button raised disabled>Change to Custom</material-button>
+                <material-button raised disabled="{{subRepo.tags.first.tagType == 2}}" (trigger)="changeToCustom()">Change to Custom</material-button>
                 <material-button raised disabled>Change to Composite</material-button>
                 <material-button raised disabled>Change to Specific</material-button>
                 <material-button raised disabled>Change to Core</material-button>

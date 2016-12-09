@@ -29,6 +29,17 @@ class EditTagComponent implements OnInit {
 
   Relation relationToEdit;
 
+  Future<Null> changeToCustom()async{
+    //todo: kecy o nebezpečnosti
+    //todo: check influence on validity
+    List<Relation> relations = repo.getRelationsRelevantFor(subRepo.tags.first);
+    for(Relation relation in relations){
+      repo.relations.remove(relation);
+    }
+    subRepo.tags.first.tagType = Tag.TYPE_CUSTOM;
+    subRepo = await _repoService.getSubRepoOfTagId(subRepo.tags.first.tagId);
+  }
+
   void deleteTag(){
     //todo: kecy o nebezpečnosti
     //todo: check influence on validity

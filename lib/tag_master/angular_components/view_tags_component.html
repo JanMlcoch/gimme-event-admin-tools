@@ -3,7 +3,7 @@
 <div *ngIf="repo?.validate() == true">
     <material-button raised (trigger)="save()">Save Changes</material-button>
 </div>
-<div *ngIf="repo?.validate() == false">The current repo is not valid</div>
+<div *ngIf="repo?.validate() == false"><h3 style="color: red;">The current repo is not valid</h3></div>
 <div *ngIf="repo?.validate() == null">Current repository have not yet been delivered from remote.</div>
 <div *ngIf="repo?.tags != null">
     <table>
