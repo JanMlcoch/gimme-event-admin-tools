@@ -3,7 +3,7 @@
     <table>
         <tr>
             <td>Name:</td>
-            <td><material-input [(ngModel)]="subRepo.tags.first.tagName"></material-input></td>
+            <td><material-input [(ngModel)]="subRepo.tags.first?.tagName"></material-input></td>
         </tr>
         <tr>
             <td>Id:</td>
@@ -48,14 +48,16 @@
                             *ngIf="relationToEdit == relation"
                             [string]="repo.getTagById(tagId)?.tagName"
                             [chosenTagId]="tagId"
-                            (onTagChosen)="repo.getTagById(tagId).tagId = $event"
+                            (onTagChosen)="replaceOriginTagId(relation,tagId,$event)"
                             disabled
                     ></smart-select>
                     <a *ngIf="relationToEdit != relation"  [routerLink]="['EditTag', {id: tagId}]">
-                        {{repo.getTagById(tagId).tagName}}
+                        {{repo.getTagById(tagId)?.tagName}}
                     </a>
                     <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
+                <material-button *ngIf="relation == relationToEdit && subRepo.tags?.first?.tagType>3" raised (trigger)="addOriginTagId(relation)">+</material-button>
+                <material-button *ngIf="relation == relationToEdit && subRepo.tags?.first?.tagType>3" raised disabled="{{relation.originTagIds.length<2}}" (trigger)="removeOriginTagId(relation)">-</material-button>
                 ]
             </td>
             <td>
@@ -108,7 +110,7 @@
                 [
                 <span *ngFor="let tagId of relation.originTagIds">
                     <!--<a [routerLink]="['EditTag', {id: tagId}]">{{tagId}}</a>-->
-                    <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId).tagName}}</a>
+                    <a [routerLink]="['EditTag', {id: tagId}]">{{repo.getTagById(tagId)?.tagName}}</a>
                     <span *ngIf="relation.originTagIds.last != tagId">,</span>
                 </span>
                 ]

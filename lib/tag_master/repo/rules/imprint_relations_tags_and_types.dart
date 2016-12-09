@@ -1,10 +1,11 @@
 part of tagMaster2.repo;
 
 ///Checks whether all imprint relations have appropriate relations regarding to the definitions of their types.
-class ImprintRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepositoryRule{
+class ImprintRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepositoryRule {
   static const String onFailure = "Some imprint relation relates to inapropriate tag types";
 
-  ImprintRelationsHaveAppropriateTagsAndTagTypes() : super(_doImprintRelationsHaveAppropriateTagsAndTagTypes, onFailure);
+  ImprintRelationsHaveAppropriateTagsAndTagTypes()
+      : super(_doImprintRelationsHaveAppropriateTagsAndTagTypes, onFailure);
 
   ///Checks whether all imprint relations have appropriate relations regarding to the definitions of their types.
   static bool _doImprintRelationsHaveAppropriateTagsAndTagTypes(TagMasterRepository repo) {
@@ -12,11 +13,12 @@ class ImprintRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepository
 
     bool imprintRelationTest(Relation relation) {
       for (int tagId in relation.originTagIds) {
-        int tagType = repo.getTagById(tagId).tagType;
+        int tagType = repo.getTagById(tagId)?.tagType;
+        if (tagType == null) return false;
         if (tagType != Tag.TYPE_SPECIFIC && tagType != Tag.TYPE_CORE) return false;
       }
       int destinationType = repo.getTagById(relation.destinationTagId)?.tagType;
-      if(destinationType == null)return false;
+      if (destinationType == null) return false;
       if (destinationType != Tag.TYPE_CORE) return false;
       return true;
     }

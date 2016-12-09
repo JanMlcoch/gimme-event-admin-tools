@@ -23,7 +23,7 @@ class EditTagComponent implements OnInit {
   TagMasterRepository repo;
 
   List<Relation> get relationsFrom =>
-      subRepo.relations.where((Relation relation) => relation.originTagIds.single == tagId).toList();
+      subRepo.relations.where((Relation relation) => relation.originTagIds.contains(tagId)).toList();
 
   List<Relation> get relationsTo =>
       subRepo.relations.where((Relation relation) => relation.destinationTagId == tagId).toList();
@@ -61,8 +61,9 @@ class EditTagComponent implements OnInit {
 
     for (Relation relation in relationsFrom) {
       if (repo.getTagById(relation.destinationTagId).tagType > 3) {
+        //todo: comment or redo multi relation reduction
         relationsToAdd.add(new Relation.composite(
-            relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
+            [relation.originTagIds.first], relation.destinationTagId, relation.getRepresentativeStrength()));
       }
     }
 
@@ -158,6 +159,11 @@ class EditTagComponent implements OnInit {
     }
   }
 
+  void replaceOriginTagId(Relation relation, int oldId, int newId){
+    relation.originTagIds.remove(oldId);
+    relation.originTagIds.add(newId);
+  }
+
   //todo: discuss defaults
   void addRelationFrom() {
     int tagId = subRepo.tags.single.tagId;
@@ -172,11 +178,19 @@ class EditTagComponent implements OnInit {
       relation = new Relation.composite([tagId], -1, 0.5);
     }
     if (type == Tag.TYPE_SPECIFIC || type == Tag.TYPE_CORE) {
-      //todo: more robust
-      relation = new Relation.imprintDefault([tagId], -1);
+      //todo: more robust ?
+      relation = new Relation.imprintFromValue([tagId], -1, 1.0);
     }
     subRepo.relations.add(relation);
     repo.relations.add(relation);
+  }
+
+  void addOriginTagId(Relation relation){
+    relation.originTagIds.add(-1);
+  }
+
+  void removeOriginTagId(Relation relation){
+    relation.originTagIds.removeLast();
   }
 
   void removeRelation(Relation relation) {
