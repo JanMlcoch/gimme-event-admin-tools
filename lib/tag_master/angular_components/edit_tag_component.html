@@ -84,7 +84,19 @@
                 {{relation.type}}
             </td>
             <td>
-                {{relation.getRepresentativeStrength()}}
+                <span *ngIf="relationToEdit != relation">{{relation.getRepresentativeStrength()}}</span>
+                <div *ngIf="relationToEdit == relation">
+                    <!--<material-number>1</material-number>-->
+                    <span *ngIf="relation.type == 'synonym'">{{relation.getRepresentativeStrength()}}</span>
+                    <span *ngIf="relation.type == 'composite'">
+                        <input type="number" min="0" max="1" step="0.05" value="{{relation.getRepresentativeStrength()}}" [(ngModel)]="relation.substance.strength"/>
+                        <!--<input type="range" step="0.05" min="0" max="1" [(ngModel)]="relation.substance.strength" value="{{relation.getRepresentativeStrength()}}" />{{relation.getRepresentativeStrength()}}-->
+                    </span>
+                    <span *ngIf="relation.type == 'imprint'">
+                        <!--todo: checking other parameters-->
+                        <input type="number" min="0" max="1" step="0.05" value="{{relation.getRepresentativeStrength()}}" [(ngModel)]="relation.substance.imprintPoint.value"/>
+                    </span>
+                </div>
             </td>
             <td>
                 <material-button raised (trigger)="editRelation(relation)">

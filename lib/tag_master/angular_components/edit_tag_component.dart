@@ -5,11 +5,12 @@ import 'package:angular2_components/angular2_components.dart';
 import 'dart:async';
 import 'package:angular2/router.dart';
 import 'ss_component.dart';
+import 'material_number.dart';
 
 @Component(
     selector: "edit-tag",
     templateUrl: 'edit_tag_component.html',
-    directives: const [materialDirectives, ROUTER_DIRECTIVES, SmartSelectComponent],
+    directives: const [materialDirectives, ROUTER_DIRECTIVES, SmartSelectComponent, MaterialNumberComponent],
     providers: const [materialProviders])
 class EditTagComponent implements OnInit {
   final GetRepoService _repoService;
