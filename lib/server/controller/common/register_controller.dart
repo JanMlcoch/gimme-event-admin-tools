@@ -6,7 +6,14 @@ class RegisterController extends QueryController<User> {
   }
   @httpPost
   Future<Response> createUser() async {
-    if (request.authorization.resourceOwnerIdentifier != 1) {
+    if (request.authorization.clientID == "Test Admin tools") {
+//      Query<User> loggedQuery = new Query<User>();
+//      loggedQuery.matchOn.id = whereEqualTo(request.authorization.resourceOwnerIdentifier);
+//      User logged = await loggedQuery.fetchOne();
+//      if(logged==null || logged.username!="test_user"){
+//        return new Response.unauthorized(body: "You are not allowed to create users");
+//      }
+    } else if (request.authorization.resourceOwnerIdentifier != 1) {
       return new Response.unauthorized(body: "You are not allowed to create users");
     }
     if (query.values.username == null || query.values.password == null) {

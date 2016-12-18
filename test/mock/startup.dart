@@ -2,7 +2,7 @@ import 'package:aqueduct/aqueduct.dart' as aque;
 import 'package:scribe/scribe.dart';
 import 'dart:async';
 import 'package:admin_tools/server/lib/library.dart';
-import 'package:admin_tools/admin_tools.dart' show ClientRecord;
+import 'package:admin_tools/admin_tools.dart' show ClientRecord, User, Token;
 
 class TestApplication {
   TestApplication() {
@@ -12,7 +12,8 @@ class TestApplication {
 
   aque.Application<AdminSink> application;
   AdminSink get sink => application.mainIsolateSink;
-  LoggingServer logger = new LoggingServer([/*new ConsoleBackend()*/]);
+  LoggingServer logger = new LoggingServer([]);
+//  LoggingServer logger = new LoggingServer([new ConsoleBackend()]);
   aque.TestClient client;
   AdminConfiguration configuration;
 
@@ -32,11 +33,14 @@ class TestApplication {
     aque.ManagedContext.defaultContext = sink.context;
 
     await createDatabaseSchema(sink.context, sink.logger);
-    await addClientRecord();
+    ClientRecord testClientRecord = await addClientRecord();
+    User testUser = await addTestAdminUser();
+    Token testToken = await addDefaultToken(testUser, testClientRecord);
 
     client = new aque.TestClient(application)
-      ..clientID = "com.aqueduct.test"
-      ..clientSecret = "kilimanjaro";
+      ..clientID = "Test Admin tools"
+      ..clientSecret = "testovaci heslo pouze pro testy"
+      ..defaultAccessToken = testToken.accessToken;
   }
 
   Future stop() async {
@@ -45,7 +49,8 @@ class TestApplication {
     await application?.stop();
   }
 
-  static Future addClientRecord({String clientID: "com.aqueduct.test", String clientSecret: "kilimanjaro"}) async {
+  static Future<ClientRecord> addClientRecord(
+      {String clientID: "Test Admin tools", String clientSecret: "testovaci heslo pouze pro testy"}) async {
     var salt = aque.AuthServer.generateRandomSalt();
     var hashedPassword = aque.AuthServer.generatePasswordHash(clientSecret, salt);
     var testClientRecord = new ClientRecord();
@@ -57,11 +62,37 @@ class TestApplication {
       ..values.id = clientID
       ..values.salt = salt
       ..values.hashedPassword = hashedPassword;
-    await clientQ.insert();
+    return clientQ.insert();
+  }
+
+  static Future<User> addTestAdminUser(
+      {String userName: "test_user", String userPassword: "test_user_xxx_password"}) async {
+    var salt = aque.AuthServer.generateRandomSalt();
+    var hashedPassword = aque.AuthServer.generatePasswordHash(userPassword, salt);
+
+    var userQ = new aque.Query<User>()
+      ..values.username = userName
+      ..values.email = "$userName@akcnik.cz"
+      ..values.salt = salt
+      ..values.hashedPassword = hashedPassword;
+    return userQ.insert();
+  }
+
+  static Future addDefaultToken(User testUser, ClientRecord client, {String accessToken: "test_token"}) async {
+    aque.Query<Token> query = new aque.Query<Token>()
+      ..values.accessToken = accessToken
+      ..values.refreshToken = "refresh_$accessToken"
+      ..values.issueDate = new DateTime.now()
+      ..values.expirationDate = new DateTime.now().add(new Duration(minutes: 1))
+      ..values.type = "token"
+      ..values.client = client
+      ..values.owner = testUser;
+    return query.insert();
   }
 
   static Future createDatabaseSchema(aque.ManagedContext context, aque.Logger logger) async {
-    var builder = new aque.SchemaBuilder.toSchema(context.persistentStore, new aque.Schema.fromDataModel(context.dataModel),
+    var builder = new aque.SchemaBuilder.toSchema(
+        context.persistentStore, new aque.Schema.fromDataModel(context.dataModel),
         isTemporary: true);
 
     for (var cmd in builder.commands) {

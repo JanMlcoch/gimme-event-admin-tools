@@ -10,10 +10,6 @@ Future main() async {
 
     setUpAll(() async {
       await app.start(3566);
-
-      var req = app.client.clientAuthenticatedRequest("/register")
-        ..json = {"email": "bob@stablekernel.com", "password": "foobaraxegrind12%"};
-      app.client.defaultAccessToken = (await req.post()).asMap["access_token"];
     });
 
     tearDownAll(() async {
@@ -25,11 +21,12 @@ Future main() async {
     });
 
     test("Identity returns user with valid token", () async {
-      var req = app.client.authenticatedRequest("/identity");
+      var req = app.client.authenticatedRequest("/api/identity");
       var result = await req.get();
 
       expect(result, hasResponse(200, partial({
-        "id": greaterThan(0)
+        "id": greaterThan(0),
+        "username":"test_user"
       })));
     });
   });

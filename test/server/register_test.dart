@@ -6,20 +6,21 @@ void main() {
   group("Success cases", () {
     TestApplication app = new TestApplication();
 
-    setUpAll(() async {
-      await app.start(3567);
+    setUpAll(() {
+      return app.start(3567);
     });
 
-    tearDownAll(() async {
-      await app.stop();
+    tearDownAll(() {
+      return app.stop();
     });
 
     test("Can create user", () async {
-      var response = await (app.client.clientAuthenticatedRequest("/register")
-        ..json = {"email": "bob@stablekernel.com", "password": "foobaraxegrind12%"}).post();
+      TestRequest request = app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"username":"bob","email": "bob@stablekernel.com", "password": "foobaraxegrind12%"};
+      var response = await request.post();
 
       expect(response, hasResponse(200, partial({
-        "access_token": hasLength(greaterThan(0))
+        "id": greaterThan(0)
       })));
     });
   });
@@ -35,25 +36,32 @@ void main() {
       await app.stop();
     });
     test("Trying to create existing user fails", () async {
-      await (app.client.clientAuthenticatedRequest("/register")
-        ..json = {"email": "bob@stablekernel.com", "password": "someotherpassword"}).post();
+      var response = await (app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"username":"bob","email": "bob@stablekernel.com", "password": "someotherpassword"}).post();
 
-      var response = await (app.client.clientAuthenticatedRequest("/register")
-        ..json = {"email": "bob@stablekernel.com", "password": "foobaraxegrind12%"}).post();
+      expect(response, hasStatus(200));
+      var secondResponse = await (app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"username":"bob","email": "bob@stablekernel.com", "password": "foobaraxegrind12%"}).post();
 
-      expect(response, hasStatus(409));
+      expect(secondResponse, hasStatus(409));
     });
 
     test("Omit password fails", () async {
-      var response = await (app.client.clientAuthenticatedRequest("/register")
-        ..json = {"email": "bobby.bones@stablekernel.com",}).post();
+      var response = await (app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"username":"bob","email": "bobby.bones@stablekernel.com"}).post();
+
+      expect(response, hasStatus(400));
+    });
+    test("Omit email fails", () async {
+      var response = await (app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"username":"bob","password": "foobaraxegrind12%"}).post();
 
       expect(response, hasStatus(400));
     });
 
     test("Omit username fails", () async {
-      var response = await (app.client.clientAuthenticatedRequest("/register")
-        ..json = {"password": "foobaraxegrind12%"}).post();
+      var response = await (app.client.authenticatedRequest("/api/auth/register")
+        ..json = {"email": "bobby.bones@stablekernel.com","password": "foobaraxegrind12%"}).post();
 
       expect(response, hasStatus(400));
     });

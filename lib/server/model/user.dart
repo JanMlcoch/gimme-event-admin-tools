@@ -21,4 +21,5 @@ class _User{
   String salt;
 
   ManagedSet<Token> tokens;
+  ManagedSet<RepoVersion> repoVersions;
 }
