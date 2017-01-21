@@ -21,7 +21,9 @@ import "dart:io";
        errorLog.createSync();
      }
    }
-   String projectDirectory = "/home/hosekp/htdocs/aqueduct2";
+   String projectDirectory = "D:/Projekty/htdocs/gimme_admin_tools/admin_tools_server";
    Process.run("sudo",["nginx","-c","$projectDirectory/nginx/conf/nginx.conf","-p","$projectDirectory/"]);
+//   Implement runner for Windows
+//   Process.run("$projectDirectory/nginx/nginx.exe",["-c","$projectDirectory/nginx/conf/nginx.conf","-p","$projectDirectory/"]);
 
  }
