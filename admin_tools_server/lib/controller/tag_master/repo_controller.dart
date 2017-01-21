@@ -11,7 +11,7 @@ class RepoController extends HTTPController {
     List<RepoVersion> repos = await query.fetch();
 //    var repoVersion = await query.fetchOne();
     print("repos.length=${repos.length}");
-    RepoVersion repoVersion=null;
+    RepoVersion repoVersion;
     if (repoVersion == null) {
       return new Response.notFound(body: "No repo with selected branchName");
     }
@@ -43,5 +43,35 @@ class RepoController extends HTTPController {
 
     RepoVersion createdVersion = await query.insert();
     return new Response.ok(createdVersion);
+  }
+
+  @override
+  List<APIResponse> documentResponsesForOperation(APIOperation operation) {
+    var responses = super.documentResponsesForOperation(operation);
+    if (operation.id == APIOperation.idForMethod(this, #getRepo)) {
+      responses.addAll([
+        new APIResponse()
+          ..statusCode = HttpStatus.OK
+          ..description = "Get last repo from {{branch}}. If omitted, default branch is downloaded"
+          ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
+        new APIResponse()
+          ..statusCode = HttpStatus.NOT_FOUND
+          ..description = "Repo not found."
+          ..schema = new APISchemaObject(properties: {"error": new APISchemaObject.string()}),
+      ]);
+    }
+    if (operation.id == APIOperation.idForMethod(this, #saveRepo)) {
+      responses.addAll([
+        new APIResponse()
+          ..statusCode = HttpStatus.OK
+          ..description = "Save repo with into {{branch}}. If omitted, default branch name is used"
+          ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
+        new APIResponse()
+          ..statusCode = HttpStatus.NOT_FOUND
+          ..description = "Source version is not found."
+          ..schema = new APISchemaObject(properties: {"error": new APISchemaObject.string()}),
+      ]);
+    }
+    return responses;
   }
 }

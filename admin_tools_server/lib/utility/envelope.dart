@@ -9,6 +9,7 @@ class MessageEnvelope{
   final String message;
   MessageEnvelope(this.message);
 
+  @override
   String toString(){
     return JSON.encode({"message":message});
   }
@@ -26,6 +27,7 @@ class ErrorEnvelope{
   final String message;
   ErrorEnvelope(this.message);
 
+  @override
   String toString(){
     return JSON.encode({"error":message});
   }
