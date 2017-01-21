@@ -61,6 +61,7 @@ class EditTagComponent implements OnInit {
     List<Relation> relationsToAdd = [];
 
     for (Relation relation in relationsFrom) {
+      if(repo.getTagById(relation.destinationTagId) == null)continue;
       if (repo.getTagById(relation.destinationTagId).tagType > 3) {
         //todo: comment or redo multi relation reduction
         relationsToAdd.add(new Relation.composite(
@@ -87,11 +88,11 @@ class EditTagComponent implements OnInit {
     List<Relation> relationsToAdd = [];
 
     for (Relation relation in relationsFrom) {
-      if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+      if (repo.getTagById(relation.destinationTagId)?.tagType == Tag.TYPE_CORE) {
         if (tag.tagType == Tag.TYPE_CORE) {
           relationsToAdd.add(relation);
         } else {
-          if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+          if (repo.getTagById(relation.destinationTagId)?.tagType == Tag.TYPE_CORE) {
             relationsToAdd.add(new Relation.imprintFromValue(
                 relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
           }
@@ -119,11 +120,11 @@ class EditTagComponent implements OnInit {
     List<Relation> relationsToAdd = [];
 
     for (Relation relation in relationsFrom) {
-      if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+      if (repo.getTagById(relation.destinationTagId)?.tagType == Tag.TYPE_CORE) {
         if (tag.tagType == Tag.TYPE_SPECIFIC) {
           relationsToAdd.add(relation);
         } else {
-          if (repo.getTagById(relation.destinationTagId).tagType == Tag.TYPE_CORE) {
+          if (repo.getTagById(relation.destinationTagId)?.tagType == Tag.TYPE_CORE) {
             relationsToAdd.add(new Relation.imprintFromValue(
                 relation.originTagIds, relation.destinationTagId, relation.getRepresentativeStrength()));
           }

@@ -1,5 +1,5 @@
 <h1>My First Angular 2 App</h1>
-<material-button [routerLink]="['ViewTags']" raised>View Tags</material-button>
+<material-button [routerLink]="['ViewTags']" raised disabled>View Tags</material-button>
 <material-button [routerLink]="['CreateTag']" raised disabled>Create Tag</material-button>
 <material-button [routerLink]="['Path3']" raised disabled>SS test</material-button>
 <material-button [routerLink]="['Path4']" raised>Quick Add Tag</material-button>
@@ -7,7 +7,8 @@
 <!--<material-button raised (trigger)="emptyRepo()" disabled>Empty repo</material-button>-->
 <!--<material-button raised (trigger)="revert()">Revert All unsaved Changes</material-button>-->
 
-<!--todo: fix/figure out why previous didnt work properly-->
+<!--todo: fix/figure out why previous didnt work properly
+update - to fix should be probablz added to bootstrap-->
 <table>
     <tr>
         <td valign="top">

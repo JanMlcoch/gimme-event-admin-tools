@@ -27,6 +27,7 @@ import 'quick_add_tag_component.dart';
   const Route(path: '/create_tag', name: 'CreateTag', component: CreateTagComponent),
   const Route(path: '/smart_select_test', name: 'Path3', component: SmartSelectComponent),
   const Route(path: '/qat_test', name: 'Path4', component: QuickAddTagComponent),
+  const Route(path: '/generic', name: 'Generic', component: EmptyComponent),
 ])
 class AppComponent {
 
@@ -51,3 +52,11 @@ class AppComponent {
     repo = await _repoService.getRepo();
   }
 }
+
+
+@Component(
+    selector: 'empty',
+    template: '',
+    directives: const [],
+    providers: const [])
+class EmptyComponent{}
