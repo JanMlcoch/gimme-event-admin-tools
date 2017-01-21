@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:admin_tools/server/model/library.dart';
+import 'package:admin_tools/model/library.dart';
 import 'package:test/test.dart';
 import 'package:aqueduct/aqueduct.dart';
 import '../mock/startup.dart';

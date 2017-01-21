@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:aqueduct/aqueduct.dart';
 import 'package:scribe/scribe.dart';
-import 'package:admin_tools/server/lib/library.dart';
+import 'package:admin_tools/lib/library.dart';
 
 Future main() async {
   try {

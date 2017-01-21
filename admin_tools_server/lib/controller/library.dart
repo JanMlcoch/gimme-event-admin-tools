@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:mirrors';
-import 'package:admin_tools/server/utility/envelope.dart';
+import 'package:admin_tools/utility/envelope.dart';
 import 'package:aqueduct/aqueduct.dart';
 import 'package:admin_tools/admin_tools.dart';
 

@@ -4,23 +4,8 @@ version: 0.0.1
 environment:
   sdk: '>=1.19.0 <2.0.0'
 dependencies:
-  angular2: ^2.0.0
   scribe: any
   aqueduct: "^1.0.0"
   googleapis_auth: any
-  angular2_components:
-    git: https://github.com/dart-lang/angular2_components
 dev_dependencies:
   test: any
-  browser: ^0.10.0
-  dart_to_js_script_rewriter: ^1.0.1
-transformers:
-- angular2:
-    platform_directives:
-    - 'package:angular2/common.dart#COMMON_DIRECTIVES'
-    platform_pipes:
-    - 'package:angular2/common.dart#COMMON_PIPES'
-    entry_points:
-    - web/account_manager/main.dart
-    - web/tag_master_2/main.dart
-- dart_to_js_script_rewriter

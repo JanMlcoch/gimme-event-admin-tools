@@ -1,7 +1,7 @@
 import 'package:aqueduct/aqueduct.dart' as aque;
 import 'package:scribe/scribe.dart';
 import 'dart:async';
-import 'package:admin_tools/server/lib/library.dart';
+import 'package:admin_tools/lib/library.dart';
 import 'package:admin_tools/admin_tools.dart' show ClientRecord, User, Token;
 
 class TestApplication {
