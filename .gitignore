@@ -23,7 +23,7 @@ doc/api/
 *.iws
 
 # NGINX
-server/nginx/logs
+admin_tools_server/nginx/logs
 
 # AQUEDUCT
-server/.aqueductsignal
+admin_tools_server/.aqueductsignal
