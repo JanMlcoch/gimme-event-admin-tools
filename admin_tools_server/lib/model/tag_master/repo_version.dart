@@ -9,8 +9,9 @@ class _RepoVersion {
   int id;
   @ManagedColumnAttributes()
   String name;
-  @ManagedColumnAttributes()
+  @ManagedColumnAttributes(defaultValue: "initial")
   String branchName;
+  /// JSONB repo
   String repo;
 //  @ManagedRelationship(#id, onDelete: ManagedRelationshipDeleteRule.cascade)
 //  RepoVersion basedOn;
