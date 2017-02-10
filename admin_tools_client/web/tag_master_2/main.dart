@@ -6,6 +6,7 @@ import 'package:angular2/platform/browser.dart';
 import 'package:admin_tools/tag_master/angular_components/app_component.dart';
 
 void main() {
+  print("UAAAAAA");
   bootstrap(AppComponent);
 }
 

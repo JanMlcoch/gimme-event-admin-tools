@@ -23,6 +23,7 @@ doc/api/
 *.iws
 
 # NGINX
+admin_tools_client/nginx/logs
 admin_tools_server/nginx/logs
 
 # AQUEDUCT
