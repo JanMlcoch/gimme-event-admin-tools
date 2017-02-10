@@ -24,3 +24,5 @@ doc/api/
 /admin_tools_server/nginx/logs
 # AQUEDUCT
 admin_tools_server/.aqueductsignal
+*.log
+*.log.*
