@@ -23,5 +23,11 @@ import "dart:io";
    }
    String projectDirectory = "/home/hosekp/htdocs/aqueduct2";
    Process.run("sudo",["nginx","-c","$projectDirectory/nginx/conf/nginx.conf","-p","$projectDirectory/"]);
+   Directory.current = new Directory("../");
+   String projectDirectory = Directory.current.path.toString();
+
+//   Process.run("sudo",["nginx","-c","$projectDirectory/nginx/conf/nginx.conf","-p","$projectDirectory/"]);
+//   Implement runner for Windows
+   Process.run("$projectDirectory/nginx/nginx.exe",["-c","$projectDirectory/nginx/conf/nginx.conf","-p","$projectDirectory/"]);
 
  }
