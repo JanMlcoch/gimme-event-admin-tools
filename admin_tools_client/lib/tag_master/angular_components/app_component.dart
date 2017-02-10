@@ -29,7 +29,7 @@ import 'quick_add_tag_component.dart';
   const Route(path: '/qat_test', name: 'Path4', component: QuickAddTagComponent),
   const Route(path: '/generic', name: 'Generic', component: EmptyComponent),
 ])
-class AppComponent {
+class AppComponent implements OnInit{
 
   final GetRepoService _repoService;
   AppComponent(this._repoService);
@@ -48,6 +48,7 @@ class AppComponent {
   }
 
 
+  @override
   Future<Null> ngOnInit() async {
     repo = await _repoService.getRepo();
   }
