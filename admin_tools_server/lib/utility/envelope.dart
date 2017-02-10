@@ -5,10 +5,11 @@ import 'dart:convert';
 //import 'dart:io';
 import 'package:aqueduct/aqueduct.dart';
 
-class MessageEnvelope{
+class MessageEnvelope implements HTTPSerializable{
   final String message;
   MessageEnvelope(this.message);
 
+  @override
   String toString(){
     return JSON.encode({"message":message});
   }
@@ -20,12 +21,17 @@ class MessageEnvelope{
         "message":new APISchemaObject.string()
       });
   }
+  @override
+  String asSerializable() {
+    return JSON.encode({"message":message});
+  }
 }
 
-class ErrorEnvelope{
+class ErrorEnvelope implements HTTPSerializable{
   final String message;
   ErrorEnvelope(this.message);
 
+  @override
   String toString(){
     return JSON.encode({"error":message});
   }
@@ -36,5 +42,9 @@ class ErrorEnvelope{
       ..schema = new APISchemaObject(properties: {
         "error":new APISchemaObject.string()
       });
+  }
+  @override
+  String asSerializable() {
+    return JSON.encode({"error":message});
   }
 }

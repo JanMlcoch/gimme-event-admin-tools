@@ -2,12 +2,12 @@ part of admin_tools.controller;
 
 class LogoutController extends HTTPController {
   @httpPost
-  Future<Response> logout() async{
+  Future<Response> logout() async {
     Query<Token> query = new Query<Token>()
       ..matchOn.client = whereRelatedByValue(request.authorization.clientID)
       ..matchOn.owner = whereRelatedByValue(request.authorization.resourceOwnerIdentifier);
     int rowCount = await query.delete();
-    if(rowCount>0) return new Response.ok(new MessageEnvelope("Succesfully logout"));
+    if (rowCount > 0) return new Response.ok(new MessageEnvelope("Succesfully logout"));
     return new Response.notFound(body: new ErrorEnvelope("Cannot logout, probably already logged out"));
   }
 

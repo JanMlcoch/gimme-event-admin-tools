@@ -6,28 +6,38 @@ class _AuthCode implements AuthTokenExchangable<Token> {
   int id;
 
   @ManagedColumnAttributes(indexed: true)
+  @override
   String code;
 
   @ManagedColumnAttributes(nullable: true)
+  @override
   String redirectURI;
 
+  @override
   String clientID;
+  @override
   int resourceOwnerIdentifier;
+  @override
   DateTime issueDate;
+  @override
   DateTime expirationDate;
 
+  @override
   @ManagedRelationship(#code, isRequired: false, onDelete: ManagedRelationshipDeleteRule.cascade)
   Token token;
 }
 
 class Token extends ManagedObject<_Token> implements _Token, AuthTokenizable<int> {
+  @override
   String get clientID => client.id;
-  void set clientID(cid) {
+  @override
+  set clientID(cid) {
     client = new ClientRecord()..id = cid;
   }
-
+  @override
   int get resourceOwnerIdentifier => owner.id;
-  void set resourceOwnerIdentifier(roid) {
+  @override
+  set resourceOwnerIdentifier(roid) {
     owner = new User()..id = roid;
   }
 }

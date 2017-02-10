@@ -2,11 +2,14 @@ import 'package:aqueduct/aqueduct.dart';
 import 'dart:async';
 
 class Migration2 extends Migration {
+  @override
   Future upgrade() async {
     database.commands = [";"];
   }
 
+  @override
   Future downgrade() async {}
+  @override
   Future seed() async {
     var clientSecret = "heslo Admin Tools pro Akcnik webovou aplikaci";
     var clientID = "Akcnik Admin tools";

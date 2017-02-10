@@ -2,11 +2,14 @@ import 'package:aqueduct/aqueduct.dart';
 import 'dart:async';
 
 class Migration3 extends Migration {
+  @override
   Future upgrade() async {
     database.commands = [";"];
   }
 
+  @override
   Future downgrade() async {}
+  @override
   Future seed() async {
     String repo = '{"tags":[],"relations":[]}';
     return store.execute(
