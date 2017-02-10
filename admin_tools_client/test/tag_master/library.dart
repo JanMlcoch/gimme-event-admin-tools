@@ -55,31 +55,31 @@ Future main() async {
     //todo: index tests
     //todo: index generator tests
   });
-  group("TagMaster Repository tests", () {
-    group("TagMaster Repository Record Application tests", () {
-      group("Action record application tests", actionRecordApplicationTests);
-      group("Tag Master diff tests", repoDiffTests);
-    });
-    group("Tag Master getLowestUnusedId test", tagMasterRepoLowestUnusedIdTests);
-    group("TagMaster Repository validation tests", () {
-      group("TagMaster Repository local validation tests", tagMasterRepoLocalValidationTests);
-      group("Synonym Relations have appropriate tags and tag types tests",
-          synonymRelationsHaveAppropriateTagsAndTagTypesTests);
-      group("Synonyms have Appropriate relations tests", synonymsHaveRelationsTests);
-      group("TagMaster Repository validation customs tests", tagMasterRepoCustomValidationTests);
-      group("Unique tag ids tests", uniqueTagIdsTests);
-      group("Unique tag names tests", uniqueTagNamesTests);
-      group("Unique relation tests", uniqueRelationsTests);
-      group("Relation tags exists tests", relationTagsExistsTests);
-      //todo: custom having relations - in default redundant
-      //todo: composite having relations
-      //todo: specific having relations
-      //todo: core having relations
-      //todo: composite relations tags&types
-      //todo: imprint relations tags&types
-      //todo: setish originTagIds
-    });
-    //todo: getTagById test
-    //todo: getRelationsRelevant FOr ID test
-  });
+//  group("TagMaster Repository tests", () {
+//    group("TagMaster Repository Record Application tests", () {
+//      group("Action record application tests", actionRecordApplicationTests);
+//      group("Tag Master diff tests", repoDiffTests);
+//    });
+//    group("Tag Master getLowestUnusedId test", tagMasterRepoLowestUnusedIdTests);
+//    group("TagMaster Repository validation tests", () {
+//      group("TagMaster Repository local validation tests", tagMasterRepoLocalValidationTests);
+//      group("Synonym Relations have appropriate tags and tag types tests",
+//          synonymRelationsHaveAppropriateTagsAndTagTypesTests);
+//      group("Synonyms have Appropriate relations tests", synonymsHaveRelationsTests);
+//      group("TagMaster Repository validation customs tests", tagMasterRepoCustomValidationTests);
+//      group("Unique tag ids tests", uniqueTagIdsTests);
+//      group("Unique tag names tests", uniqueTagNamesTests);
+//      group("Unique relation tests", uniqueRelationsTests);
+//      group("Relation tags exists tests", relationTagsExistsTests);
+//      //todo: custom having relations - in default redundant
+//      //todo: composite having relations
+//      //todo: specific having relations
+//      //todo: core having relations
+//      //todo: composite relations tags&types
+//      //todo: imprint relations tags&types
+//      //todo: setish originTagIds
+//    });
+//    //todo: getTagById test
+//    //todo: getRelationsRelevant FOr ID test
+//  });
 }
