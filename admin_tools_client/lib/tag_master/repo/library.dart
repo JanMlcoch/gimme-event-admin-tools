@@ -1,9 +1,9 @@
 ///Library concentrating on [TagMasterRepository]
 library tag_master_2.repo;
 
-import '../tag.dart';
-import '../relation/library.dart';
 import 'dart:math';
+import 'package:admin_tools/tag_master/tag.dart';
+import 'package:admin_tools/tag_master/relation/library.dart';
 
 part "repository_validator.dart";
 part "tag_master_repo.dart";

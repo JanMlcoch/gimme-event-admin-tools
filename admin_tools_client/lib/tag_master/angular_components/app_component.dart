@@ -1,19 +1,19 @@
 // Copyright (c) 2016, GrundL. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
+
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:admin_tools/tag_master/repo/library.dart';
 
-import 'dart:async';
-
-import 'get_repo_service.dart';
-import 'view_tags_component.dart';
-import 'edit_tag_component.dart';
-import 'create_tag_component.dart';
-import 'ss_component.dart';
-import 'quick_add_tag_component.dart';
+import 'package:admin_tools/tag_master/angular_components/get_repo_service.dart';
+import 'package:admin_tools/tag_master/angular_components/view_tags_component.dart';
+import 'package:admin_tools/tag_master/angular_components/edit_tag_component.dart';
+import 'package:admin_tools/tag_master/angular_components/create_tag_component.dart';
+import 'package:admin_tools/tag_master/angular_components/ss_component.dart';
+import 'package:admin_tools/tag_master/angular_components/quick_add_tag_component.dart';
 
 @Component(
     selector: 'my-app',

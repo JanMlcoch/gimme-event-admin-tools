@@ -2,7 +2,7 @@ library generate;
 
 import 'dart:io';
 import 'dart:convert';
-import '../../tag_master/repo/library.dart';
+import 'package:admin_tools/tag_master/repo/library.dart';
 
 void main() {
   String oldString = "";

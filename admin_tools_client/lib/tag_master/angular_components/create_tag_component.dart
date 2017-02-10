@@ -1,9 +1,10 @@
-import 'package:angular2/core.dart';
-import 'get_repo_service.dart';
-import 'package:admin_tools/tag_master/library.dart';
-import 'package:angular2_components/angular2_components.dart';
 import 'dart:async';
+import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
+import 'package:angular2_components/angular2_components.dart';
+
+import 'package:admin_tools/tag_master/angular_components/get_repo_service.dart';
+import 'package:admin_tools/tag_master/library.dart';
 
 @Component(
     selector: "create-tag",
