@@ -53,12 +53,12 @@ abstract class RepositoryValidator {
       if (!rule.repositoryTest(repo)) reasonsToFail.add(rule.onInvalidMessage);
     }
     if (reasonsToFail.isEmpty) {
-      print("Global validation passed");
+//      print("Global validation passed");
       return true;
     } else {
-      print("Global validation failed because:");
+//      print("Global validation failed because:");
       for (String reason in reasonsToFail) print(reason);
-      print("*end of reasons*");
+//      print("*end of reasons*");
       return false;
     }
   }
