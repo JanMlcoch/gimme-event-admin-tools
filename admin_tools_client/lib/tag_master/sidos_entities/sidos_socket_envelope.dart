@@ -53,6 +53,107 @@ class SidosSocketEnvelope {
   int visitLength;
   List<GPS> pointsOfOrigin;
 
+  SidosSocketEnvelope();
+
+  SidosSocketEnvelope.testEnvelope({String message: "No message sent from client"}) {
+    type = TYPE_TEST;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.updateImprintEnvelope(int eventId, List<int> tags,
+      {double baseCost: null,
+      GPS place: null,
+      int visitLength: null,
+      bool isDetailedInfo: false,
+      String message: "No message sent from client"}) {
+    type = TYPE_UPDATE_IMPRINT;
+    this.eventId = eventId;
+    this.tags = tags;
+    this.baseCost = baseCost;
+    this.place = place;
+    this.visitLength = visitLength;
+    this.message = message;
+    this.isDetailedInfo = isDetailedInfo;
+  }
+
+  SidosSocketEnvelope.updatePatternEnvelope(int userId,
+      {List<GPS> pointsOfOrigin: const [], bool isDetailedInfo: false, String message: "No message sent from client"}) {
+    type = TYPE_UPDATE_PATTERN;
+    this.userId = userId;
+    this.pointsOfOrigin = pointsOfOrigin;
+    this.isDetailedInfo = isDetailedInfo;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.attendEnvelope(int userId, int eventId, {String message: "No message sent from client"}) {
+    type = TYPE_ATTEND;
+    this.userId = userId;
+    this.eventId = eventId;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.sortEventsForUser(int userId, List<int> eventIds,
+      {int numberOfEventsDesired: 35, GPS localPointOfOrigin: null, String message: "No message sent from client"}) {
+    type = TYPE_SORT_EVENTS_FOR_USER;
+    this.numberOfEventsDesired = numberOfEventsDesired;
+    this.userId = userId;
+    this.eventIds = eventIds;
+    this.message = message;
+    this.pointsOfOrigin = [localPointOfOrigin];
+  }
+
+  SidosSocketEnvelope.createHardLog({String message: "No message sent from client"}) {
+    type = TYPE_HARD_LOG;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.createHardCache({String message: "No message sent from client"}) {
+    type = TYPE_HARD_COPY;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.loadHardCache({String message: "No message sent from client"}) {
+    type = TYPE_LOAD_HARD_COPY;
+    this.message = message;
+  }
+
+  SidosSocketEnvelope.requestAdditionalInfoEventTags(int eventIdx, {String message: "No message sent"}) {
+    type = TYPE_ADDITIONAL_INFO_REQUEST_EVENT_TAGS;
+    this.message = message;
+    isRequestForAdditionalInfo = true;
+    isRequestForEventTags = true;
+    eventId = eventIdx;
+  }
+
+  SidosSocketEnvelope.requestSpecificAdditionalInfoEvent(int eventIdx, List<String> missingEventInfox,
+      {String message: "No message sent"}) {
+    type = TYPE_ADDITIONAL_INFO_REQUEST_INFO_EVENT;
+    this.message = message;
+    isRequestForAdditionalInfo = true;
+    isRequestForEventInfo = true;
+    missingEventInfo = missingEventInfox;
+    eventId = eventIdx;
+  }
+
+  SidosSocketEnvelope.requestUserPointsOfOriginAdditionalInfo(int userId, {String message: "No message sent"}) {
+    type = TYPE_ADDITIONAL_INFO_REQUEST_USER_POINTS_OF_ORIGIN;
+    this.message = message;
+    isRequestForAdditionalInfo = true;
+    isRequestForPointsOfOrigin = true;
+    this.userId = userId;
+  }
+
+  SidosSocketEnvelope.additionalEventTags(int eventIdx, List<int> eventTags,
+      {String message: "No message sent from client"}) {
+    type = TYPE_ADDITIONAL_INFO_REQUEST_ADDITIONAL_EVENT_TAGS;
+    this.message = message;
+    isRequestForAdditionalInfo = true;
+    isRequestForEventTags = true;
+    eventId = eventIdx;
+    tags = eventTags;
+  }
+
+
   void fromMap(Map json) {
     if (json['pointsOfOrigin'] != null) {
       pointsOfOrigin = [];
@@ -256,105 +357,5 @@ class SidosSocketEnvelope {
 //        print("Tested SidosSocketEnvelope with unknown type $type, NOT VALID");
 //        return false;
 //    }
-  }
-
-  SidosSocketEnvelope();
-
-  SidosSocketEnvelope.testEnvelope({String message: "No message sent from client"}) {
-    type = TYPE_TEST;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.updateImprintEnvelope(int eventId, List<int> tags,
-      {double baseCost: null,
-      GPS place: null,
-      int visitLength: null,
-      bool isDetailedInfo: false,
-      String message: "No message sent from client"}) {
-    type = TYPE_UPDATE_IMPRINT;
-    this.eventId = eventId;
-    this.tags = tags;
-    this.baseCost = baseCost;
-    this.place = place;
-    this.visitLength = visitLength;
-    this.message = message;
-    this.isDetailedInfo = isDetailedInfo;
-  }
-
-  SidosSocketEnvelope.updatePatternEnvelope(int userId,
-      {List<GPS> pointsOfOrigin: const [], bool isDetailedInfo: false, String message: "No message sent from client"}) {
-    type = TYPE_UPDATE_PATTERN;
-    this.userId = userId;
-    this.pointsOfOrigin = pointsOfOrigin;
-    this.isDetailedInfo = isDetailedInfo;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.attendEnvelope(int userId, int eventId, {String message: "No message sent from client"}) {
-    type = TYPE_ATTEND;
-    this.userId = userId;
-    this.eventId = eventId;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.sortEventsForUser(int userId, List<int> eventIds,
-      {int numberOfEventsDesired: 35, GPS localPointOfOrigin: null, String message: "No message sent from client"}) {
-    type = TYPE_SORT_EVENTS_FOR_USER;
-    this.numberOfEventsDesired = numberOfEventsDesired;
-    this.userId = userId;
-    this.eventIds = eventIds;
-    this.message = message;
-    this.pointsOfOrigin = [localPointOfOrigin];
-  }
-
-  SidosSocketEnvelope.createHardLog({String message: "No message sent from client"}) {
-    type = TYPE_HARD_LOG;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.createHardCache({String message: "No message sent from client"}) {
-    type = TYPE_HARD_COPY;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.loadHardCache({String message: "No message sent from client"}) {
-    type = TYPE_LOAD_HARD_COPY;
-    this.message = message;
-  }
-
-  SidosSocketEnvelope.requestAdditionalInfoEventTags(int eventIdx, {String message: "No message sent"}) {
-    type = TYPE_ADDITIONAL_INFO_REQUEST_EVENT_TAGS;
-    this.message = message;
-    isRequestForAdditionalInfo = true;
-    isRequestForEventTags = true;
-    eventId = eventIdx;
-  }
-
-  SidosSocketEnvelope.requestSpecificAdditionalInfoEvent(int eventIdx, List<String> missingEventInfox,
-      {String message: "No message sent"}) {
-    type = TYPE_ADDITIONAL_INFO_REQUEST_INFO_EVENT;
-    this.message = message;
-    isRequestForAdditionalInfo = true;
-    isRequestForEventInfo = true;
-    missingEventInfo = missingEventInfox;
-    eventId = eventIdx;
-  }
-
-  SidosSocketEnvelope.requestUserPointsOfOriginAdditionalInfo(int userId, {String message: "No message sent"}) {
-    type = TYPE_ADDITIONAL_INFO_REQUEST_USER_POINTS_OF_ORIGIN;
-    this.message = message;
-    isRequestForAdditionalInfo = true;
-    isRequestForPointsOfOrigin = true;
-    this.userId = userId;
-  }
-
-  SidosSocketEnvelope.additionalEventTags(int eventIdx, List<int> eventTags,
-      {String message: "No message sent from client"}) {
-    type = TYPE_ADDITIONAL_INFO_REQUEST_ADDITIONAL_EVENT_TAGS;
-    this.message = message;
-    isRequestForAdditionalInfo = true;
-    isRequestForEventTags = true;
-    eventId = eventIdx;
-    tags = eventTags;
   }
 }
