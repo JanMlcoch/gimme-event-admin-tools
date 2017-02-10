@@ -1,0 +1,28 @@
+<div class="list-row header">
+    <div class="float-left" [style.width]="columns[0]">
+        Název akce
+    </div>
+    <div class="float-left" [style.width]="columns[1]">
+        Datum akce
+    </div>
+    <div class="float-left" [style.width]="columns[2]">
+        Má tagy
+    </div>
+    <div class="float-left" [style.width]="columns[3]">
+        Tagy
+    </div>
+</div>
+<div class="list-row" *ngFor="let event of events.list" [class.selected]="events.selected == event" (click)="events.selected = event">
+    <div class="float-left" [style.width]="columns[0]">
+        {{event.name}}
+    </div>
+    <div class="float-left" [style.width]="columns[1]">
+        {{event.dateFrom | date:"d. M. yyyy" }}
+    </div>
+    <div class="float-left" [style.width]="columns[2]">
+        {{event.tags.isNotEmpty}}
+    </div>
+    <div class="float-left" [style.width]="columns[3]">
+        <span *ngFor="let tag of event.tags">{{tag.name}}</span>
+    </div>
+</div>

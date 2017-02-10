@@ -1,0 +1,26 @@
+<header>
+    <div class="logo-block">
+        <img class="logo" src="assets/img/symbol_small.png">
+        <a class="logo-text" href="angular_app/">GimmeEvent</a>
+    </div>
+    <div class="title-block">
+        <h1>Tagger 1.0</h1>
+    </div>
+    <login>
+        <a href="#">
+            pavel@gmail.com
+        </a>
+    </login>
+    <menu>
+        <material-button [routerLink]="['Event',  {id: 1}]" raised>Akce</material-button>
+        <material-button raised>Odhlásit</material-button>
+    </menu>
+</header>
+<content>
+    <div class="events-list-cont">
+        <events-list-component></events-list-component>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</content>

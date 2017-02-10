@@ -1,0 +1,55 @@
+h1{
+    font-size: 20pt;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    padding: 5px 0;
+    height: 50px;
+}
+
+.logo-block{
+    float: left;
+    margin: 1px 10px;
+}
+
+.title-block{
+    float: left;
+    margin: 7px 5px 4px 60px;
+}
+
+menu{
+    float: right;
+    margin: 2px 20px;
+}
+
+login{
+    float: right;
+    margin: 2px 20px;
+}
+
+.logo{
+    height: 40px;
+    float: left;
+}
+
+.logo-text{
+    font-family: "Fira sans extrabolditalic", "Fira sans", Verdana, Tahoma, sans-serif;
+    font-size: 26px;
+    margin: 2px 6px;
+    display: block;
+    float: left;
+    color: #2b2b2a;
+}
+
+content{
+    display: block;
+    margin: 30px 0;
+}
+
+.events-list-cont{
+    width: 800px;
+    clear: both;
+    margin: 10px;
+}
