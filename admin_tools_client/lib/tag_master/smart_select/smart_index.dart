@@ -1,4 +1,4 @@
-part of tagMaster2.smartSelect;
+part of tag_master_2.smart_select;
 
 class SmartIndex{
   List<LabeledTag> tags;

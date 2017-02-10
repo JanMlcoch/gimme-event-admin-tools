@@ -1,4 +1,4 @@
-part of tagMaster2.repo;
+part of tag_master_2.repo;
 
 ///Class handling various validations of [TagMasterRepository]'s instances.
 abstract class RepositoryValidator {

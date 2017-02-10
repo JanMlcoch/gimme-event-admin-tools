@@ -42,7 +42,7 @@ Directory nginx;
    }else{
      Process.start("nginx.exe",["-c","${project.path}/nginx/conf/nginx.conf","-p","${project.path}/nginx/"]).then((Process process) {
        printFromOutputStreams(process, "Nginx");
-     });;
+     });
    }
 
 

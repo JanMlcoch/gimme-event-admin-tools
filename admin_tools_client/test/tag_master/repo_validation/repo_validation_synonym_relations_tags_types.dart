@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void synonymRelationsHaveAppropriateTagsAndTagTypesTests() {
   test("Test of synonym pointing itself repo default validity", () {

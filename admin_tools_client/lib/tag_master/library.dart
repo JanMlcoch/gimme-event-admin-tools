@@ -1,5 +1,5 @@
 ///TagMaster client library
-library tagMaster2;
+library tag_master_2;
 
 export 'relation/library.dart';
 export "tag.dart";

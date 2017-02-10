@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void uniqueTagIdsTests(){
     test("Test of empty repo unique tag ids rule", () {

@@ -1,4 +1,4 @@
-part of tagMaster2.repo;
+part of tag_master_2.repo;
 
 class RelationTagsExists extends TagMasterRepositoryRule{
   static const String onFailure = "Some of the relation-relevant tags do not exist";

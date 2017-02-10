@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void tagMasterRepoCustomValidationTests() {
   test("Test of only custom tag repo default validity", () {

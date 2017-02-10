@@ -1,4 +1,4 @@
-part of tagMaster2.repo;
+part of tag_master_2.repo;
 
 ///Checks whether all imprint relations have appropriate relations regarding to the definitions of their types.
 class ImprintRelationsHaveAppropriateTagsAndTagTypes extends TagMasterRepositoryRule {

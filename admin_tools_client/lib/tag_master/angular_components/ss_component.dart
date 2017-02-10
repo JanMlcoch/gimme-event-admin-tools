@@ -46,7 +46,7 @@ class SmartSelectComponent implements OnInit {
   }
 
   void delayedBlur() {
-    Timer timer = new Timer(new Duration(milliseconds: 500), () {
+    new Timer(new Duration(milliseconds: 500), () {
       shouldRenderOptions = false;
     });
   }
@@ -59,6 +59,7 @@ class SmartSelectComponent implements OnInit {
     onTagChosen.emit(tagId);
   }
 
+  @override
   Future<Null> ngOnInit() async {
     repo = await _repoService.getRepo();
   }

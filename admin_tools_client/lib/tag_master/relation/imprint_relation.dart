@@ -1,4 +1,4 @@
-part of tagMaster2.relation;
+part of tag_master_2.relation;
 
 class ImprintRelation extends RelationSubstance {
   ImprintRelation() : super._();

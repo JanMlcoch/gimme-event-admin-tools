@@ -1,4 +1,4 @@
-library tagMaster2.relation;
+library tag_master_2.relation;
 
 import '../sidos_entities/library.dart';
 

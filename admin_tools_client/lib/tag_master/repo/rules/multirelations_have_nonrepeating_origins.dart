@@ -1,4 +1,4 @@
-part of tagMaster2.repo;
+part of tag_master_2.repo;
 
 ///Checks whether all higher order [Relation]s have nonrepeating originTagIds.
 class MultiRelationsHaveNonrepeatingOrigins extends TagMasterRepositoryRule{

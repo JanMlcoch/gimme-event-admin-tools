@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void sSOrderTests() {
   Function getOrderTest(List<Tag> unfilteredTags, List<Tag> expectedTags, String string) {

@@ -1,5 +1,5 @@
 ///Library concentrating on [TagMasterRepository]
-library tagMaster2.repo;
+library tag_master_2.repo;
 
 import '../tag.dart';
 import '../relation/library.dart';

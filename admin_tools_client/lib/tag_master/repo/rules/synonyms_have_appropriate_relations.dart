@@ -1,4 +1,4 @@
-part of tagMaster2.repo;
+part of tag_master_2.repo;
 
 ///finds out whether or not do synonym tags have appropriate relations regarding to the definitions of their types.
 class SynonymsHaveAppropriateRelations extends TagMasterRepositoryRule{

@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void synonymsHaveRelationsTests() {
   test("Test of only_synonym_tag repo synonyms-have-appr.-relation validity", () {

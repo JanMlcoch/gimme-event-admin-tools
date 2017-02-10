@@ -21,6 +21,7 @@ class CreateTagComponent implements OnInit {
 
   List<Relation> get relationsTo => [];
 
+  @override
   Future<Null> ngOnInit() async {
     subRepo = await _repoService.getRepo();
   }

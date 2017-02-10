@@ -1,4 +1,4 @@
-part of tagMaster2.smartSelect;
+part of tag_master_2.smart_select;
 //todo: docs
 abstract class SmartSorter {
   static List<LabeledTag> getTags(String inputString, TagMasterRepository repo,
@@ -46,9 +46,9 @@ abstract class SmartSorter {
     }
     //here begins own sorting and filtering
     List<Tag> tagsStartsWith = getStartsWithTags(repo,inputString);
-    List<Tag> tagsSubstring = getSubstringTags(repo,inputString);;
-    List<Tag> tagsAbbreviationStartsWith = getStartsWithAbbrevTags(repo,inputString);;
-    List<Tag> tagsAbbreviation = getAbbrevTags(repo,inputString);;
+    List<Tag> tagsSubstring = getSubstringTags(repo,inputString);
+    List<Tag> tagsAbbreviationStartsWith = getStartsWithAbbrevTags(repo,inputString);
+    List<Tag> tagsAbbreviation = getAbbrevTags(repo,inputString);
 
     TagCompare tagTypeCompare = (a, b) => -a.tagType.compareTo(b.tagType);
 

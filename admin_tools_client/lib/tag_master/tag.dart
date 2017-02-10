@@ -1,4 +1,4 @@
-library tagMaster2.tag;
+library tag_master_2.tag;
 
 ///Class representing tags
 class Tag {

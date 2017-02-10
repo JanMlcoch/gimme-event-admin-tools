@@ -214,6 +214,7 @@ class EditTagComponent implements OnInit {
     relationToEdit = relation;
   }
 
+  @override
   Future<Null> ngOnInit() async {
     String _tagIdString = _routeParams.get('id');
     _tagIdString = _tagIdString != null ? _tagIdString : "";

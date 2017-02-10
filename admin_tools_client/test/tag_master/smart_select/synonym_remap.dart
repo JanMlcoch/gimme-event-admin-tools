@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void sSReMapSynonymsTests() {
   Function getAllowedTypesTest(String string, List<Tag> unfilteredTags, List<Relation> relations, List<Tag> expectedTags) {

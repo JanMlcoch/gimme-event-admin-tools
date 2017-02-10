@@ -1,4 +1,4 @@
-library test.tagMaster2;
+library test.tag_master_2;
 
 import 'package:test/test.dart';
 import 'dart:async';

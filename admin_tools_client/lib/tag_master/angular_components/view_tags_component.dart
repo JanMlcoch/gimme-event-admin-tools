@@ -30,6 +30,7 @@ class ViewTagsComponent implements OnInit {
     _repoService.saveChanges();
   }
 
+  @override
   Future<Null> ngOnInit() async {
     repo = await _repoService.getRepo();
   }

@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void desiredCountTest() {
   Function getMaxAmountTestTest(List<Tag> unfilteredTags, String string, int filteredLength,{int numberOfTagsDesired: 3, bool giveMax: false}){

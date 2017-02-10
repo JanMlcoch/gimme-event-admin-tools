@@ -39,6 +39,7 @@ class QuickAddTagComponent implements OnInit {
     isValid = false;
   }
 
+  @override
   Future<Null> ngOnInit() async {
     repo = await _repoService.getRepo();
   }

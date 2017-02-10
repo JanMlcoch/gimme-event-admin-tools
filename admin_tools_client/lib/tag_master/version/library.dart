@@ -1,7 +1,7 @@
 ///TagMaster version library. It handles aspocts of tagMaster associated with [TagMasterRepository] progress.
 ///
 ///It contains classes [Version], [Record] and [ActionRecord]
-library tagMaster2.version;
+library tag_master_2.version;
 
 import '../relation/library.dart';
 import "../tag.dart";

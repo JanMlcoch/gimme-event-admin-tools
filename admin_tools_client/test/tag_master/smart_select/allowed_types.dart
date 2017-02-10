@@ -1,4 +1,4 @@
-part of test.tagMaster2;
+part of test.tag_master_2;
 
 void sSAllowedTypeTests() {
   Function getAllowedTypesTest(List<Tag> unfilteredTags, List<Tag> expectedTags, List<int> allowedTypes) {

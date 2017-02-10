@@ -1,5 +1,5 @@
 ///This library handles "back-end-ish" functionality of Smart Select (for [Tag]s)
-library tagMaster2.smartSelect;
+library tag_master_2.smart_select;
 
 import '../tag.dart';
 import '../repo/library.dart';
