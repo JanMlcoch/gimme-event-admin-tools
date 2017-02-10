@@ -132,4 +132,9 @@ class Record{
       return tag.tagId == record.tag.tagId;
     }
   }
+
+  bool isInSoftConflictWith(Record record){
+    if(isInConflictWith(record))return true;
+    return false;
+  }
 }

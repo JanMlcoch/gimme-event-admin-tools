@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:http/http.dart' as http;
 import 'package:angular2/core.dart';
-
 import 'package:admin_tools/tag_master/library.dart';
 import 'package:admin_tools/tag_master/repo_refactor/new_deserialized.dart';
 
@@ -15,6 +15,7 @@ class GetRepoService {
 
 
   Future<Null> getTagMasterRepoFromRemote()async{
+    //todo: get from remote
     Map<String, List<Map<String, dynamic>>> repoMap = {"tags":[],"relations":[]};
     if(a is Map<String, List<Map<String, dynamic>>>){
       repoMap = a as Map<String, List<Map<String, dynamic>>>;
@@ -48,5 +49,16 @@ class GetRepoService {
     Tag tag = repo.getTagById(tagId);
     TagMasterRepository subRepo = new TagMasterRepository.withData([tag],repo.getRelationsRelevantFor(tag));
     return subRepo;
+  }
+
+  Future<TagMasterRepository> downloadFromRemote()async{
+    //todo: implement
+    return await new TagMasterRepository();
+  }
+
+  Future<String> uploadFromRemote() async{
+    //todo: should test for validity?
+    TagMasterRepository currentRemoteState = await downloadFromRemote();
+//    currentRemoteState.
   }
 }
