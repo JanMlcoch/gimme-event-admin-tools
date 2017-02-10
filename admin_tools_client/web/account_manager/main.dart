@@ -7,4 +7,6 @@ import './angular_components/app_component.dart';
 
 void main() {
   bootstrap(AppComponent);
+
+
 }
