@@ -5,13 +5,16 @@ import 'package:angular2_components/angular2_components.dart';
 import 'package:admin_tools/tagger/model/library.dart';
 import 'package:admin_tools/tagger/services/events_service.dart';
 
+import 'package:admin_tools/tagger/ui_components/selectize_component.dart';
+
 @Component(
     selector: "event-detail",
     templateUrl: "event_component.html",
     styleUrls: const ["event_component.css"],
     directives: const [
       materialDirectives,
-      ROUTER_DIRECTIVES
+      ROUTER_DIRECTIVES,
+      NgSelectize
     ],
     providers: const [
       materialProviders,

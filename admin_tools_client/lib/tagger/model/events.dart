@@ -5,7 +5,7 @@ class Events{
   Event selected;
 }
 
-class Event{
+class Event {
   static int _idIterator = 1;
   int id;
   String name;
@@ -17,34 +17,25 @@ class Event{
   String description;
   List<Tag> tags = [];
 
-  Event(){
+  Event() {
     id = _idIterator++;
   }
 
-  void fromMap(Map eventData){
+  void fromMap(Map eventData) {
     name = eventData["name"];
     dateFrom = new DateTime.fromMillisecondsSinceEpoch(eventData["dateFrom"]);
     image = eventData["image"];
     place = eventData["place"];
     annotation = eventData["annotation"];
     sourceUrl = eventData["sourceUrl"];
-    if(eventData.containsKey("description")){
+    if (eventData.containsKey("description")) {
       description = eventData["description"];
     }
-    if(eventData.containsKey("tags")){
+    if (eventData.containsKey("tags")) {
       tags.clear();
-      for(Map tagData in eventData["tags"]){
+      for (Map tagData in eventData["tags"]) {
         tags.add(new Tag()..fromMap(tagData));
       }
     }
-  }
-
-}
-
-class Tag{
-  String name;
-
-  void fromMap(Map tagData){
-    name = tagData["name"];
   }
 }

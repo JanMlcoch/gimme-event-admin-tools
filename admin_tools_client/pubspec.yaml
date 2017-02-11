@@ -6,6 +6,7 @@ environment:
 dependencies:
   angular2: '2.2.0'
   angular2_components: any
+  selectize: any
 #    git: https://github.com/dart-lang/angular2_components
   http: any
 dev_dependencies:
