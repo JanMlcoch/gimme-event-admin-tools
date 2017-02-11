@@ -22,8 +22,8 @@ class MessageEnvelope implements HTTPSerializable{
       });
   }
   @override
-  String asSerializable() {
-    return JSON.encode({"message":message});
+  Map<String,String> asSerializable() {
+    return {"message":message};
   }
 }
 
@@ -44,7 +44,7 @@ class ErrorEnvelope implements HTTPSerializable{
       });
   }
   @override
-  String asSerializable() {
-    return JSON.encode({"error":message});
+  Map<String,String> asSerializable() {
+    return {"error":message};
   }
 }
