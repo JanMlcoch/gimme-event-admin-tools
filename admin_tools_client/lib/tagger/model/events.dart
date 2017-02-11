@@ -55,7 +55,7 @@ class GimmeEvent {
     eventData["image"] = image;
     eventData["annotation"] = annotation;
     eventData["description"] = description;
-    eventData["tags"] = tags.toList();
+    eventData["tags"] = tags?.toList();
     return eventData;
   }
 }
