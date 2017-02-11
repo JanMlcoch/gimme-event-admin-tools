@@ -48,10 +48,14 @@ content{
     margin: 5px 0;
 }
 
+.tools{
+    height: 40px;
+}
+
 .events-list-cont{
     width: 800px;
     clear: both;
-    margin: 40px 10px;
+    margin: 0 10px;
     float: left;
 }
 

@@ -5,10 +5,12 @@ import 'package:admin_tools/tagger/model/library.dart';
 @Injectable()
 class TagsService {
   Tags tags;
+  SmartSelectModel smartSelectModel;
   static int _incrementId = 0;
 
   TagsService(){
     createMockTags();
+    smartSelectModel = new SmartSelectModel(tags.tags);
   }
 
   void createMockTags(){

@@ -27,6 +27,10 @@ import 'package:admin_tools/tagger/services/events_service.dart';
 class AppComponent{
   AppComponent();
 
+
+  void save(){
+
+  }
 }
 
 

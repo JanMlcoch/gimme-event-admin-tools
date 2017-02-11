@@ -1,14 +1,23 @@
 
+import 'dart:convert';
+import 'dart:html';
 import 'package:angular2/core.dart';
 
 import 'package:admin_tools/tagger/model/library.dart';
 
 @Injectable()
 class EventsService {
-  Events events;
+  GimmeEvents events;
 
   EventsService(){
-    createMockEvents();
+    events = new GimmeEvents();
+//    createMockEvents();
+    HttpRequest.getString("assets/data.json").then((String content){
+      Map pages = JSON.decode(content);
+      pages.forEach((url,Map page){
+        events.events.add(new GimmeEvent()..fromMap(page["event"]));
+      });
+    });
   }
 
   void createMockEvents(){
@@ -24,9 +33,9 @@ class EventsService {
     Map event2Data = new Map.from(event1Data);
     event2Data["name"] = "Moje jiná akce";
 
-    Event event1 = new Event()..fromMap(event1Data);
-    Event event2 = new Event()..fromMap(event2Data);
-    events = new Events();
-    events.list.addAll([event1, event2]);
+    GimmeEvent event1 = new GimmeEvent()..fromMap(event1Data);
+    GimmeEvent event2 = new GimmeEvent()..fromMap(event2Data);
+    events = new GimmeEvents();
+    events.events.addAll([event1, event2]);
   }
 }
