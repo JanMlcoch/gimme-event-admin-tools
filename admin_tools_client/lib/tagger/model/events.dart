@@ -11,6 +11,10 @@ class GimmeEvents{
     }
     return {"events": eventsData};
   }
+
+  void saveEvents(){
+
+  }
 }
 
 class GimmeEvent {

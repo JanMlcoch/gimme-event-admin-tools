@@ -5,4 +5,11 @@ import 'package:admin_tools/tagger/model/library.dart';
 @Injectable()
 class UserService {
   User user;
+
+  UserService();
+
+  void login(){
+
+  }
+
 }
