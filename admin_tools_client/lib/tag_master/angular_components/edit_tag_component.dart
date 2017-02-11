@@ -224,6 +224,6 @@ class EditTagComponent implements OnInit {
     });
 //    subRepo = await _repoService.getRepo();
     subRepo = await _repoService.getSubRepoOfTagId(_tagId);
-    repo = await _repoService.getRepo();
+    repo = await _repoService.getWorkingRepo();
   }
 }

@@ -1,31 +1,54 @@
+library tag_master2.requests;
+
 import 'dart:async';
 import 'dart:html';
 import 'dart:convert';
 import 'dart:math' as math;
 import 'package:admin_tools/tag_master/repo/library.dart';
-import 'package:admin_tools/tag_master/repo_refactor/new_deserialized.dart';
-//import 'package:http/http.dart' as http;
 
-TagMasterRepository sampleRepo = new TagMasterRepository()..fromMap(a);
+class TagMasterGateway {
+  static String accessToken;
+  static String dataFromResponse;
+  static DateTime lastLogin;
+}
 
-Future main() async {
+
+Future<int> getRemoteLastRepoId() async {
+  String response = await login();
+  Map tokens = JSON.decode(response);
+  String token = tokens["access_token"];
+  dynamic resp = await downloadRepo(token);
+  resp = JSON.decode(resp);
+  return resp["id"];
+}
+
+Future<Map<String, dynamic>> getRepo() async {
+  String response = await login();
+  Map tokens = JSON.decode(response);
+  String token = tokens["access_token"];
+  dynamic resp = await downloadRepo(token);
+  resp = JSON.decode(resp);
+  TagMasterRepository repo = new TagMasterRepository()
+    ..fromMap(JSON.decode(resp["repo"]));
+  int repoId = resp["id"];
+  return {"repo": repo, "repoId": repoId};
+}
+
+Future pushRepo(TagMasterRepository repo, int basedOnId) async {
   String response = await login();
   Map tokens = JSON.decode(response);
   await tokens;
   String token = tokens["access_token"];
-  await register(token);
-  dynamic resp = await downloadRepo(token);
-  resp = JSON.decode(resp);
-  print(resp);
-  print(resp["repo"].toString());
-  int repoId = resp["id"];
-  await uploadRepo(token, sampleRepo, repoId);
-  await downloadRepo(token);
-  await logout(token);
-  await register(token);
+  await uploadRepo(token, repo, basedOnId);
 }
 
 Future<String> login() async {
+  if (TagMasterGateway.accessToken != null &&
+      new DateTime.now().difference(TagMasterGateway.lastLogin).inMilliseconds > const Duration(minutes: 20).inMilliseconds) {
+    return TagMasterGateway.dataFromResponse;
+  }
+
+  TagMasterGateway.lastLogin = new DateTime.now();
   String password = "heslo Admin Tools pro Akcnik webovou aplikaci";
   String clientID = "Akcnik Admin tools";
 
@@ -41,6 +64,10 @@ Future<String> login() async {
     requestHeaders: {"Authorization": "Basic $b64"},
   ).then((HttpRequest resp) {
     dataFromResponse = resp.response;
+    Map tokens = JSON.decode(dataFromResponse);
+    String token = tokens["access_token"];
+    TagMasterGateway.accessToken = token;
+    TagMasterGateway.dataFromResponse = dataFromResponse;
   });
   return await dataFromResponse;
 }
@@ -91,7 +118,6 @@ Future uploadRepo(String token, TagMasterRepository repo, int basedOnId) async {
     "Authorization": "Bearer $token",
     "Content-Type": "application/json;charset=UTF-8"
   }).then((HttpRequest resp) {
-    print(resp.response);
     completer.complete();
   });
   await completer.future;
@@ -99,7 +125,8 @@ Future uploadRepo(String token, TagMasterRepository repo, int basedOnId) async {
 
 Future logout(String token) async {
   Completer completer = new Completer();
-  HttpRequest.request("http://localhost:8000/api/auth/logout", method: "POST"/*, sendData: jsonString*/, requestHeaders: {
+  HttpRequest.request(
+      "http://localhost:8000/api/auth/logout", method: "POST" /*, sendData: jsonString*/, requestHeaders: {
     "Authorization": "Bearer $token",
     "Content-Type": "application/json;charset=UTF-8"
   }).then((HttpRequest resp) {
