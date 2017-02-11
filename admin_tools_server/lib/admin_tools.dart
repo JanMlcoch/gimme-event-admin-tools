@@ -9,6 +9,6 @@ part 'model/tag_master/repo_version.dart';
 // Only for convenient migrations - without the need for
 // $ aqueduct db generate -l "server/model/library"
 
-void main(){
+void main() {
   throw "Do not use this!!!";
 }

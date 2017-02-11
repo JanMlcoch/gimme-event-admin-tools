@@ -1,4 +1,4 @@
-Map a = {
+Map<String, List<Map<String, dynamic>>> a = {
   "relations": [
     {
       "originTagIds": [11],

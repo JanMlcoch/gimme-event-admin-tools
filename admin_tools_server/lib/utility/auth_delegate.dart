@@ -3,8 +3,7 @@ part of admin_tools.utility;
 class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token, AuthCode> {
   @override
   Future<aque.AuthClient> clientForID(aque.AuthServer server, String id) async {
-    var clientQ = new aque.Query<ClientRecord>()
-      ..matchOn.id = id;
+    var clientQ = new aque.Query<ClientRecord>()..matchOn.id = id;
 
     var clientRecord = await clientQ.fetchOne();
     if (clientRecord == null) {
@@ -16,8 +15,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 
   @override
   Future deleteTokenForRefreshToken(aque.AuthServer server, String refreshToken) async {
-    var q = new aque.Query<Token>()
-      ..matchOn.refreshToken = refreshToken;
+    var q = new aque.Query<Token>()..matchOn.refreshToken = refreshToken;
 
     await q.delete();
   }
@@ -33,16 +31,14 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 
   @override
   Future<Token> tokenForAccessToken(aque.AuthServer server, String accessToken) {
-    var tokenQ = new aque.Query<Token>()
-      ..matchOn.accessToken = accessToken;
+    var tokenQ = new aque.Query<Token>()..matchOn.accessToken = accessToken;
 
     return tokenQ.fetchOne();
   }
 
   @override
   Future<Token> tokenForRefreshToken(aque.AuthServer server, String refreshToken) {
-    var tokenQ = new aque.Query<Token>()
-      ..matchOn.refreshToken = refreshToken;
+    var tokenQ = new aque.Query<Token>()..matchOn.refreshToken = refreshToken;
 
     return tokenQ.fetchOne();
   }
@@ -51,7 +47,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
   Future<User> authenticatableForUsername(aque.AuthServer server, String username) async {
     var userQ = new aque.Query<User>()
       ..matchOn.username = username
-      ..resultProperties = ["username","email", "hashedPassword", "salt", "id"];
+      ..resultProperties = ["username", "email", "hashedPassword", "salt", "id"];
 
     return await userQ.fetchOne();
   }
@@ -60,14 +56,13 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
   Future<User> authenticatableForID(aque.AuthServer server, dynamic id) async {
     var userQ = new aque.Query<User>()
       ..matchOn.id = id
-      ..resultProperties = ["username","email", "hashedPassword", "salt", "id"];
+      ..resultProperties = ["username", "email", "hashedPassword", "salt", "id"];
 
     return await userQ.fetchOne();
   }
 
   Future deleteTokenForAccessToken(aque.AuthServer server, String accessToken) async {
-    var q = new aque.Query<Token>()
-      ..matchOn.accessToken = accessToken;
+    var q = new aque.Query<Token>()..matchOn.accessToken = accessToken;
 
     await q.delete();
   }
@@ -75,8 +70,8 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
   @override
   Future<Token> storeToken(aque.AuthServer server, Token t) async {
     var oldTokenQ = new aque.Query<Token>()
-      ..matchOn.client= aque.whereRelatedByValue(t.client.id)
-    ..matchOn.owner=aque.whereRelatedByValue(t.owner.id);
+      ..matchOn.client = aque.whereRelatedByValue(t.client.id)
+      ..matchOn.owner = aque.whereRelatedByValue(t.owner.id);
     await oldTokenQ.delete();
 
     var tokenQ = new aque.Query<Token>();
@@ -96,7 +91,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 //    var authCodeQ = new Query<AuthCode>();
 //    authCodeQ.values = code;
 //    return authCodeQ.insert();
-  return null;
+    return null;
   }
 
   @override
@@ -105,7 +100,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 //      ..matchOn.code = code;
 //
 //    return authCodeQ.fetchOne();
-  return null;
+    return null;
   }
 
   @override
@@ -115,7 +110,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 //      ..values = code;
 //
 //    return authCodeQ.updateOne();
-  return null;
+    return null;
   }
 
   @override
@@ -124,7 +119,7 @@ class AdminAuthenticationDelegate implements aque.AuthServerDelegate<User, Token
 //      ..matchOn.id = code.id;
 //
 //    return authCodeQ.delete();
-  return null;
+    return null;
   }
 
   Future pruneResourceOwnerTokensAfterIssuingToken(Token t, {int count: 25}) async {

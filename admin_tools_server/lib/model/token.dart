@@ -1,6 +1,7 @@
 part of admin_tools.model;
 
 class AuthCode extends ManagedObject<_AuthCode> implements _AuthCode {}
+
 class _AuthCode implements AuthTokenExchangable<Token> {
   @managedPrimaryKey
   int id;
@@ -34,6 +35,7 @@ class Token extends ManagedObject<_Token> implements _Token, AuthTokenizable<int
   set clientID(cid) {
     client = new ClientRecord()..id = cid;
   }
+
   @override
   int get resourceOwnerIdentifier => owner.id;
   @override
@@ -41,6 +43,7 @@ class Token extends ManagedObject<_Token> implements _Token, AuthTokenizable<int
     owner = new User()..id = roid;
   }
 }
+
 class _Token {
   @ManagedColumnAttributes(primaryKey: true)
   String accessToken;
@@ -62,6 +65,7 @@ class _Token {
 }
 
 class ClientRecord extends ManagedObject<_Client> implements _Client {}
+
 class _Client {
   @ManagedColumnAttributes(primaryKey: true)
   String id;

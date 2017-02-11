@@ -2,7 +2,7 @@ library json_helper;
 
 import 'dart:convert';
 
-class JsonHelper{
+class JsonHelper {
   static Map<String, dynamic> decodeMap(String source) {
     dynamic decoded = JSON.decode(source);
     if (decoded is Map<String, dynamic>) return decoded;
@@ -27,4 +27,3 @@ class JsonHelper{
 
   static String encode(Object any) => JSON.encode(any);
 }
-
