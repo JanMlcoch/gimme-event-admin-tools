@@ -4,12 +4,15 @@ import 'dart:html';
 import 'package:angular2/core.dart';
 
 import 'package:admin_tools/tagger/model/library.dart';
+import 'package:admin_tools/tagger/server_gateway/requests.dart';
+import 'package:admin_tools/tagger/services/user_service.dart';
 
 @Injectable()
 class EventsService {
+  UserService _userService;
   GimmeEvents events;
 
-  EventsService(){
+  EventsService(this._userService){
     events = new GimmeEvents();
 //    createMockEvents();
     HttpRequest.getString("assets/data.json").then((String content){
@@ -37,5 +40,10 @@ class EventsService {
     GimmeEvent event2 = new GimmeEvent()..fromMap(event2Data);
     events = new GimmeEvents();
     events.events.addAll([event1, event2]);
+  }
+
+  void saveEvent(GimmeEvent event){
+    String token = _userService.user.token;
+    uploadEvent(token, event.toMap());
   }
 }

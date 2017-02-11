@@ -23,8 +23,8 @@ class Tag{
   String name;
 
   void fromMap(Map tagData){
-    id = tagData["id"];
-    name = tagData["name"];
+    id = tagData["tagId"];
+    name = tagData["tagName"];
   }
 
   Map toMap(){

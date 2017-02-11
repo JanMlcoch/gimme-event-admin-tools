@@ -7,7 +7,7 @@ import 'package:admin_tools/tagger/server_gateway/requests.dart';
 
 @Injectable()
 class TagsService {
-  Tags tags;
+  Tags tags = new Tags();
   SmartSelectModel smartSelectModel;
   static int _incrementId = 0;
 
@@ -24,8 +24,9 @@ class TagsService {
     tags.tags = tagsData;
   }
 
-  void loadTags() async{
-    tags = await getTags();
+  Future loadTags() async{
+    List tagsData = await getTags();
+    tags.fromList(tagsData);
   }
 
 }

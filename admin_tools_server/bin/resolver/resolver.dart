@@ -3,7 +3,7 @@ library resolver;
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import '../../../admin_tools_client/lib/tagger/model/library.dart';
+//import '../../../admin_tools_client/lib/tagger/model/library.dart';
 
 List<User> users = [];
 GimmeEvents events;
