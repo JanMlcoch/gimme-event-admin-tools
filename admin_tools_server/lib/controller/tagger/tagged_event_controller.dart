@@ -71,4 +71,48 @@ class TaggedEventController extends HTTPController {
     TaggedEvent updated = await updateQuery.updateOne();
     return new Response.ok(updated);
   }
+  @override
+  List<APIResponse> documentResponsesForOperation(APIOperation operation) {
+    var responses = super.documentResponsesForOperation(operation);
+    if (operation.id == APIOperation.idForMethod(this, #getEvents)) {
+      responses.addAll([
+        new APIResponse()
+          ..statusCode = HttpStatus.OK
+          ..description = "Get all tagged_events"
+          ..schema =
+          new APISchemaObject.fromTypeMirror(List)
+      ]);
+    }
+    if (operation.id == APIOperation.idForMethod(this, #getEvent)) {
+      responses.addAll([
+      new APIResponse()
+        ..statusCode = HttpStatus.OK
+        ..description = "Get tagged_event with id"
+        ..schema =
+        new APISchemaObject.fromTypeMirror(TaggedEvent),
+      const ErrorEnvelope("missing ID").document(HttpStatus.NOT_FOUND)
+      ]);
+    }
+    if (operation.id == APIOperation.idForMethod(this, #saveEvent)) {
+      responses.addAll([
+      new APIResponse()
+        ..statusCode = HttpStatus.OK
+        ..description = "Save tagged_event"
+        ..schema =
+        new APISchemaObject.fromTypeMirror(TaggedEvent),
+//      const ErrorEnvelope("missing ID").document(HttpStatus.NOT_FOUND)
+      ]);
+    }
+    if (operation.id == APIOperation.idForMethod(this, #updateEvent)) {
+      responses.addAll([
+      new APIResponse()
+        ..statusCode = HttpStatus.OK
+        ..description = "Update tagged_event with ID"
+        ..schema =
+        new APISchemaObject.fromTypeMirror(TaggedEvent),
+      const ErrorEnvelope("missing event with id \$stringId").document(HttpStatus.NOT_FOUND)
+      ]);
+    }
+    return responses;
+  }
 }

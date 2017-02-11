@@ -13,9 +13,9 @@ Future main() async {
 
     Map<String, List<Map<String, dynamic>>> repo = {
       "tags": [
-        {"id": 1, "name": "pivo", "type": "core"},
-        {"id": 2, "name": "les", "type": "copmosite"},
-        {"id": 3, "name": "larp", "type": "comparable"}
+        {"tagId": 1, "tagName": "pivo", "tagType": "core"},
+        {"tagId": 2, "tagName": "les", "tagType": "copmosite"},
+        {"tagId": 3, "tagName": "larp", "tagType": "comparable"}
       ],
       "relations": []
     };
@@ -46,9 +46,9 @@ Future main() async {
         hasResponse(
             200,
             equals([
-              {"id": 1, "name": "pivo"},
-              {"id": 2, "name": "les"},
-              {"id": 3, "name": "larp"}
+              {"tagId": 1, "tagName": "pivo"},
+              {"tagId": 2, "tagName": "les"},
+              {"tagId": 3, "tagName": "larp"}
             ])));
   });
   test("Get all tags - fail", () async {

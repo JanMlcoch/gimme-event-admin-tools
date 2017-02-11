@@ -19,7 +19,7 @@ class TagsController extends HTTPController {
     }
     List<Map<String, dynamic>> tagList = convertedRepo["tags"];
     return new Response.ok(
-        tagList.map((Map<String, dynamic> tag) => {"id": tag["id"], "name": tag["name"]}).toList(growable: false));
+        tagList.map((Map<String, dynamic> tag) => {"tagId": tag["tagId"], "tagName": tag["tagName"]}).toList(growable: false));
   }
 
   @httpGet
@@ -36,7 +36,7 @@ class TagsController extends HTTPController {
           ..statusCode = HttpStatus.OK
           ..description = "Get tags from last repo"
           ..schema =
-              new APISchemaObject(properties: {"id": new APISchemaObject.int(), "name": new APISchemaObject.string()}),
+              new APISchemaObject(properties: {"tagId": new APISchemaObject.int(), "tagName": new APISchemaObject.string()}),
         const ErrorEnvelope("missing repoVersion").document(HttpStatus.NOT_FOUND),
         const ErrorEnvelope("missing repo in repoVersion").document(HttpStatus.NOT_FOUND),
         const ErrorEnvelope("missing repo[\"tags\"] is not List").document(HttpStatus.NOT_FOUND)
