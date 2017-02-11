@@ -5,17 +5,14 @@ class RepoController extends HTTPController {
   Future<Response> getRepo(@HTTPPath("branch") String branchName) async {
     Query<RepoVersion> query = new Query<RepoVersion>();
     query.sortDescriptors = [new QuerySortDescriptor('id', QuerySortOrder.descending)];
-    if (branchName != null) {
+    if (branchName != "") {
       query.matchOn.branchName = whereEqualTo(branchName);
     }
-    List<RepoVersion> repos = await query.fetch();
-//    var repoVersion = await query.fetchOne();
-    print("repos.length=${repos.length}");
-    RepoVersion repoVersion;
-    if (repoVersion == null) {
+    List<RepoVersion> repoVersions = await query.fetch();
+    if (repoVersions.length == 0) {
       return new Response.notFound(body: "No repo with selected branchName");
     }
-    return new Response.ok(repoVersion);
+    return new Response.ok(repoVersions[0]);
   }
 
   @httpPost
@@ -26,15 +23,21 @@ class RepoController extends HTTPController {
     basedQuery.matchOn.id = whereEqualTo(body["basedOnId"]);
     RepoVersion basedOn = await basedQuery.fetchOne();
     if (basedOn == null) {
-      return new Response.notFound(body: "blbe");
+      return new Response.notFound(body: "Missing basedOn repo");
     }
-    if (branchName == null) {
+    if (branchName == null || branchName == "") {
+      branchName = body["branchName"];
+    }
+    if (branchName == "") {
       branchName = basedOn.branchName;
     }
+    if (branchName == null || branchName == "") {
+      return new Response.badRequest(body: "missing branchName");
+    }
 
-    Query<RepoVersion> query;
+    Query<RepoVersion> query = new Query<RepoVersion>();
     query.values
-      ..author = request.authorization.resourceOwnerIdentifier
+      ..author = (new User()..id = request.authorization.resourceOwnerIdentifier)
       ..created = new DateTime.now()
       ..branchName = branchName
       ..repo = body["repo"]

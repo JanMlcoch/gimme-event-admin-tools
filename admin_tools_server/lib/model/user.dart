@@ -1,10 +1,11 @@
 part of admin_tools.model;
 
-class User extends ManagedObject<_User> implements _User, Authenticatable{
+class User extends ManagedObject<_User> implements _User, Authenticatable {
   @managedTransientInputAttribute
   String password;
 }
-class _User{
+
+class _User {
   @managedPrimaryKey
   int id;
 
