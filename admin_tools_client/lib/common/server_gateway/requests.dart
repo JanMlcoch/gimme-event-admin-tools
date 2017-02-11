@@ -11,20 +11,23 @@ class Gateway {
   static DateTime lastLogin;
 }
 
-Future<String> login() async {
+Future<String> login([String login, String password]) async {
   if (Gateway.accessToken != null &&
       new DateTime.now().difference(Gateway.lastLogin).inMilliseconds > const Duration(minutes: 20).inMilliseconds) {
     return Gateway.dataFromResponse;
   }
 
   Gateway.lastLogin = new DateTime.now();
-  String password = "heslo Admin Tools pro Akcnik webovou aplikaci";
+  String appPassword = "heslo Admin Tools pro Akcnik webovou aplikaci";
   String clientID = "Akcnik Admin tools";
 
-  String pColonC = "$clientID:$password";
+  String pColonC = "$clientID:$appPassword";
   String b64 = BASE64.encode(UTF8.encode(pColonC));
 
-  Map<String, String> dataToSend = {"grant_type": "password", "username": "admin", "password": "velmi_slozite_heslo"};
+  String userLogin = login != null ? login : 'admin';
+  String userPassword = password != null ? password : 'velmi_slozite_heslo';
+
+  Map<String, String> dataToSend = {"grant_type": "password", "username": userLogin, "password": userPassword};
   String dataFromResponse;
 
   await HttpRequest.postFormData(

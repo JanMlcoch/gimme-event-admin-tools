@@ -9,7 +9,7 @@
     <login>
         <div *ngIf="isUserLogged">
             <a href="#">
-                pavel@gmail.com
+                {{user.login}}
             </a>
         </div>
         <div *ngIf="!isUserLogged">

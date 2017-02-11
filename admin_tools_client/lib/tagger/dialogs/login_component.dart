@@ -1,6 +1,7 @@
 
 import 'dart:html';
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
@@ -25,24 +26,28 @@ class LoginDialogComponent{
   final UserService _userService;
   final Router _router;
 
-  User get user => _userService.user;
-
   bool showDialog = true;
   bool submitted = false;
   bool valid = false;
-  UserLoginModel model = new UserLoginModel("", "");
+  UserLoginModel model = new UserLoginModel("admin", "velmi_slozite_heslo");
 
   LoginDialogComponent(this._userService, this._router);
 
   void onSubmit(){
     Future request = _userService.login(model.login, model.password);
-    request.then((bool successful) {
-      if (successful) {
-        valid = true;
-//        _router.navigate(['RecommendedEvents']);
-      } else {
+    request.then((String message){
+      try{
+        Map responds = JSON.decode(message);
+        if(responds.containsKey('access_token')){
+          valid = true;
+          _userService.createLoggedUser(model.login, responds['access_token']);
+          showDialog = false;
+          _router.navigate(['Empty']);
+        }else{
+          valid = false;
+        }
+      }catch(e){
         valid = false;
-        print("wrong");
       }
       submitted = true;
     });

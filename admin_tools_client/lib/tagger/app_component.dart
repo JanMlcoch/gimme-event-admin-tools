@@ -3,6 +3,7 @@ import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 
 import 'package:admin_tools/tagger/services/user_service.dart';
+import 'package:admin_tools/tagger/model/library.dart';
 
 import 'package:admin_tools/tagger/events_list_component.dart';
 import 'package:admin_tools/tagger/event_component.dart';
@@ -28,6 +29,8 @@ import 'package:admin_tools/tagger/dialogs/login_component.dart';
 ])
 class AppComponent{
   final UserService _userService;
+
+  User get user => _userService.user;
 
   bool get isUserLogged => _userService.isUserLogged;
 
