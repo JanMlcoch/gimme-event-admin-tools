@@ -24,19 +24,17 @@ class AdminSink extends aque.RequestSink {
   void setupRouter(aque.Router router) {
     router
       ..basePath = "/api"
-    // routes for AUTHENTICATION
+      // routes for AUTHENTICATION
       ..route("/auth/login")
           .pipe(new aque.Authorizer(authenticationServer, strategy: aque.AuthStrategy.client))
           .generate(() => new aque.AuthController(authenticationServer))
       ..route("/auth/logout").pipe(new aque.Authorizer(authenticationServer)).generate(() => new LogoutController())
       ..route("/auth/register").pipe(new aque.Authorizer(authenticationServer)).generate(() => new RegisterController())
       ..route("/identity").pipe(new aque.Authorizer(authenticationServer)).generate(() => new IdentityController())
-    // routes for ACCOUNT MANAGER
+      // routes for ACCOUNT MANAGER
 
-    // routes for TAG MASTER 2
-    ..route("/repo/[:branch]").pipe(new aque.Authorizer(authenticationServer)).generate(() => new RepoController())
-
-        ;
+      // routes for TAG MASTER 2
+      ..route("/repo/[:branch]").pipe(new aque.Authorizer(authenticationServer)).generate(() => new RepoController());
   }
 
   aque.ManagedContext contextWithConnectionInfo(aque.DatabaseConnectionConfiguration database) {

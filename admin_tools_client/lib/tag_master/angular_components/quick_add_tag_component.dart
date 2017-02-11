@@ -6,7 +6,11 @@ import 'package:admin_tools/tag_master/library.dart';
 
 @Component(
     selector: "quick-add-tag",
-    templateUrl: 'quick_add_tag_component.html',
+    template: r"""
+      <material-input raised [(ngModel)]="string" (input)="validate()"></material-input>
+      <material-button *ngIf="!isValid" raised disabled>Submit</material-button>
+      <material-button *ngIf="isValid" raised (trigger)="submit()">Submit</material-button>
+     """,
     directives: const [materialDirectives],
     providers: const [materialProviders])
 class QuickAddTagComponent implements OnInit {

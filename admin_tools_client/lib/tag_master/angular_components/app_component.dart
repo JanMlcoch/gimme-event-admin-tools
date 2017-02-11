@@ -12,12 +12,11 @@ import 'package:admin_tools/tag_master/angular_components/get_repo_service.dart'
 import 'package:admin_tools/tag_master/angular_components/view_tags_component.dart';
 import 'package:admin_tools/tag_master/angular_components/edit_tag_component.dart';
 import 'package:admin_tools/tag_master/angular_components/create_tag_component.dart';
-import 'package:admin_tools/tag_master/angular_components/ss_component.dart';
+import 'package:admin_tools/tag_master/angular_components/smart-select.dart';
 import 'package:admin_tools/tag_master/angular_components/quick_add_tag_component.dart';
 
 @Component(
     selector: 'my-app',
-    styleUrls: const ['app_component.css'],
     templateUrl: 'app_component.html',
     directives: const [materialDirectives, ROUTER_DIRECTIVES, ViewTagsComponent, QuickAddTagComponent],
     providers: const [materialProviders, GetRepoService, ROUTER_PROVIDERS])

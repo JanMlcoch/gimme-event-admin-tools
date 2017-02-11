@@ -58,9 +58,9 @@ abstract class SmartSorter {
     tagsAbbreviation.sort(tagTypeCompare);
 
     //todo: future optimalization
-    if (false /*giveMaximalAmount*/) {
-      //todo: implement
-    } else {
+//    if (false /*giveMaximalAmount*/) {
+//      //todo: implement
+//    } else {
       int procedure(List<LabeledTag> sorted, Tag tag, int i) {
         if (allowedTypes.contains(tag.tagType) && !excludeTagIds.contains(tag.tagId)) {
           if (shouldReMapSynonyms && tag.tagType == Tag.TYPE_SYNONYM) {
@@ -89,7 +89,7 @@ abstract class SmartSorter {
         i = procedure(toReturn, tagsAbbreviation[i], i);
       return toReturn;
     }
-  }
+//  }
 
   static List<Tag> getStartsWithTags(TagMasterRepository repo, String string){
     List<Tag> toReturn = [];

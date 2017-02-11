@@ -4,9 +4,9 @@ version: 0.0.1
 environment:
   sdk: '>=1.19.0 <2.0.0'
 dependencies:
-  angular2: '3.0.0-alpha'
-  angular2_components:
-    git: https://github.com/dart-lang/angular2_components
+  angular2: '2.2.0'
+  angular2_components: any
+#    git: https://github.com/dart-lang/angular2_components
 dev_dependencies:
   test: any
   browser: ^0.10.0

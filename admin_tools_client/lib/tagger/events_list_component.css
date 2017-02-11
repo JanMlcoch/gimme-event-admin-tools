@@ -1,0 +1,21 @@
+.list-row.header{
+    background-color: #eee;
+    font-weight: bold;
+    text-align: center;
+}
+
+.list-row{
+    height: 40px;
+}
+
+.list-row.selected{
+    background-color: darkkhaki !important;
+}
+
+.list-row:hover{
+    background-color: #eee;
+}
+
+.list-row > div{
+    padding: 10px 7px;
+}

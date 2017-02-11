@@ -1,3 +1,19 @@
-[INFO] 2017-01-21 15:11:16.081272 aqueduct: Server aqueduct/1 started.
-[INFO] 2017-01-21 15:11:16.671613 aqueduct: Server aqueduct/2 started.
-[INFO] 2017-01-21 15:11:17.254421 aqueduct: Server aqueduct/3 started.
+[INFO] 2017-02-10 19:22:55.918047 aqueduct: Server aqueduct/1 started.
+[INFO] 2017-02-10 19:22:56.433719 aqueduct: Server aqueduct/2 started.
+[INFO] 2017-02-10 19:22:56.965 aqueduct: Server aqueduct/3 started.
+[FINE] 2017-02-10 19:23:57.267451 aqueduct: Request received GET / (1486751037263). GET / (1486751037263)
+[INFO] 2017-02-10 19:23:57.287505 aqueduct: 127.0.0.1 GET / 8ms 404 
+[FINE] 2017-02-10 19:23:57.296529 aqueduct: Request received GET /favicon.ico (1486751037295). GET /favicon.ico (1486751037295)
+[INFO] 2017-02-10 19:23:57.297532 aqueduct: 127.0.0.1 GET /favicon.ico 1ms 404 
+[FINE] 2017-02-10 19:24:04.751541 aqueduct: Request received GET / (1486751044751). GET / (1486751044751)
+[INFO] 2017-02-10 19:24:04.752545 aqueduct: 127.0.0.1 GET / 0ms 404 
+[FINE] 2017-02-10 19:25:06.065277 aqueduct: Request received GET /createUser (1486751106065). GET /createUser (1486751106065)
+[INFO] 2017-02-10 19:25:06.066282 aqueduct: 127.0.0.1 GET /createUser 0ms 404 
+[FINE] 2017-02-10 19:25:11.447956 aqueduct: Request received GET /createuser (1486751111447). GET /createuser (1486751111447)
+[INFO] 2017-02-10 19:25:11.448969 aqueduct: 127.0.0.1 GET /createuser 0ms 404 
+[FINE] 2017-02-10 19:25:14.872140 aqueduct: Request received GET /create_user (1486751114872). GET /create_user (1486751114872)
+[INFO] 2017-02-10 19:25:14.873141 aqueduct: 127.0.0.1 GET /create_user 1ms 404 
+[FINE] 2017-02-10 19:25:42.863869 aqueduct: Request received GET /getIdentity (1486751142863). GET /getIdentity (1486751142863)
+[INFO] 2017-02-10 19:25:42.864871 aqueduct: 127.0.0.1 GET /getIdentity 1ms 404 
+[FINE] 2017-02-10 19:25:49.879776 aqueduct: Request received GET /get_identity (1486751149879). GET /get_identity (1486751149879)
+[INFO] 2017-02-10 19:25:49.880781 aqueduct: 127.0.0.1 GET /get_identity 1ms 404 
