@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:admin_tools/admin_tools.dart';
 import 'package:test/test.dart';
 import 'package:aqueduct/aqueduct.dart';
-import '../mock/startup.dart';
+import '../../mock/startup.dart';
 
 Future main() async {
   TestApplication app = new TestApplication();

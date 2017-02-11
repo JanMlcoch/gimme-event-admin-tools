@@ -12,3 +12,4 @@ part 'common/register_controller.dart';
 part 'common/identity_controller.dart';
 part 'tag_master/repo_controller.dart';
 part 'tag_master/branch_controller.dart';
+part 'tagger/tagged_event_controller.dart';
