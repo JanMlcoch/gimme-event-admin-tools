@@ -3,7 +3,7 @@ library sidos.computor;
 import 'dart:math' as math;
 import 'package:admin_tools/sidos_entities/library.dart';
 import 'package:admin_tools/tag_master/library.dart';
-import 'package:admin_tools/resolver/resolver_interface/tag_master_repository_getter/tag_master_import_map_manual.dart' as tagMaster;
+import 'package:admin_tools/resolver/resolver_interface/tag_master_repository_getter/tag_master_import_map.dart' as tagMaster;
 
 //todo: more division
 

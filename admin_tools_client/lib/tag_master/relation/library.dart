@@ -1,6 +1,6 @@
 library tag_master_2.relation;
 
-import 'package:admin_tools/tag_master/sidos_entities/library.dart';
+import 'package:admin_tools/sidos_entities/library.dart';
 
 part 'relation.dart';
 part "relation_substance.dart";

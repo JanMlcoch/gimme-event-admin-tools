@@ -23,9 +23,9 @@ Future main()async{
     TagMasterRepository repo = new TagMasterRepository()..fromMap(repoMap as Map<String, List<Map<String, dynamic>>>);
     Map mapie = repo.toMap();
     String deserializedJson = JSON.encode(mapie);
-    deserializedJson = "Map a =$deserializedJson;";
+    deserializedJson = "Map<String, List<Map<String, dynamic>>> tagMasterRepoMap = $deserializedJson;";
 
-    File tagMasterImport = new File("tag_master_import_map.dart");
+    File tagMasterImport = new File("lib/resolver/resolver_interface/tag_master_repository_getter/tag_master_import_map.dart");
     tagMasterImport.createSync();
     tagMasterImport.writeAsStringSync(deserializedJson);
   });

@@ -25,31 +25,52 @@ class Imprintificator {
 
   ///initializes an instance of [Imprintificator]. Loads necessary data for its purposes.
   void init() {
-    ImprintPoint link11 = new ImprintPoint()
-      ..probability = 0.8
-      ..zeroVariance = 0.1
-      ..valueVariance = 0.1
-      ..value = 1.0;
-    ImprintPoint link12 = new ImprintPoint()
-      ..probability = 0.3
-      ..zeroVariance = 0.1
-      ..valueVariance = 0.3
-      ..value = 0.5;
-    ImprintPoint link21 = new ImprintPoint()
-      ..probability = 0.5
-      ..zeroVariance = 0.1
-      ..valueVariance = 0.2
-      ..value = 0.4;
-    ImprintPoint link22 = new ImprintPoint()
-      ..probability = 0.9
-      ..zeroVariance = 0.3
-      ..valueVariance = 0.1
-      ..value = 0.9;
+    TagMasterRepository repo = new TagMasterRepository()..fromMap(tagMaster.tagMasterRepoMap);
 
-    Imprint links1 = new Imprint()..points = {1: link11, 2: link12};//..place = new GPS.withValues(13.0,48.0);
-    Imprint links2 = new Imprint()..points = {1: link21, 2: link22};//..place = new GPS.withValues(16.0,52.0);
+    for(int tagI = 0;tagI<repo.tags.length;tagI++){
+      Imprint linksI = new Imprint();
+      //todo: remapping synonyms
 
-    links = {1: links1, 2: links2};
+      //todo: remapping composites
+
+      //remapping core-likes
+      List<Relation> relevantRelations = repo.getRelationsRelevantFor(repo.getTagById(tagI));
+      for(Relation relation in relevantRelations){
+        if(relation.originTagIds.contains(tagI)){
+          if(relation.substance is ImprintRelation){
+            linksI.points.addAll({relation.destinationTagId: (relation.substance as ImprintRelation).imprintPoint});
+          }
+        }
+      }
+
+      links[tagI] = linksI;
+    }
+
+//    ImprintPoint link11 = new ImprintPoint()
+//      ..probability = 0.8
+//      ..zeroVariance = 0.1
+//      ..valueVariance = 0.1
+//      ..value = 1.0;
+//    ImprintPoint link12 = new ImprintPoint()
+//      ..probability = 0.3
+//      ..zeroVariance = 0.1
+//      ..valueVariance = 0.3
+//      ..value = 0.5;
+//    ImprintPoint link21 = new ImprintPoint()
+//      ..probability = 0.5
+//      ..zeroVariance = 0.1
+//      ..valueVariance = 0.2
+//      ..value = 0.4;
+//    ImprintPoint link22 = new ImprintPoint()
+//      ..probability = 0.9
+//      ..zeroVariance = 0.3
+//      ..valueVariance = 0.1
+//      ..value = 0.9;
+//
+//    Imprint links1 = new Imprint()..points = {1: link11, 2: link12};//..place = new GPS.withValues(13.0,48.0);
+//    Imprint links2 = new Imprint()..points = {1: link21, 2: link22};//..place = new GPS.withValues(16.0,52.0);
+//
+//    links = {1: links1, 2: links2};
   }
 
   ///this function handles only tags (in the meaning of [ImprintPoint]s.
