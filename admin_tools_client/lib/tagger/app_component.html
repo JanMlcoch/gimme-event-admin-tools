@@ -7,9 +7,14 @@
         <h1>Tagger 1.0</h1>
     </div>
     <login>
-        <a href="#">
-            pavel@gmail.com
-        </a>
+        <div *ngIf="isUserLogged">
+            <a href="#">
+                pavel@gmail.com
+            </a>
+        </div>
+        <div *ngIf="!isUserLogged">
+            <material-button raised [routerLink]="['Login']">Login</material-button>
+        </div>
     </login>
     <menu>
         <material-button [routerLink]="['Event',  {id: '1'}]" raised>Akce</material-button>
@@ -27,3 +32,5 @@
         <router-outlet></router-outlet>
     </div>
 </content>
+
+

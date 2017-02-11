@@ -1,0 +1,59 @@
+
+/* Forms START */
+.ng-valid[required] {
+    border-left: 5px solid #42A948 !important;  /* green */
+}
+
+.ng-invalid.ng-dirty {
+    border-left: 5px solid #a94442 !important; /* red */
+    margin-bottom: 0 !important;
+}
+
+.ng-valid {
+    margin-bottom: 20px !important;
+}
+
+.alert {
+    height: 16px !important;
+    padding: 1px !important;
+    margin: 2px !important;
+    font-size: 8pt;
+}
+
+input[type=date] {
+    padding: 6px !important;
+}
+
+.form-control{
+   display: inline-block !important;
+}
+
+.inputWithLabel{
+    margin: 2px 0;
+}
+.inputWithLabel label{
+    width: 90px;
+}
+.inputWithLabel input{
+    margin: 0 20px 0 0;
+}
+.inputWithLongLabel{
+    margin: 2px 0;
+}
+.inputWithLongLabel label{
+    width: 130px;
+}
+.inputWithLongLabel input{
+    margin: 0 20px 0 0;
+}
+.eventLongInput{
+    width: 360px !important;
+}
+.eventShortInput {
+    width: 143px !important;
+}
+.eventVeryShortInput {
+    width: 83px !important;
+}
+
+/* Forms END */
