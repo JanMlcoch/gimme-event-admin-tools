@@ -34,7 +34,7 @@ class RepoController extends HTTPController {
       branchName = basedOn.branchName;
     }
     if (branchName == null || branchName == "") {
-      return new Response.badRequest(body: new ErrorEnvelope("missing branchName"));
+      return new Response.badRequest(body: const ErrorEnvelope("missing branchName"));
     }
     Query<RepoVersion> lastRepoQuery = new Query<RepoVersion>()
       ..matchOn.branchName = whereEqualTo(branchName)
@@ -68,7 +68,7 @@ class RepoController extends HTTPController {
           ..statusCode = HttpStatus.OK
           ..description = "Get last repo from {{branch}}. If omitted, default branch is downloaded"
           ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
-        new ErrorEnvelope("Repo not found.").document(HttpStatus.NOT_FOUND)
+        const ErrorEnvelope("Repo not found.").document(HttpStatus.NOT_FOUND)
       ]);
     }
     if (operation.id == APIOperation.idForMethod(this, #saveRepo)) {
@@ -77,8 +77,8 @@ class RepoController extends HTTPController {
           ..statusCode = HttpStatus.OK
           ..description = "Save repo with into {{branch}}. If omitted, default branch name is used"
           ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
-        new ErrorEnvelope("Source version is not found.").document(HttpStatus.NOT_FOUND),
-        new ErrorEnvelope("BasedOn repo is not last repo in \$branchName branch").document(HttpStatus.CONFLICT)
+        const ErrorEnvelope("Source version is not found.").document(HttpStatus.NOT_FOUND),
+        const ErrorEnvelope("BasedOn repo is not last repo in \$branchName branch").document(HttpStatus.CONFLICT)
       ]);
     }
     return responses;

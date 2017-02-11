@@ -12,7 +12,7 @@ class TaggedEventController extends HTTPController {
   @httpGet
   Future<Response> getEvent(@HTTPPath("id") String stringId) async {
     if (stringId == null || stringId == "") {
-      return new Response.badRequest(body: new ErrorEnvelope("missing ID"));
+      return new Response.badRequest(body: const ErrorEnvelope("missing ID"));
     }
     Query<TaggedEvent> query = new Query<TaggedEvent>()
       ..matchOn.id = whereEqualTo(int.parse(stringId))
@@ -46,7 +46,7 @@ class TaggedEventController extends HTTPController {
 
     bool isUpdating = stringId != null && stringId != "";
     if (!isUpdating) {
-      return new Response.badRequest(body: new ErrorEnvelope("Missing ID path parameter"));
+      return new Response.badRequest(body: const ErrorEnvelope("Missing ID path parameter"));
     }
     Query<TaggedEvent> eventToUpdateQuery = new Query<TaggedEvent>()
       ..matchOn.id = whereEqualTo(int.parse(stringId))

@@ -7,7 +7,7 @@ import 'package:aqueduct/aqueduct.dart';
 
 class MessageEnvelope implements HTTPSerializable {
   final String message;
-  MessageEnvelope(this.message);
+  const MessageEnvelope(this.message);
 
   @override
   String toString() {
@@ -29,7 +29,7 @@ class MessageEnvelope implements HTTPSerializable {
 
 class ErrorEnvelope implements HTTPSerializable {
   final String message;
-  ErrorEnvelope(this.message);
+  const ErrorEnvelope(this.message);
 
   @override
   String toString() {

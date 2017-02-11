@@ -35,6 +35,7 @@ class AdminSink extends aque.RequestSink {
 
       // routes for TAG MASTER 2
       ..route("/repo/[:branch]").pipe(new aque.Authorizer(authenticationServer)).generate(() => new RepoController())
+      ..route("/tags/[:id]").pipe(new aque.Authorizer(authenticationServer)).generate(() => new TagsController())
 
       // routes for TAGGER
       ..route("/tagged_events/[:id]")

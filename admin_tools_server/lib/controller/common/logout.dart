@@ -7,8 +7,8 @@ class LogoutController extends HTTPController {
       ..matchOn.client = whereRelatedByValue(request.authorization.clientID)
       ..matchOn.owner = whereRelatedByValue(request.authorization.resourceOwnerIdentifier);
     int rowCount = await query.delete();
-    if (rowCount > 0) return new Response.ok(new MessageEnvelope("Succesfully logout"));
-    return new Response.notFound(body: new ErrorEnvelope("Cannot logout, probably already logged out"));
+    if (rowCount > 0) return new Response.ok(const MessageEnvelope("Succesfully logout"));
+    return new Response.notFound(body: const ErrorEnvelope("Cannot logout, probably already logged out"));
   }
 
   @override
@@ -16,8 +16,8 @@ class LogoutController extends HTTPController {
     var responses = super.documentResponsesForOperation(operation);
     if (operation.id == APIOperation.idForMethod(this, #logout)) {
       responses.addAll([
-        new MessageEnvelope("Succesfully logout").document(HttpStatus.OK),
-        new ErrorEnvelope("Cannot logout, probably already logged out").document(HttpStatus.BAD_REQUEST)
+        const MessageEnvelope("Succesfully logout").document(HttpStatus.OK),
+        const ErrorEnvelope("Cannot logout, probably already logged out").document(HttpStatus.BAD_REQUEST)
       ]);
     }
 
