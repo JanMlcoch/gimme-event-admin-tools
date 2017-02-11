@@ -25,9 +25,7 @@ import 'package:admin_tools/tagger/services/events_service.dart';
   const Route(path: '/event/:id', name: 'Event', component: EventDetailComponent),
 ])
 class AppComponent{
-  final EventsService _eventsService;
-
-  AppComponent(this._eventsService);
+  AppComponent();
 
 }
 

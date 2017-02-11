@@ -1,1 +1,30 @@
-ahoj
+<div *ngIf="hasData">
+    <h2>{{event.name}}</h2>
+    <div class="image-block">
+        <img class="float-left" src="assets/img/no_image.jpg" >
+        <div class="float-left image-block-right">
+            <div><span class="bold">Od:</span> {{event.dateFrom | date:"d. M. yyyy"}}</div>
+            <div><span class="bold">Místo:</span> {{event.place}}</div>
+        </div>
+    </div>
+    <h3>Anotace</h3>
+    <p>{{event.annotation}}</p>
+    <h3>Popis</h3>
+    <p>{{event.description}}</p>
+    <h3>Tagy</h3>
+    <div class="tags-block">
+        <selective></selective>
+
+        <!--
+        <input class="form-control float-left">
+        <div class="float-left">
+            <div *ngFor="let tag of event.tags">{{tag.name}}fdsa fasdf sdf sadfs dafasf sd fdd</div>
+        </div>
+        -->
+    </div>
+    <h3>Zdroj dat</h3>
+    <a href="{{event.sourceUrl}}">{{event.sourceUrl}}</a>
+</div>
+<div *ngIf="!hasData">
+    No event with id: {{eventId}} found
+</div>

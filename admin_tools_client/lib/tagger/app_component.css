@@ -16,7 +16,7 @@ header{
 
 .title-block{
     float: left;
-    margin: 7px 5px 4px 60px;
+    margin: 5px 5px 4px 60px;
 }
 
 menu{
@@ -45,11 +45,18 @@ login{
 
 content{
     display: block;
-    margin: 30px 0;
+    margin: 5px 0;
 }
 
 .events-list-cont{
     width: 800px;
     clear: both;
-    margin: 10px;
+    margin: 40px 10px;
+    float: left;
+}
+
+.event-detail-cont{
+    width: 700px;
+    float: left;
+    margin: 0 10px 0 30px;
 }

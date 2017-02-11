@@ -6,6 +6,11 @@
 
 .list-row{
     height: 40px;
+    border-radius: 5px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+
 }
 
 .list-row.selected{
