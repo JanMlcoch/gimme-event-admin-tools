@@ -12,7 +12,7 @@ class TaggedEventController extends HTTPController {
   @httpGet
   Future<Response> getEvent(@HTTPPath("id") String stringId) async {
     if (stringId == null || stringId == "") {
-      return new Response.badRequest(new ErrorMessage("missing ID"));
+      return new Response.badRequest(body: new ErrorEnvelope("missing ID"));
     }
     Query<TaggedEvent> query = new Query<TaggedEvent>()
       ..matchOn.id = whereEqualTo(int.parse(stringId))
