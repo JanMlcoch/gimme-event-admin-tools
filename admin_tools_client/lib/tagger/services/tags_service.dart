@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'package:angular2/core.dart';
 
 import 'package:admin_tools/tagger/model/library.dart';
+
+import 'package:admin_tools/tagger/server_gateway/requests.dart';
 
 @Injectable()
 class TagsService {
@@ -9,7 +12,8 @@ class TagsService {
   static int _incrementId = 0;
 
   TagsService(){
-    createMockTags();
+//    createMockTags();
+    loadTags();
     smartSelectModel = new SmartSelectModel(tags.tags);
   }
 
@@ -19,4 +23,9 @@ class TagsService {
     tags = new Tags();
     tags.tags = tagsData;
   }
+
+  void loadTags() async{
+    tags = await getTags();
+  }
+
 }
