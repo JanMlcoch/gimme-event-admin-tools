@@ -5,7 +5,6 @@ import 'package:angular2_components/angular2_components.dart';
 
 import 'package:admin_tools/tagger/events_list_component.dart';
 import 'package:admin_tools/tagger/event_component.dart';
-import 'package:admin_tools/tagger/services/events_service.dart';
 
 @Component(
     selector: 'my-app',
@@ -27,8 +26,7 @@ import 'package:admin_tools/tagger/services/events_service.dart';
 class AppComponent{
   AppComponent();
 
-
-  void save(){
+  save(){
 
   }
 }

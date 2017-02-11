@@ -12,7 +12,7 @@
         Tagy
     </div>
 </div>
-<a [routerLink]="['Event',  {id: event.id.toString()}]" class="list-row" *ngFor="let event of events.list" [class.selected]="events.selected == event" (click)="selectEvent(event)" title="{{event.id}}">
+<a [routerLink]="['Event',  {id: event.id.toString()}]" class="list-row" *ngFor="let event of events.events" [class.selected]="events.selected == event" (click)="selectEvent(event)" title="{{event.id}}">
     <div class="float-left overflow-hidden" [style.width]="columns[0]" title="{{event.name}}">
         {{event.name}}
     </div>
@@ -20,7 +20,7 @@
         {{event.dateFrom | date:"d. M. yyyy" }}
     </div>
     <div class="float-left overflow-hidden" [style.width]="columns[2]">
-        {{event.tags.isNotEmpty}}
+        {{event?.tags?.tags?.isNotEmpty}}
     </div>
     <div class="float-left overflow-hidden" [style.width]="columns[3]">
         <span *ngFor="let tag of event.tags">{{tag.name}}</span>
