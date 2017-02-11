@@ -42,7 +42,7 @@ class EventDetailComponent implements OnInit{
     });
     if(event != null){
       hasData = true;
-      _eventService.events.selected = event;
+      _eventService.selected = event;
     }
 
   }

@@ -24,11 +24,12 @@ class EventsListComponent{
   String width = "200";
 
   GimmeEvents get events => _eventsService.events;
+  EventsService get eventsService => _eventsService;
 
   EventsListComponent(this._eventsService, this._router);
 
   void selectEvent(GimmeEvent event){
-    events.selected = event;
+    _eventsService.selected = event;
     _router.navigate(["Event", {'id': event.id}]);
   }
 

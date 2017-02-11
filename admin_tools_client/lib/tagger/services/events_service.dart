@@ -11,6 +11,7 @@ import 'package:admin_tools/tagger/services/user_service.dart';
 class EventsService {
   UserService _userService;
   GimmeEvents events;
+  GimmeEvent selected;
 
   EventsService(this._userService){
     events = new GimmeEvents();
@@ -43,7 +44,6 @@ class EventsService {
   }
 
   void saveEvent(GimmeEvent event){
-    String token = _userService.user.token;
-    uploadEvent(token, event.toMap());
+    uploadEvent(event.toMap());
   }
 }

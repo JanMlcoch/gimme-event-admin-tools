@@ -2,7 +2,6 @@ part of model;
 
 class GimmeEvents{
   List<GimmeEvent> events = [];
-  GimmeEvent selected;
 
   Map toMap(){
     List<Map> eventsData = [];

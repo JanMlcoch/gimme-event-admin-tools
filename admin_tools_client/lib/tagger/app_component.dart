@@ -39,7 +39,7 @@ class AppComponent{
   AppComponent(this._userService, this._eventsService);
 
   void save(){
-
+    _eventsService.saveEvent(_eventsService.selected);
   }
 }
 

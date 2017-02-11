@@ -28,11 +28,14 @@ Future<String> downloadRepo(String token) async {
   return response;
 }
 
-Future uploadEvent(String token, Map event) async {
+Future uploadEvent(Map event) async {
+  String response = await login();
+  Map tokens = JSON.decode(response);
+  String token = tokens["access_token"];
   Completer completer = new Completer();
   Map<String, dynamic> dataMap = event;
   String dataJson = JSON.encode(dataMap);
-  HttpRequest.request("http://localhost:8000/api/tagged_events/", sendData: dataJson, method: "POST", requestHeaders: {
+  HttpRequest.request("http://localhost:8000/api/tagged_events", sendData: dataJson, method: "POST", requestHeaders: {
     "Authorization": "Bearer $token",
     "Content-Type": "application/json;charset=UTF-8"
   }).then((HttpRequest resp) {
