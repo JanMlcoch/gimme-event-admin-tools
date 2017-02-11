@@ -27,24 +27,42 @@ class Imprintificator {
   void init() {
     TagMasterRepository repo = new TagMasterRepository()..fromMap(tagMaster.tagMasterRepoMap);
 
-    for(int tagI = 0;tagI<repo.tags.length;tagI++){
+    //remapping core-likes
+    for(int tagI = 0;tagI<repo.tags.length;tagI++) {
       Imprint linksI = new Imprint();
-      //todo: remapping synonyms
-
-      //todo: remapping composites
-
-      //remapping core-likes
       List<Relation> relevantRelations = repo.getRelationsRelevantFor(repo.getTagById(tagI));
-      for(Relation relation in relevantRelations){
-        if(relation.originTagIds.contains(tagI)){
-          if(relation.substance is ImprintRelation){
+      for (Relation relation in relevantRelations) {
+        if (relation.originTagIds.contains(tagI)) {
+          if (relation.substance is ImprintRelation) {
             linksI.points.addAll({relation.destinationTagId: (relation.substance as ImprintRelation).imprintPoint});
           }
         }
       }
-
       links[tagI] = linksI;
     }
+
+    //remapping composites
+    for(int tagI = 0;tagI<repo.tags.length;tagI++) {
+//      Imprint linksI = new Imprint();
+//      List<Relation> relevantRelations = repo.getRelationsRelevantFor(repo.getTagById(tagI));
+//      for (Relation relation in relevantRelations) {
+//        if (relation.originTagIds.contains(tagI)) {
+//          if (relation.substance is CompositeRelation) {
+//            double strength = (relation.substance as CompositeRelation).strength;
+//            Map<int, ImprintPoint> targetsImprintPoints = links[relation.destinationTagId].points;
+//            Map<int, ImprintPoint> selfsImprintPoints = {};
+//            targetsImprintPoints.forEach((int tagId, ImprintPoint imprintPoint){
+//              selfsImprintPoints[tagId] = new ImprintPoint.withData(imprintPoint.value*strength, imprintPoint.probability)
+//            });
+//            linksI.points.addAll({relation.destinationTagId: imprintPoint});
+//          }
+//        }
+//      }
+//      links[tagI] = linksI;
+    }
+
+    //todo: remapping synonyms
+    for(int tagI = 0;tagI<repo.tags.length;tagI++) {}
 
 //    ImprintPoint link11 = new ImprintPoint()
 //      ..probability = 0.8
