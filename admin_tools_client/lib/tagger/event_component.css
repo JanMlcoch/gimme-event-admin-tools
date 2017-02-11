@@ -1,0 +1,20 @@
+h2{
+    margin: 5px 0 7px 0;
+}
+
+.image-block{
+    height: 90px;
+}
+
+.image-block img{
+    height: 80px;
+    margin: 5px 20px 5px 5px;
+}
+
+.image-block-right > div{
+    margin: 18px 0 0 0;
+}
+
+.tags-block{
+    display: inline-block;
+}

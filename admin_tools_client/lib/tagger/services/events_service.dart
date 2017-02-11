@@ -14,7 +14,7 @@ class EventsService {
   void createMockEvents(){
     Map event1Data = {
       "name": "Akce",
-      "dateFrom": 12345531353,
+      "dateFrom": 1234553135573,
       "image": "image",
       "place": "Moje místo",
       "annotation": "Moje anotace sdfkljasflksdmf klasmdfkl asdmfkl asdmdfl ",

@@ -13,12 +13,11 @@ import 'package:admin_tools/tagger/model/library.dart';
     ROUTER_DIRECTIVES
   ],
   providers: const [
-    materialProviders,
-    ROUTER_PROVIDERS,
-    EventsService
+    materialProviders
   ])
 class EventsListComponent{
   final EventsService _eventsService;
+  final Router _router;
   List<double> _columns = [40.0, 20.0, 10.0, 30.0];
   List<String> get columns => ['${_columns[0]}%', '${_columns[1]}%', '${_columns[2]}%', '${_columns[3]}%'];
 
@@ -26,5 +25,10 @@ class EventsListComponent{
 
   Events get events => _eventsService.events;
 
-  EventsListComponent(this._eventsService);
+  EventsListComponent(this._eventsService, this._router);
+
+  void selectEvent(Event event){
+    events.selected = event;
+    _router.navigate(["Event", {'id': event.id}]);
+  }
 }

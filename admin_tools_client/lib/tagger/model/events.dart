@@ -6,6 +6,8 @@ class Events{
 }
 
 class Event{
+  static int _idIterator = 1;
+  int id;
   String name;
   DateTime dateFrom;
   String image;
@@ -14,6 +16,10 @@ class Event{
   String sourceUrl;
   String description;
   List<Tag> tags = [];
+
+  Event(){
+    id = _idIterator++;
+  }
 
   void fromMap(Map eventData){
     name = eventData["name"];
