@@ -4,10 +4,9 @@ version: 0.0.1
 environment:
   sdk: '>=1.19.0 <2.0.0'
 dependencies:
-  angular2: '2.2.0'
+  angular2: any
   angular2_components: any
 #    git: https://github.com/dart-lang/angular2_components
-  http: any
 dev_dependencies:
   test: any
   browser: ^0.10.0
@@ -21,4 +20,5 @@ transformers:
     entry_points:
     - web/account_manager/main.dart
     - web/tag_master_2/main.dart
+    - web/tagger/main.dart
 - dart_to_js_script_rewriter
