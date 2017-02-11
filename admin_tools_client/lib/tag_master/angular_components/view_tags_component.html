@@ -1,4 +1,4 @@
-<material-button raised [routerLink]="['Generic']" (trigger)="emptyRepo()">Empty repo</material-button>
+<!--<material-button raised [routerLink]="['Generic']" (trigger)="emptyRepo()">Empty repo</material-button>-->
 <material-button raised [routerLink]="['Generic']" (trigger)="revert()">Revert All unsaved Changes</material-button>
 <div *ngIf="repo?.validate() == true">
     <material-button raised (trigger)="save()">Save Changes</material-button>

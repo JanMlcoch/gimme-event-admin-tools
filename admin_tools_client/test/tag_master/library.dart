@@ -5,7 +5,7 @@ import 'dart:async';
 import '../../lib/tag_master/repo/library.dart';
 import '../../lib/tag_master/relation/library.dart';
 import '../../lib/tag_master/tag.dart';
-import '../../lib/tag_master/sidos_entities/library.dart';
+import '../../lib/sidos_entities/library.dart';
 import '../../lib/tag_master/library.dart';
 import '../../lib/tag_master/smart_select/library.dart';
 

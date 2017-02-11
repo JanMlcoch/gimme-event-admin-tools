@@ -49,7 +49,7 @@ class AppComponent implements OnInit{
 
   @override
   Future<Null> ngOnInit() async {
-    repo = await _repoService.getRepo();
+    repo = await _repoService.getWorkingRepo();
   }
 }
 

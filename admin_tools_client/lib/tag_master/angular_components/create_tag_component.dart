@@ -24,6 +24,6 @@ class CreateTagComponent implements OnInit {
 
   @override
   Future<Null> ngOnInit() async {
-    subRepo = await _repoService.getRepo();
+    subRepo = await _repoService.getWorkingRepo();
   }
 }
