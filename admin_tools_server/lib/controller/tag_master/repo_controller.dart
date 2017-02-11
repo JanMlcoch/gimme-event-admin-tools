@@ -28,7 +28,7 @@ class RepoController extends HTTPController {
     if (branchName == null || branchName == "") {
       branchName = body["branchName"];
     }
-    if (branchName == "") {
+    if (branchName == null || branchName == "") {
       branchName = basedOn.branchName;
     }
     if (branchName == null || branchName == "") {
