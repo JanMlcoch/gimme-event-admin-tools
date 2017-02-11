@@ -35,6 +35,7 @@ class Token extends ManagedObject<_Token> implements _Token, AuthTokenizable<int
   set clientID(cid) {
     client = new ClientRecord()..id = cid;
   }
+
   @override
   int get resourceOwnerIdentifier => owner.id;
   @override

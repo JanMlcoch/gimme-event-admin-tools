@@ -9,6 +9,7 @@ class _RepoVersion {
   String name;
   @ManagedColumnAttributes()
   String branchName;
+
   /// JSONB repo
   String repo;
 //  @ManagedRelationship(#id, onDelete: ManagedRelationshipDeleteRule.cascade)

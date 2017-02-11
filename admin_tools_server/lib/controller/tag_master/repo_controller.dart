@@ -19,8 +19,10 @@ class RepoController extends HTTPController {
   Future<Response> saveRepo(@HTTPPath("branch") String branchName) async {
     Map<String, dynamic> body = requestBody;
 
-    Query<RepoVersion> basedQuery = new Query<RepoVersion>();
-    basedQuery.matchOn.id = whereEqualTo(body["basedOnId"]);
+    Query<RepoVersion> basedQuery = new Query<RepoVersion>()
+      ..matchOn.id = whereEqualTo(body["basedOnId"])
+      ..resultProperties = ["id", "basedOnId"]
+      ..fetchLimit = 1;
     RepoVersion basedOn = await basedQuery.fetchOne();
     if (basedOn == null) {
       return new Response.notFound(body: "Missing basedOn repo");
@@ -32,7 +34,16 @@ class RepoController extends HTTPController {
       branchName = basedOn.branchName;
     }
     if (branchName == null || branchName == "") {
-      return new Response.badRequest(body: "missing branchName");
+      return new Response.badRequest(body: new ErrorEnvelope("missing branchName"));
+    }
+    Query<RepoVersion> lastRepoQuery = new Query<RepoVersion>()
+      ..matchOn.branchName = whereEqualTo(branchName)
+      ..sortDescriptors = [new QuerySortDescriptor("id", QuerySortOrder.descending)]
+      ..fetchLimit = 1
+      ..resultProperties = ["id"];
+    RepoVersion lastRepo = await lastRepoQuery.fetchOne();
+    if (lastRepo != null && lastRepo.id != basedOn.id) {
+      return new Response.conflict(body: new ErrorEnvelope("BasedOn repo is not last repo in $branchName branch"));
     }
 
     Query<RepoVersion> query = new Query<RepoVersion>();
@@ -57,10 +68,7 @@ class RepoController extends HTTPController {
           ..statusCode = HttpStatus.OK
           ..description = "Get last repo from {{branch}}. If omitted, default branch is downloaded"
           ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
-        new APIResponse()
-          ..statusCode = HttpStatus.NOT_FOUND
-          ..description = "Repo not found."
-          ..schema = new APISchemaObject(properties: {"error": new APISchemaObject.string()}),
+        new ErrorEnvelope("Repo not found.").document(HttpStatus.NOT_FOUND)
       ]);
     }
     if (operation.id == APIOperation.idForMethod(this, #saveRepo)) {
@@ -69,10 +77,8 @@ class RepoController extends HTTPController {
           ..statusCode = HttpStatus.OK
           ..description = "Save repo with into {{branch}}. If omitted, default branch name is used"
           ..schema = new APISchemaObject.fromTypeMirror(reflectType(RepoVersion)),
-        new APIResponse()
-          ..statusCode = HttpStatus.NOT_FOUND
-          ..description = "Source version is not found."
-          ..schema = new APISchemaObject(properties: {"error": new APISchemaObject.string()}),
+        new ErrorEnvelope("Source version is not found.").document(HttpStatus.NOT_FOUND),
+        new ErrorEnvelope("BasedOn repo is not last repo in \$branchName branch").document(HttpStatus.CONFLICT)
       ]);
     }
     return responses;
