@@ -8,6 +8,7 @@ class TestApplication {
   TestApplication() {
     configuration = new AdminConfiguration("config.yaml.src");
     configuration.database.isTemporary = true;
+    aque.RequestController.includeErrorDetailsInServerErrorResponses = true;
   }
 
   aque.Application<AdminSink> application;

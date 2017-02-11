@@ -11,14 +11,21 @@ Future main() async {
   setUpAll(() async {
     await app.start(3528);
     Query<RepoVersion> query = new Query<RepoVersion>();
-    if (query.entity == null) throw "entity is null";
     query
       ..values.author = (new User()..id = 1)
       ..values.branchName = "initial"
       ..values.repo = ""
       ..values.created = new DateTime.now()
       ..values.name = "initial_test_repo";
-    return query.insert();
+    await query.insert();
+    Query<RepoVersion> query2 = new Query<RepoVersion>();
+    query2
+      ..values.author = (new User()..id = 1)
+      ..values.branchName = "initial"
+      ..values.repo = ""
+      ..values.created = new DateTime.now()
+      ..values.name = "second_test_repo";
+    return query2.insert();
   });
 
   tearDownAll(() async {
@@ -42,7 +49,7 @@ Future main() async {
       Map body = {
         "name": "name of test repo",
         "branchName": "test_branch",
-        "basedOnId": 1,
+        "basedOnId": 2,
         "repo": JSON.encode({"tags": [], "relations": []})
       };
       req.body = JSON.encode(body);
@@ -52,6 +59,24 @@ Future main() async {
           result,
           hasResponse(
               200, partial({"id": greaterThan(1), "branchName": equals(body["branchName"]), "repo": equals(body["repo"])})));
+    });
+  });
+  group("Save repo - Fail",(){
+    test("Conflict",()async{
+      var req = app.client.authenticatedRequest("/api/repo/");
+      Map body = {
+        "name": "name of test repo",
+        "branchName": "test_branch",
+        "basedOnId": 1,
+        "repo": JSON.encode({"tags": [], "relations": []})
+      };
+      req.body = JSON.encode(body);
+      var result = await req.post();
+
+      expect(
+          result,
+          hasResponse(
+              409, partial({"error":equals("BasedOn repo is not last repo in test_branch branch")})));
     });
   });
 }
