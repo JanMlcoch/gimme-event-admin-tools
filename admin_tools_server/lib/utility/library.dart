@@ -5,4 +5,3 @@ import 'dart:async';
 import 'package:aqueduct/aqueduct.dart' as aque;
 
 part 'auth_delegate.dart';
-

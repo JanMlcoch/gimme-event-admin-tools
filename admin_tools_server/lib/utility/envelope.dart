@@ -5,46 +5,46 @@ import 'dart:convert';
 //import 'dart:io';
 import 'package:aqueduct/aqueduct.dart';
 
-class MessageEnvelope implements HTTPSerializable{
+class MessageEnvelope implements HTTPSerializable {
   final String message;
   MessageEnvelope(this.message);
 
   @override
-  String toString(){
-    return JSON.encode({"message":message});
+  String toString() {
+    return JSON.encode({"message": message});
   }
-  APIResponse document([int responseCode=200]){
+
+  APIResponse document([int responseCode = 200]) {
     return new APIResponse()
       ..statusCode = responseCode
       ..description = message
-      ..schema = new APISchemaObject(properties: {
-        "message":new APISchemaObject.string()
-      });
+      ..schema = new APISchemaObject(properties: {"message": new APISchemaObject.string()});
   }
+
   @override
-  Map<String,String> asSerializable() {
-    return {"message":message};
+  Map<String, String> asSerializable() {
+    return {"message": message};
   }
 }
 
-class ErrorEnvelope implements HTTPSerializable{
+class ErrorEnvelope implements HTTPSerializable {
   final String message;
   ErrorEnvelope(this.message);
 
   @override
-  String toString(){
-    return JSON.encode({"error":message});
+  String toString() {
+    return JSON.encode({"error": message});
   }
-  APIResponse document([int responseCode=500]){
+
+  APIResponse document([int responseCode = 500]) {
     return new APIResponse()
       ..statusCode = responseCode
       ..description = message
-      ..schema = new APISchemaObject(properties: {
-        "error":new APISchemaObject.string()
-      });
+      ..schema = new APISchemaObject(properties: {"error": new APISchemaObject.string()});
   }
+
   @override
-  Map<String,String> asSerializable() {
-    return {"error":message};
+  Map<String, String> asSerializable() {
+    return {"error": message};
   }
 }

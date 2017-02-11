@@ -25,7 +25,7 @@ class RepoController extends HTTPController {
     if (basedOn == null) {
       return new Response.notFound(body: "Missing basedOn repo");
     }
-    if(branchName==null || branchName==""){
+    if (branchName == null || branchName == "") {
       branchName = body["branchName"];
     }
     if (branchName == "") {

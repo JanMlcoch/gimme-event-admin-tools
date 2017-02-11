@@ -23,6 +23,12 @@ class RegisterController extends QueryController<User> {
       return new Response.badRequest(body: {"error": "Email required."});
     }
 
+    Query<User> sameEmailQuery = new Query<User>()..matchOn.email = query.values.email;
+    User sameEmail = await sameEmailQuery.fetchOne();
+    if (sameEmail != null) {
+      return new Response.conflict(body: {"error": "Email is already used."});
+    }
+
     var salt = AuthServer.generateRandomSalt();
     var hashedPassword = AuthServer.generatePasswordHash(query.values.password, salt);
     query.values.hashedPassword = hashedPassword;
