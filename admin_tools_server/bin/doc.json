@@ -1,0 +1,949 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API",
+    "description": "Description",
+    "version": "1.0",
+    "termsOfService": "",
+    "contact": {
+      "name": "default",
+      "url": "http://localhost",
+      "email": "default"
+    },
+    "license": {
+      "name": "default",
+      "url": "http://localhost"
+    }
+  },
+  "consumes": [
+    "application/x-www-form-urlencoded",
+    "application/json; charset=utf-8"
+  ],
+  "produces": [
+    "application/json; charset=utf-8"
+  ],
+  "security": [],
+  "paths": {
+    "/auth/login": {
+      "parameters": [],
+      "post": {
+        "summary": "Creates or refreshes an authentication token.",
+        "description": "\nWhen grant_type is 'password', there must be username and password values.\nWhen grant_type is 'refresh_token', there must be a refresh_token value.\nWhen grant_type is 'authorization_code', there must be a authorization_code value.",
+        "id": "AuthController.create",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "description": "",
+            "required": false,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "formData"
+          },
+          {
+            "name": "password",
+            "description": "",
+            "required": false,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "formData"
+          },
+          {
+            "name": "refresh_token",
+            "description": "",
+            "required": false,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "formData"
+          },
+          {
+            "name": "authorization_code",
+            "description": "",
+            "required": false,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "formData"
+          },
+          {
+            "name": "authorization",
+            "description": "",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "header"
+          },
+          {
+            "name": "grant_type",
+            "description": "",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Missing one or more of: 'client_id', 'username', 'password'.",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "Successfully exchanged credentials for credentials",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                },
+                "token_type": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                },
+                "expires_in": {
+                  "type": "integer",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false,
+                  "format": "int32"
+                },
+                "refresh_token": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.application": []
+          }
+        ]
+      }
+    },
+    "/auth/logout": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "description": "",
+        "id": "LogoutController.logout",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "Succesfully logout",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Cannot logout, probably already logged out",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/auth/register": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "description": "",
+        "id": "RegisterController.createUser",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/identity": {
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "IdentityController.getIdentity",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "",
+            "required": true,
+            "deprecated": false,
+            "schema": {
+              "type": "string",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "User not found.",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "User is logged",
+            "schema": {
+              "type": null,
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/repo": {
+      "parameters": []
+    },
+    "/repo/{branch}": {
+      "parameters": [
+        {
+          "name": "branch",
+          "description": "",
+          "required": true,
+          "deprecated": false,
+          "schema": {
+            "type": "string",
+            "required": true,
+            "readOnly": false,
+            "deprecated": false
+          },
+          "in": "path"
+        }
+      ],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "RepoController.getRepo",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "Get last repo from {{branch}}. If omitted, default branch is downloaded",
+            "schema": {
+              "type": null,
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Repo not found.",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "description": "",
+        "id": "RepoController.saveRepo",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "Save repo with into {{branch}}. If omitted, default branch name is used",
+            "schema": {
+              "type": null,
+              "required": true,
+              "readOnly": false,
+              "deprecated": false
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Source version is not found.",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "BasedOn repo is not last repo in $branchName branch",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/tags": {
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "TagsController.getTags",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "200": {
+            "description": "Get tags from last repo",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false,
+                  "format": "int32"
+                },
+                "name": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "missing repo[\"tags\"] is not List",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/tags/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "description": "",
+          "required": true,
+          "deprecated": false,
+          "schema": {
+            "type": "string",
+            "required": true,
+            "readOnly": false,
+            "deprecated": false
+          },
+          "in": "path"
+        }
+      ],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "TagsController.getTag",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          },
+          "501": {
+            "description": "Not implemented",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/tagged_events": {
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "TaggedEventController.getEvents",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "description": "",
+        "id": "TaggedEventController.saveEvent",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    },
+    "/tagged_events/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "description": "",
+          "required": true,
+          "deprecated": false,
+          "schema": {
+            "type": "string",
+            "required": true,
+            "readOnly": false,
+            "deprecated": false
+          },
+          "in": "path"
+        }
+      ],
+      "get": {
+        "summary": "",
+        "description": "",
+        "id": "TaggedEventController.getEvent",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "",
+        "description": "",
+        "id": "TaggedEventController.updateEvent",
+        "deprecated": false,
+        "tags": [],
+        "consumes": [
+          "application/json; charset=utf-8",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json; charset=utf-8"
+        ],
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "required": true,
+              "readOnly": false,
+              "deprecated": false,
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "required": true,
+                  "readOnly": false,
+                  "deprecated": false
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "oauth2.password": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2.application": {
+      "type": "oauth2",
+      "description": "OAuth 2.0 Application Flow",
+      "flow": "application",
+      "tokenUrl": "http://localhost/auth/login",
+      "scopes": {}
+    },
+    "oauth2.password": {
+      "type": "oauth2",
+      "description": "OAuth 2.0 Resource Owner Flow",
+      "flow": "password",
+      "tokenUrl": "http://localhost/auth/login",
+      "scopes": {}
+    },
+    "oauth2.accessCode": {
+      "type": "oauth2",
+      "description": "OAuth 2.0 Access Code Flow",
+      "flow": "accessCode",
+      "authorizationUrl": null,
+      "tokenUrl": "http://localhost/auth/login",
+      "scopes": {}
+    }
+  }
+}

@@ -1,0 +1,11 @@
+name: admin_tools
+description: Collection of tools for Akcnik administration
+version: 0.0.1
+environment:
+  sdk: '>=1.19.0 <2.0.0'
+dependencies:
+  scribe: any
+  aqueduct: "^1.0.0"
+  googleapis_auth: any
+dev_dependencies:
+  test: any

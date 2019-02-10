@@ -1,0 +1,12 @@
+<material-input [(ngModel)]="string" (input)="updateOptions()" (focus)="shouldRenderOptions = true" (blur)="delayedBlur()"></material-input>
+<!--The value is {{string}}-->
+<div *ngIf="shouldRenderOptions">
+    <div *ngFor="let option of options">
+        <material-button
+                raised (trigger)="chooseOption(option.tagId)"
+                disabled="{{!allowedTypes.contains(option.tagType) || excludedTagIds.contains(option.tagId)}}">
+            {{option.tagName}}
+            <span *ngIf="option.label!=''">({{option.label}})</span>
+        </material-button>
+    </div>
+</div>

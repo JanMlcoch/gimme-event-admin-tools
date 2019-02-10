@@ -1,0 +1,7 @@
+port: 8000
+database:
+  username: admin_tools
+  password: uHFWd35Nyj0fBamrtEo1
+  host: akcnik.vserver.cz
+  port: 5432
+  databaseName: admin_tools
