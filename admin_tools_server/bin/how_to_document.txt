@@ -1,8 +1,0 @@
-run:
-
-dart ./bin/document.dart > ./bin/doc.json
-
-put doc.json into this portal:
-
-http://editor.swagger.io/#/
-
